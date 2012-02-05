@@ -1,0 +1,42 @@
+CREATE TABLE `pererv`(
+  Gkey          int(10)     DEFAULT NULL COMMENT 'код в АСОКУПЭ-Л',
+  Cat           int(10)     DEFAULT NULL COMMENT 'категория поезда',
+  TPlanID       int(10)     DEFAULT NULL COMMENT 'ID в БД АСОКУПЭ-Л',
+  E             int(10)     DEFAULT NULL COMMENT 'Экспресс код',
+  TicketTypeID  int(10)     DEFAULT NULL COMMENT 'ID типа билета',
+  L             int(10)     DEFAULT NULL COMMENT 'Код льготы',
+  N             int(10)     DEFAULT NULL COMMENT 'Номер билета / квитанции /операции',
+  A             smallint    DEFAULT NULL COMMENT 'Признак аннулирования =1',
+  T             datetaime   DEFAULT NULL COMMENT 'Время операции',
+  S             double      DEFAULT NULL COMMENT 'Сумма оплаты',
+  A             smallint    DEFAULT NULL COMMENT 'Признак туда и обратно',
+  R             datetaime   DEFAULT NULL COMMENT 'Дата предварительного проезда',
+  U             double      DEFAULT NULL COMMENT 'Сумма доплаты',
+  V             int(10)     DEFAULT NULL COMMENT 'Тип документа на льготу',
+  D             varchar(10) DEFAULT NULL COMMENT 'Номер льготного документа / ЭТТ с БСК',
+  B             int(10)     DEFAULT NULL COMMENT 'Код билетного бюро', 
+  O             int(10)     DEFAULT NULL COMMENT 'Код организации',
+  H             varchar(1)  DEFAULT NULL COMMENT 'Категория пассажира',
+  C             int(25)     DEFAULT NULL COMMENT 'Номер ТК / СК / ЭТТ',
+  K             int(15)     DEFAULT NULL COMMENT 'Кристалл ТК / СК / ЭТТ',
+  F             varchar(50) DEFAULT NULL COMMENT 'Кристалл ТК / СК / ЭТТ',
+  H             varchar(10) DEFAULT NULL COMMENT 'Номер аннулированного документа',
+  E             int(15)     DEFAULT NULL COMMENT 'Номер ошибки',
+  DK            int(15)     DEFAULT NULL COMMENT 'Внутренний номер по ЭТТс БСК',
+  Col           double      DEFAULT NULL COMMENT 'Стоимость услуги оформления ППД на ПКТК',
+  Tax           double      DEFAULT NULL COMMENT 'НДС услуги оформленияППД на ПКТК',
+  NDS           double      DEFAULT NULL COMMENT 'НДС по ручной клади',
+  Bl            int(10)     DEFAULT NULL COMMENT 'Номер бланка',
+  SN            int(10)     DEFAULT NULL COMMENT 'СНИЛС',
+
+
+
+
+
+  
+ 
+ 
+
+
+  
+  

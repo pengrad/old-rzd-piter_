@@ -1,4 +1,4 @@
-# --------------------------------------------------------
+﻿# --------------------------------------------------------
 # Host:                         localhost
 # Server version:               5.1.50-community
 # Server OS:                    Win32
@@ -6,7 +6,7 @@
 # Date/time:                    2012-02-05 17:35:11
 # --------------------------------------------------------
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT .*/;
 /*!40101 SET NAMES utf8 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;

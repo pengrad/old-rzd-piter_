@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<form type="3932">
+<header direction="123" sector="123" station="123" typeTerminal="MKTK|PKTK"/>
+<money>
+<!-- Доходы -->
+<incom type="all" sum="130.5" sumPay="130.5" sumService="45.5"/>
+
+<!-- Начислено платежей -->
+<incom type="pay" sum="100.5" sumFedSoc="10.5" sumFedNonSoc="10.5" sumRegion="10.5" sumWar="10.5" sumStudy="10.5" sumRZDPersonal="10.5" sumRZDWork="10.5"/>
+
+<!-- Выпадающие доходы -->
+<incom type="out-pay" sum="30.5" sumRZDService="20.5"/>
+</money>
+
+
+
+<tickets sum="100" sumPay="100" sumFedSoc="10" sumFedNonSoc="10" sumRegion="10" sumWar="10" sumStudy="10" sumRZDPersonal="10" sumRZDWork="10" sumRZDService="10" sumService="10">
+<!--<ticket type="all" sum="100" sumPay="100" sumFedSoc="10" sumFedNonSoc="10" sumRegion="10" sumWar="10" sumStudy="10" sumRZDPersonal="10" sumRZDWork="10" sumRZDService="10" sumService="10"/>-->
+
+<!-- Билеты туда -->
+<ticket type="one-way" sum="100" sumPay="100"/>
+
+<!-- Билеты туда-обратно -->
+<ticket type="round-trip" sum="100" sumPay="100"/>
+</tickets>
+
+
+
+<abonements sum="100" sumPay="100" sumRZDWork="10">
+<!--<abonement type="all" sum="100" sumPay="100" sumRZDWork="10"/>-->
+
+<!-- Ежедневные абонементы -->
+<abonement type="everyday" subtype="day-5" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="everyday" subtype="day-10" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="everyday" subtype="day-15" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="everyday" subtype="day-20" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="everyday" subtype="day-25" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="everyday" subtype="month-1" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="everyday" subtype="month-2" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="everyday" subtype="month-3" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="everyday" subtype="month-4" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="everyday" subtype="month-5" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="everyday" subtype="month-6" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="everyday" subtype="month-12" sum="100" sumPay="100" sumRZDWork="10"/>
+
+<!-- Абонементы рабочего дня -->
+<abonement type="workday" subtype="day-10" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="workday" subtype="day-15" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="workday" subtype="day-20" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="workday" subtype="day-25" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="workday" subtype="month-1" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="workday" subtype="month-2" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="workday" subtype="month-3" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="workday" subtype="month-4" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="workday" subtype="month-5" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="workday" subtype="month-6" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="workday" subtype="month-12" sum="100" sumPay="100" sumRZDWork="10"/>
+
+<!-- Абонементы на даты -->
+<abonement type="date" subtype="5" sum="100" sumPay="100" sumRZDWork="10"/> 
+<abonement type="date" subtype="6" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="date" subtype="7" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="date" subtype="8" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="date" subtype="9" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="date" subtype="10" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="date" subtype="11" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="date" subtype="12" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="date" subtype="13" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="date" subtype="14" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="date" subtype="15" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="date" subtype="16" sum="100" sumPay="100" sumRZDWork="10"/>
+
+<!-- Абонементы на поездки -->
+<abonement type="trip" subtype="10-month-1" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="trip" subtype="20-month-1" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="trip" subtype="60-month-2" sum="100" sumPay="100" sumRZDWork="10"/>
+<abonement type="trip" subtype="90-month-2" sum="100" sumPay="100" sumRZDWork="10"/>
+</abonements>
+</form>

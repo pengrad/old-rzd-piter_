@@ -1,12 +1,12 @@
-﻿# --------------------------------------------------------
+# --------------------------------------------------------
 # Host:                         localhost
 # Server version:               5.1.50-community
 # Server OS:                    Win32
 # HeidiSQL version:             6.0.0.3603
-# Date/time:                    2012-02-05 17:35:11
+# Date/time:                    2012-02-07 02:22:08
 # --------------------------------------------------------
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT .*/;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `ticket` (
   `TicketId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `FileId` int(10) unsigned DEFAULT NULL,
   `PerevozGkey` int(11) DEFAULT NULL COMMENT 'код перевозчика в АСОКУПЭ-Л',
-  `TrainCat` int(11) DEFAULT NULL COMMENT 'категория поезда (скорый, пасс.)',
+  `TrainCat` varchar(5) DEFAULT NULL COMMENT 'категория поезда (скорый, пасс.)',
   `TPlanID` int(11) DEFAULT NULL COMMENT 'Тарифный план (ID в БД АСОКУПЭ-Л)',
   `FromStationE` int(11) NOT NULL COMMENT 'Станция отправления (Экспресс код)',
   `ToStationE` int(11) NOT NULL COMMENT 'Станция назначения (Экспресс код)',

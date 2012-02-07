@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+
+    <mvc:annotation-driven/>
+    <tx:annotation-driven transaction-manager="txManager" mode="proxy"/>
+
+    <!--Дата сурс-->
+    <bean id="mainDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <!--<property name="url" value="jdbc:mysql://10.20.100.22:1433/uniform?useUnicode=true&amp;characterEncoding=UTF-8&amp;dumpQueriesOnException=true" />-->
+        <property name="url"
+                  value="jdbc:mysql://localhost:3307/rzd?useUnicode=true&amp;characterEncoding=UTF-8&amp;dumpQueriesOnException=true"/>
+        <property name="username" value="root"/>
+        <property name="password" value="12345"/>
+    </bean>
+    <!-- Менеджер транзакций: привязываем его к нашему DataSource -->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="mainDataSource"/>
+    </bean>
+
+
+    <!--Секция менеджеров-->
+    <bean id="uploadManager" class="managers.UploadManager">
+        <property name="dataSource" ref="mainDataSource"/>
+    </bean>
+
+    <!--Скекция контроллеров-->
+    <bean id="cUploadFile" class="controllers.CUploadFile">
+        <property name="uploadManager" ref="uploadManager"/>
+    </bean>
+
+
+
+    <!--Прочие бины-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- one of the properties available; the maximum file size in bytes -->
+        <property name="maxUploadSize" value="1000000"/>
+    </bean>
+
+
+</beans>

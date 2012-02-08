@@ -34,17 +34,14 @@ public class CUploadFile {
     public String setFileUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "kFile", required = false) MultipartFile kfile) {
         MultipartFile multipartFile = kfile;
         String fileName = "";
-
-        if (multipartFile != null) {
+        try {
             fileName = multipartFile.getOriginalFilename();
             System.out.println(fileName);
             InputStream is = null;
             try {
                 is = multipartFile.getInputStream();
                 uploadManager.upload(is, new SimpleDateFormat("dd.MM.yyyy hh:mm:ss").parse("06.02.2012 00:45:33"));
-            return "Данные успешно загружены";
-            } catch (Exception e) {
-            e.printStackTrace();
+                return "SUCCESS";
             } finally {
                 if (is != null) {
                     try {
@@ -55,13 +52,17 @@ public class CUploadFile {
                 }
 
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+             return "ERROR";
         }
+
 //        try {
 //            response.(1111,"Ошибка загрузки файла");
 //        } catch (IOException e) {
 //            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
 //        }
-        return "success";
+//        return message;
     }
 
 //    @RequestMapping(value = "test.htm", method = RequestMethod.GET)

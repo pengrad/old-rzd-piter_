@@ -43,6 +43,11 @@ public class UploadManager {
         JdbcTemplate db = new JdbcTemplate(dataSource);
         FileLoad fileLoad = parseXML(is);
         String query = "";
+        int count = db.queryForInt("select count(FileId) from file where FileName=?", fileLoad.getNameXML());
+        if (count > 0) {
+            db.update("delete from ticket where FileId in (select FileId from file where FileName=?);", fileLoad.getNameXML());
+            db.update("delete from file where FileName=?;", fileLoad.getNameXML());
+        }
         query = "insert into file (\n" +
                 /*1 */"FileName,\n" +
                 /*2 */"NumTerm,\n" +
@@ -107,7 +112,6 @@ public class UploadManager {
                 /*28*/fileLoad.getNDSServ(),
                 /*29*/timeCalcReport
         );
-        System.out.println("UPLOAD FILE");
 
         query = "insert into ticket(\n" +
                 /*1 */"FileId,\n" +
@@ -177,7 +181,6 @@ public class UploadManager {
                     /*29*/ticket.getNds(),
                     /*30*/ticket.getBi()
             );
-            System.out.println("UPLOAD TICKET");
         }
 
     }
@@ -188,7 +191,7 @@ public class UploadManager {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();
         Document dom = db.parse(is);
-      
+
         Element root = dom.getDocumentElement();
         fileLoad.setNameXML(root.getAttribute("Name"));
         Element eHead = (Element) root.getElementsByTagName("Head").item(0);
@@ -242,7 +245,6 @@ public class UploadManager {
                                         Element eTicket = (Element) eTicketType.getElementsByTagName("Ticket").item(c);
                                         Ticket ticket = new Ticket();
                                         ticket.setPerevozGkey(parseInt(ePerevoz.getAttribute("GKey")));
-                                        System.out.println(eTrainCat.getAttribute("Cat"));
                                         ticket.setTrainCat(eTrainCat.getAttribute("Cat"));
                                         ticket.setTPlanID(parseInt(eTPlan.getAttribute("ID")));
                                         ticket.setFromStation(parseInt(eFromStation.getAttribute("E")));

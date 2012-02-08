@@ -93,7 +93,7 @@ FileProgress.prototype.setComplete = function () {
 
 	var oSelf = this;
 	this.setTimer(setTimeout(function () {
-		oSelf.disappear();
+		//	oSelf.disappear();  //скытие элементов
 	}, 1000));
 };
 FileProgress.prototype.setError = function () {
@@ -113,7 +113,7 @@ FileProgress.prototype.setCancelled = function () {
 
 	var oSelf = this;
 	this.setTimer(setTimeout(function () {
-		oSelf.disappear();
+	//	oSelf.disappear();  //скытие элементов
 	}, 2000));
 };
 FileProgress.prototype.setStatus = function (status) {

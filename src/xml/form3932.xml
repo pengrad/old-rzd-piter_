@@ -1,6 +1,6 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+ <?xml version="1.0" encoding="UTF-8"?>
 <form type="3932">
-<header direction="123" sector="123" station="123" typeTerminal="MKTK|PKTK"/>
+<header direction="123" sector="123" station="123" typeTerminal="MKTK|PKTK">
 <money>
 <!-- Доходы -->
 <incom type="all" sum="130.5" sumPay="130.5" sumService="45.5"/>
@@ -76,4 +76,5 @@
 <abonement type="trip" subtype="60-month-2" sum="100" sumPay="100" sumRZDWork="10"/>
 <abonement type="trip" subtype="90-month-2" sum="100" sumPay="100" sumRZDWork="10"/>
 </abonements>
+</header>
 </form>

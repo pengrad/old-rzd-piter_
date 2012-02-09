@@ -14,8 +14,9 @@
 
 
 
-<tickets sum="100" sumPay="100" sumFedSoc="10" sumFedNonSoc="10" sumRegion="10" sumWar="10" sumStudy="10" sumRZDPersonal="10" sumRZDWork="10" sumRZDService="10" sumService="10">
-<!--<ticket type="all" sum="100" sumPay="100" sumFedSoc="10" sumFedNonSoc="10" sumRegion="10" sumWar="10" sumStudy="10" sumRZDPersonal="10" sumRZDWork="10" sumRZDService="10" sumService="10"/>-->
+<tickets>
+<!-- Всего продано разовых билетов -->
+<ticket type="all" sum="100" sumPay="100" sumFedSoc="10" sumFedNonSoc="10" sumRegion="10" sumWar="10" sumStudy="10" sumRZDPersonal="10" sumRZDWork="10" sumRZDService="10" sumService="10"/>
 
 <!-- Билеты туда -->
 <ticket type="one-way" sum="100" sumPay="100"/>
@@ -26,8 +27,9 @@
 
 
 
-<abonements sum="100" sumPay="100" sumRZDWork="10">
-<!--<abonement type="all" sum="100" sumPay="100" sumRZDWork="10"/>-->
+<abonements>
+<!-- Всего продано абонементов -->
+<abonement type="all" sum="100" sumPay="100" sumRZDWork="10"/>
 
 <!-- Ежедневные абонементы -->
 <abonement type="everyday" subtype="day-5" sum="100" sumPay="100" sumRZDWork="10"/>

@@ -3,7 +3,7 @@
 # Server version:               5.1.50-community
 # Server OS:                    Win32
 # HeidiSQL version:             6.0.0.3603
-# Date/time:                    2012-02-07 02:22:08
+# Date/time:                    2012-02-12 02:00:25
 # --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -15,6 +15,17 @@
 DROP DATABASE IF EXISTS `rzd`;
 CREATE DATABASE IF NOT EXISTS `rzd` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `rzd`;
+
+
+# Dumping structure for table rzd.direction
+DROP TABLE IF EXISTS `direction`;
+CREATE TABLE IF NOT EXISTS `direction` (
+  `dir_id` int(10) unsigned NOT NULL,
+  `dir_name` varchar(100) NOT NULL,
+  PRIMARY KEY (`dir_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+# Data exporting was unselected.
 
 
 # Dumping structure for table rzd.file
@@ -57,6 +68,34 @@ CREATE TABLE IF NOT EXISTS `file` (
 # Data exporting was unselected.
 
 
+# Dumping structure for table rzd.sector
+DROP TABLE IF EXISTS `sector`;
+CREATE TABLE IF NOT EXISTS `sector` (
+  `sect_id` int(10) unsigned NOT NULL,
+  `sect_name` varchar(100) NOT NULL,
+  `sect_dir_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`sect_id`),
+  KEY `fk__sector__sect_dir_id` (`sect_dir_id`),
+  CONSTRAINT `fk__sector__sect_dir_id` FOREIGN KEY (`sect_dir_id`) REFERENCES `direction` (`dir_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+# Data exporting was unselected.
+
+
+# Dumping structure for table rzd.station
+DROP TABLE IF EXISTS `station`;
+CREATE TABLE IF NOT EXISTS `station` (
+  `stat_id` int(10) unsigned NOT NULL,
+  `stat_name` varchar(100) NOT NULL,
+  `stat_sect_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`stat_id`),
+  KEY `fk__station__stat_sect_id` (`stat_sect_id`),
+  CONSTRAINT `fk__station__stat_sect_id` FOREIGN KEY (`stat_sect_id`) REFERENCES `sector` (`sect_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+# Data exporting was unselected.
+
+
 # Dumping structure for table rzd.ticket
 DROP TABLE IF EXISTS `ticket`;
 CREATE TABLE IF NOT EXISTS `ticket` (
@@ -92,7 +131,9 @@ CREATE TABLE IF NOT EXISTS `ticket` (
   `NDS` double DEFAULT NULL COMMENT 'НДС по ручной клади',
   `Bl` int(11) DEFAULT NULL COMMENT 'Номер бланка',
   `SN` varchar(15) DEFAULT NULL COMMENT 'СНИЛС',
-  PRIMARY KEY (`TicketId`)
+  PRIMARY KEY (`TicketId`),
+  KEY `FK__ticket__FileId` (`FileId`),
+  CONSTRAINT `FK__ticket__FileId` FOREIGN KEY (`FileId`) REFERENCES `file` (`FileId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 # Data exporting was unselected.

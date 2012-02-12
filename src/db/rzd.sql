@@ -1,112 +1,171 @@
-# --------------------------------------------------------
-# Host:                         localhost
-# Server version:               5.1.50-community
-# Server OS:                    Win32
-# HeidiSQL version:             6.0.0.3603
-# Date/time:                    2012-02-12 20:38:35
-# --------------------------------------------------------
+-- MySQL dump 10.13  Distrib 5.1.50, for Win32 (ia32)
+--
+-- Host: localhost    Database: rzd
+-- ------------------------------------------------------
+-- Server version	5.1.50-community
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-# Dumping database structure for rzd
-DROP DATABASE IF EXISTS `rzd`;
-CREATE DATABASE IF NOT EXISTS `rzd` /*!40100 DEFAULT CHARACTER SET utf8 */;
+--
+-- Current Database: `rzd`
+--
+
+/*!40000 DROP DATABASE IF EXISTS `rzd`*/;
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `rzd` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
 USE `rzd`;
 
+--
+-- Table structure for table `direction`
+--
 
-# Dumping structure for table rzd.direction
 DROP TABLE IF EXISTS `direction`;
-CREATE TABLE IF NOT EXISTS `direction` (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `direction` (
   `dir_id` int(10) unsigned NOT NULL,
   `dir_name` varchar(100) NOT NULL,
   PRIMARY KEY (`dir_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-# Data exporting was unselected.
+--
+-- Table structure for table `discount`
+--
 
-
-# Dumping structure for table rzd.discount
 DROP TABLE IF EXISTS `discount`;
-CREATE TABLE IF NOT EXISTS `discount` (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `discount` (
   `disc_id` int(10) unsigned NOT NULL,
   `disc_type_id` int(10) unsigned NOT NULL,
   `disc_type_name` varchar(50) NOT NULL,
   PRIMARY KEY (`disc_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-# Data exporting was unselected.
+--
+-- Temporary table structure for view `discount_fednonsoc`
+--
 
+DROP TABLE IF EXISTS `discount_fednonsoc`;
+/*!50001 DROP VIEW IF EXISTS `discount_fednonsoc`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `discount_fednonsoc` (
+  `disc_id` int(10) unsigned
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
 
-# Dumping structure for view rzd.discount_fednonsoc
-DROP VIEW IF EXISTS `discount_fednonsoc`;
-# Creating temporary table to overcome VIEW dependency errors
-CREATE TABLE `discount_fednonsoc` (
-	`disc_id` INT(10) UNSIGNED NOT NULL DEFAULT ''
-) ENGINE=MyISAM;
+--
+-- Temporary table structure for view `discount_fedsoc`
+--
 
+DROP TABLE IF EXISTS `discount_fedsoc`;
+/*!50001 DROP VIEW IF EXISTS `discount_fedsoc`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `discount_fedsoc` (
+  `disc_id` int(10) unsigned
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
 
-# Dumping structure for view rzd.discount_fedsoc
-DROP VIEW IF EXISTS `discount_fedsoc`;
-# Creating temporary table to overcome VIEW dependency errors
-CREATE TABLE `discount_fedsoc` (
-	`disc_id` INT(10) UNSIGNED NOT NULL DEFAULT ''
-) ENGINE=MyISAM;
+--
+-- Temporary table structure for view `discount_region`
+--
 
+DROP TABLE IF EXISTS `discount_region`;
+/*!50001 DROP VIEW IF EXISTS `discount_region`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `discount_region` (
+  `disc_id` int(10) unsigned
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
 
-# Dumping structure for view rzd.discount_region
-DROP VIEW IF EXISTS `discount_region`;
-# Creating temporary table to overcome VIEW dependency errors
-CREATE TABLE `discount_region` (
-	`disc_id` INT(10) UNSIGNED NOT NULL DEFAULT ''
-) ENGINE=MyISAM;
+--
+-- Temporary table structure for view `discount_rzdpersonal`
+--
 
+DROP TABLE IF EXISTS `discount_rzdpersonal`;
+/*!50001 DROP VIEW IF EXISTS `discount_rzdpersonal`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `discount_rzdpersonal` (
+  `disc_id` int(10) unsigned
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
 
-# Dumping structure for view rzd.discount_rzdpersonal
-DROP VIEW IF EXISTS `discount_rzdpersonal`;
-# Creating temporary table to overcome VIEW dependency errors
-CREATE TABLE `discount_rzdpersonal` (
-	`disc_id` INT(10) UNSIGNED NOT NULL DEFAULT ''
-) ENGINE=MyISAM;
+--
+-- Temporary table structure for view `discount_rzdservice`
+--
 
+DROP TABLE IF EXISTS `discount_rzdservice`;
+/*!50001 DROP VIEW IF EXISTS `discount_rzdservice`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `discount_rzdservice` (
+  `disc_id` int(10) unsigned
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
 
-# Dumping structure for view rzd.discount_rzdservice
-DROP VIEW IF EXISTS `discount_rzdservice`;
-# Creating temporary table to overcome VIEW dependency errors
-CREATE TABLE `discount_rzdservice` (
-	`disc_id` INT(10) UNSIGNED NOT NULL DEFAULT ''
-) ENGINE=MyISAM;
+--
+-- Temporary table structure for view `discount_rzdwork`
+--
 
+DROP TABLE IF EXISTS `discount_rzdwork`;
+/*!50001 DROP VIEW IF EXISTS `discount_rzdwork`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `discount_rzdwork` (
+  `disc_id` int(10) unsigned
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
 
-# Dumping structure for view rzd.discount_rzdwork
-DROP VIEW IF EXISTS `discount_rzdwork`;
-# Creating temporary table to overcome VIEW dependency errors
-CREATE TABLE `discount_rzdwork` (
-	`disc_id` INT(10) UNSIGNED NOT NULL DEFAULT ''
-) ENGINE=MyISAM;
+--
+-- Temporary table structure for view `discount_study`
+--
 
+DROP TABLE IF EXISTS `discount_study`;
+/*!50001 DROP VIEW IF EXISTS `discount_study`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `discount_study` (
+  `disc_id` int(10) unsigned
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
 
-# Dumping structure for view rzd.discount_study
-DROP VIEW IF EXISTS `discount_study`;
-# Creating temporary table to overcome VIEW dependency errors
-CREATE TABLE `discount_study` (
-	`disc_id` INT(10) UNSIGNED NOT NULL DEFAULT ''
-) ENGINE=MyISAM;
+--
+-- Temporary table structure for view `discount_war`
+--
 
+DROP TABLE IF EXISTS `discount_war`;
+/*!50001 DROP VIEW IF EXISTS `discount_war`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `discount_war` (
+  `disc_id` int(10) unsigned
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
 
-# Dumping structure for view rzd.discount_war
-DROP VIEW IF EXISTS `discount_war`;
-# Creating temporary table to overcome VIEW dependency errors
-CREATE TABLE `discount_war` (
-	`disc_id` INT(10) UNSIGNED NOT NULL DEFAULT ''
-) ENGINE=MyISAM;
+--
+-- Table structure for table `file`
+--
 
-
-# Dumping structure for table rzd.file
 DROP TABLE IF EXISTS `file`;
-CREATE TABLE IF NOT EXISTS `file` (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `file` (
   `FileId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `FileName` varchar(100) DEFAULT NULL COMMENT 'имя XML документа',
   `NumTerm` int(11) DEFAULT NULL COMMENT 'номер терминала',
@@ -138,14 +197,17 @@ CREATE TABLE IF NOT EXISTS `file` (
   `NDSServ` double DEFAULT NULL COMMENT 'НДС услуги',
   `TimeCreate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Дата записи файла',
   PRIMARY KEY (`FileId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-# Data exporting was unselected.
+--
+-- Table structure for table `sector`
+--
 
-
-# Dumping structure for table rzd.sector
 DROP TABLE IF EXISTS `sector`;
-CREATE TABLE IF NOT EXISTS `sector` (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sector` (
   `sect_id` int(10) unsigned NOT NULL,
   `sect_name` varchar(100) NOT NULL,
   `sect_dir_id` int(10) unsigned NOT NULL,
@@ -156,24 +218,30 @@ CREATE TABLE IF NOT EXISTS `sector` (
   CONSTRAINT `fk__sector__sect_parent_id` FOREIGN KEY (`sect_parent_id`) REFERENCES `sector` (`sect_id`),
   CONSTRAINT `fk__sector__sect_dir_id` FOREIGN KEY (`sect_dir_id`) REFERENCES `direction` (`dir_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-# Data exporting was unselected.
+--
+-- Table structure for table `station`
+--
 
-
-# Dumping structure for table rzd.station
 DROP TABLE IF EXISTS `station`;
-CREATE TABLE IF NOT EXISTS `station` (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `station` (
   `stat_id` int(10) unsigned NOT NULL,
   `stat_name` varchar(100) NOT NULL,
   PRIMARY KEY (`stat_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-# Data exporting was unselected.
+--
+-- Table structure for table `station_sector_cross`
+--
 
-
-# Dumping structure for table rzd.station_sector_cross
 DROP TABLE IF EXISTS `station_sector_cross`;
-CREATE TABLE IF NOT EXISTS `station_sector_cross` (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `station_sector_cross` (
   `stat_id` int(10) unsigned NOT NULL,
   `sect_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`stat_id`,`sect_id`),
@@ -181,13 +249,16 @@ CREATE TABLE IF NOT EXISTS `station_sector_cross` (
   CONSTRAINT `fk__station_sector_cross__stat_id` FOREIGN KEY (`stat_id`) REFERENCES `station` (`stat_id`),
   CONSTRAINT `fk__station_sector_cross__sect_id` FOREIGN KEY (`sect_id`) REFERENCES `sector` (`sect_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-# Data exporting was unselected.
+--
+-- Table structure for table `ticket`
+--
 
-
-# Dumping structure for table rzd.ticket
 DROP TABLE IF EXISTS `ticket`;
-CREATE TABLE IF NOT EXISTS `ticket` (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ticket` (
   `TicketId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `FileId` int(10) unsigned NOT NULL,
   `PerevozGkey` int(11) DEFAULT NULL COMMENT 'код перевозчика в АСОКУПЭ-Л',
@@ -225,65 +296,174 @@ CREATE TABLE IF NOT EXISTS `ticket` (
   KEY `FK__ticket__FileId` (`FileId`),
   KEY `ix__ticket__TimeCalcReport` (`TimeCalcReport`) USING BTREE,
   CONSTRAINT `FK__ticket__FileId` FOREIGN KEY (`FileId`) REFERENCES `file` (`FileId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-# Data exporting was unselected.
+--
+-- Current Database: `rzd`
+--
 
+USE `rzd`;
 
-# Dumping structure for view rzd.discount_fednonsoc
-DROP VIEW IF EXISTS `discount_fednonsoc`;
-# Removing temporary table and create final VIEW structure
-DROP TABLE IF EXISTS `discount_fednonsoc`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `discount_fednonsoc` AS select `discount`.`disc_id` AS `disc_id` from `discount` where (`discount`.`disc_type_id` = 2);
+--
+-- Final view structure for view `discount_fednonsoc`
+--
 
+/*!50001 DROP TABLE IF EXISTS `discount_fednonsoc`*/;
+/*!50001 DROP VIEW IF EXISTS `discount_fednonsoc`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `discount_fednonsoc` AS select `discount`.`disc_id` AS `disc_id` from `discount` where (`discount`.`disc_type_id` = 2) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 
-# Dumping structure for view rzd.discount_fedsoc
-DROP VIEW IF EXISTS `discount_fedsoc`;
-# Removing temporary table and create final VIEW structure
-DROP TABLE IF EXISTS `discount_fedsoc`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `discount_fedsoc` AS select `discount`.`disc_id` AS `disc_id` from `discount` where (`discount`.`disc_type_id` = 1);
+--
+-- Final view structure for view `discount_fedsoc`
+--
 
+/*!50001 DROP TABLE IF EXISTS `discount_fedsoc`*/;
+/*!50001 DROP VIEW IF EXISTS `discount_fedsoc`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `discount_fedsoc` AS select `discount`.`disc_id` AS `disc_id` from `discount` where (`discount`.`disc_type_id` = 1) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 
-# Dumping structure for view rzd.discount_region
-DROP VIEW IF EXISTS `discount_region`;
-# Removing temporary table and create final VIEW structure
-DROP TABLE IF EXISTS `discount_region`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `discount_region` AS select `discount`.`disc_id` AS `disc_id` from `discount` where (`discount`.`disc_type_id` = 3);
+--
+-- Final view structure for view `discount_region`
+--
 
+/*!50001 DROP TABLE IF EXISTS `discount_region`*/;
+/*!50001 DROP VIEW IF EXISTS `discount_region`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `discount_region` AS select `discount`.`disc_id` AS `disc_id` from `discount` where (`discount`.`disc_type_id` = 3) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 
-# Dumping structure for view rzd.discount_rzdpersonal
-DROP VIEW IF EXISTS `discount_rzdpersonal`;
-# Removing temporary table and create final VIEW structure
-DROP TABLE IF EXISTS `discount_rzdpersonal`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `discount_rzdpersonal` AS select `discount`.`disc_id` AS `disc_id` from `discount` where (`discount`.`disc_type_id` = 6);
+--
+-- Final view structure for view `discount_rzdpersonal`
+--
 
+/*!50001 DROP TABLE IF EXISTS `discount_rzdpersonal`*/;
+/*!50001 DROP VIEW IF EXISTS `discount_rzdpersonal`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `discount_rzdpersonal` AS select `discount`.`disc_id` AS `disc_id` from `discount` where (`discount`.`disc_type_id` = 6) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 
-# Dumping structure for view rzd.discount_rzdservice
-DROP VIEW IF EXISTS `discount_rzdservice`;
-# Removing temporary table and create final VIEW structure
-DROP TABLE IF EXISTS `discount_rzdservice`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `discount_rzdservice` AS select `discount`.`disc_id` AS `disc_id` from `discount` where (`discount`.`disc_type_id` = 8);
+--
+-- Final view structure for view `discount_rzdservice`
+--
 
+/*!50001 DROP TABLE IF EXISTS `discount_rzdservice`*/;
+/*!50001 DROP VIEW IF EXISTS `discount_rzdservice`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `discount_rzdservice` AS select `discount`.`disc_id` AS `disc_id` from `discount` where (`discount`.`disc_type_id` = 8) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 
-# Dumping structure for view rzd.discount_rzdwork
-DROP VIEW IF EXISTS `discount_rzdwork`;
-# Removing temporary table and create final VIEW structure
-DROP TABLE IF EXISTS `discount_rzdwork`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `discount_rzdwork` AS select `discount`.`disc_id` AS `disc_id` from `discount` where (`discount`.`disc_type_id` = 7);
+--
+-- Final view structure for view `discount_rzdwork`
+--
 
+/*!50001 DROP TABLE IF EXISTS `discount_rzdwork`*/;
+/*!50001 DROP VIEW IF EXISTS `discount_rzdwork`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `discount_rzdwork` AS select `discount`.`disc_id` AS `disc_id` from `discount` where (`discount`.`disc_type_id` = 7) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 
-# Dumping structure for view rzd.discount_study
-DROP VIEW IF EXISTS `discount_study`;
-# Removing temporary table and create final VIEW structure
-DROP TABLE IF EXISTS `discount_study`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `discount_study` AS select `discount`.`disc_id` AS `disc_id` from `discount` where (`discount`.`disc_type_id` = 5);
+--
+-- Final view structure for view `discount_study`
+--
 
+/*!50001 DROP TABLE IF EXISTS `discount_study`*/;
+/*!50001 DROP VIEW IF EXISTS `discount_study`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `discount_study` AS select `discount`.`disc_id` AS `disc_id` from `discount` where (`discount`.`disc_type_id` = 5) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 
-# Dumping structure for view rzd.discount_war
-DROP VIEW IF EXISTS `discount_war`;
-# Removing temporary table and create final VIEW structure
-DROP TABLE IF EXISTS `discount_war`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `discount_war` AS select `discount`.`disc_id` AS `disc_id` from `discount` where (`discount`.`disc_type_id` = 4);
+--
+-- Final view structure for view `discount_war`
+--
+
+/*!50001 DROP TABLE IF EXISTS `discount_war`*/;
+/*!50001 DROP VIEW IF EXISTS `discount_war`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `discount_war` AS select `discount`.`disc_id` AS `disc_id` from `discount` where (`discount`.`disc_type_id` = 4) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2012-02-13  0:13:45

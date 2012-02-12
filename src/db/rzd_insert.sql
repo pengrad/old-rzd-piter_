@@ -1,7 +1,10 @@
 use rzd;
 
 truncate table discount;
+truncate table direction;
+truncate table sector;
 
+#Льготы
 insert discount(disc_id, disc_type_name, disc_type_id)values
 (2407,'FedSoc', 1),
 (2408,'FedSoc', 1),
@@ -67,3 +70,19 @@ insert discount(disc_id, disc_type_name, disc_type_id)values
 (2216,'RZDService', 8),
 (2217,'RZDService', 8),
 (2218,'RZDService', 8);
+
+
+# Направления
+insert direction(dir_id, dir_name) values
+(1,'Московское направление'),
+(2,'Финляндское направление'),
+(3,'Витебское направление'),
+(4,'Балтийское направление'),
+(5,'Псковское направление'),
+(6,'Волховское направление'),
+(7,'Петрозаводское направление');
+
+#Участки
+insert sector(sect_id, sect_name, sect_dir_id, sect_parent_id) values
+(1,'УП Витебский',3,null),
+(2,'УП Детское Село',3,null);

@@ -3,7 +3,7 @@
 # Server version:               5.1.50-community
 # Server OS:                    Win32
 # HeidiSQL version:             6.0.0.3603
-# Date/time:                    2012-02-12 02:00:25
+# Date/time:                    2012-02-12 15:50:05
 # --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -26,6 +26,82 @@ CREATE TABLE IF NOT EXISTS `direction` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 # Data exporting was unselected.
+
+
+# Dumping structure for table rzd.discount
+DROP TABLE IF EXISTS `discount`;
+CREATE TABLE IF NOT EXISTS `discount` (
+  `disc_id` int(10) unsigned NOT NULL,
+  `disc_type_id` int(10) unsigned NOT NULL,
+  `disc_type_name` varchar(50) NOT NULL,
+  PRIMARY KEY (`disc_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+# Data exporting was unselected.
+
+
+# Dumping structure for view rzd.discount_fednonsoc
+DROP VIEW IF EXISTS `discount_fednonsoc`;
+# Creating temporary table to overcome VIEW dependency errors
+CREATE TABLE `discount_fednonsoc` (
+	`disc_id` INT(10) UNSIGNED NOT NULL DEFAULT ''
+) ENGINE=MyISAM;
+
+
+# Dumping structure for view rzd.discount_fedsoc
+DROP VIEW IF EXISTS `discount_fedsoc`;
+# Creating temporary table to overcome VIEW dependency errors
+CREATE TABLE `discount_fedsoc` (
+	`disc_id` INT(10) UNSIGNED NOT NULL DEFAULT ''
+) ENGINE=MyISAM;
+
+
+# Dumping structure for view rzd.discount_region
+DROP VIEW IF EXISTS `discount_region`;
+# Creating temporary table to overcome VIEW dependency errors
+CREATE TABLE `discount_region` (
+	`disc_id` INT(10) UNSIGNED NOT NULL DEFAULT ''
+) ENGINE=MyISAM;
+
+
+# Dumping structure for view rzd.discount_rzdpersonal
+DROP VIEW IF EXISTS `discount_rzdpersonal`;
+# Creating temporary table to overcome VIEW dependency errors
+CREATE TABLE `discount_rzdpersonal` (
+	`disc_id` INT(10) UNSIGNED NOT NULL DEFAULT ''
+) ENGINE=MyISAM;
+
+
+# Dumping structure for view rzd.discount_rzdservice
+DROP VIEW IF EXISTS `discount_rzdservice`;
+# Creating temporary table to overcome VIEW dependency errors
+CREATE TABLE `discount_rzdservice` (
+	`disc_id` INT(10) UNSIGNED NOT NULL DEFAULT ''
+) ENGINE=MyISAM;
+
+
+# Dumping structure for view rzd.discount_rzdwork
+DROP VIEW IF EXISTS `discount_rzdwork`;
+# Creating temporary table to overcome VIEW dependency errors
+CREATE TABLE `discount_rzdwork` (
+	`disc_id` INT(10) UNSIGNED NOT NULL DEFAULT ''
+) ENGINE=MyISAM;
+
+
+# Dumping structure for view rzd.discount_study
+DROP VIEW IF EXISTS `discount_study`;
+# Creating temporary table to overcome VIEW dependency errors
+CREATE TABLE `discount_study` (
+	`disc_id` INT(10) UNSIGNED NOT NULL DEFAULT ''
+) ENGINE=MyISAM;
+
+
+# Dumping structure for view rzd.discount_war
+DROP VIEW IF EXISTS `discount_war`;
+# Creating temporary table to overcome VIEW dependency errors
+CREATE TABLE `discount_war` (
+	`disc_id` INT(10) UNSIGNED NOT NULL DEFAULT ''
+) ENGINE=MyISAM;
 
 
 # Dumping structure for table rzd.file
@@ -62,7 +138,8 @@ CREATE TABLE IF NOT EXISTS `file` (
   `NDSServ` double DEFAULT NULL COMMENT 'НДС услуги',
   `TimeCreate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Дата записи файла',
   `TimeCalcReport` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'Отчетный день, за который считать файл',
-  PRIMARY KEY (`FileId`)
+  PRIMARY KEY (`FileId`),
+  KEY `ix__file__TimeCalcReport` (`TimeCalcReport`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 # Data exporting was unselected.
@@ -100,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `station` (
 DROP TABLE IF EXISTS `ticket`;
 CREATE TABLE IF NOT EXISTS `ticket` (
   `TicketId` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `FileId` int(10) unsigned DEFAULT NULL,
+  `FileId` int(10) unsigned NOT NULL,
   `PerevozGkey` int(11) DEFAULT NULL COMMENT 'код перевозчика в АСОКУПЭ-Л',
   `TrainCat` varchar(5) DEFAULT NULL COMMENT 'категория поезда (скорый, пасс.)',
   `TPlanID` int(11) DEFAULT NULL COMMENT 'Тарифный план (ID в БД АСОКУПЭ-Л)',
@@ -137,6 +214,62 @@ CREATE TABLE IF NOT EXISTS `ticket` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 # Data exporting was unselected.
+
+
+# Dumping structure for view rzd.discount_fednonsoc
+DROP VIEW IF EXISTS `discount_fednonsoc`;
+# Removing temporary table and create final VIEW structure
+DROP TABLE IF EXISTS `discount_fednonsoc`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `discount_fednonsoc` AS select `discount`.`disc_id` AS `disc_id` from `discount` where (`discount`.`disc_type_id` = 2);
+
+
+# Dumping structure for view rzd.discount_fedsoc
+DROP VIEW IF EXISTS `discount_fedsoc`;
+# Removing temporary table and create final VIEW structure
+DROP TABLE IF EXISTS `discount_fedsoc`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `discount_fedsoc` AS select `discount`.`disc_id` AS `disc_id` from `discount` where (`discount`.`disc_type_id` = 1);
+
+
+# Dumping structure for view rzd.discount_region
+DROP VIEW IF EXISTS `discount_region`;
+# Removing temporary table and create final VIEW structure
+DROP TABLE IF EXISTS `discount_region`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `discount_region` AS select `discount`.`disc_id` AS `disc_id` from `discount` where (`discount`.`disc_type_id` = 3);
+
+
+# Dumping structure for view rzd.discount_rzdpersonal
+DROP VIEW IF EXISTS `discount_rzdpersonal`;
+# Removing temporary table and create final VIEW structure
+DROP TABLE IF EXISTS `discount_rzdpersonal`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `discount_rzdpersonal` AS select `discount`.`disc_id` AS `disc_id` from `discount` where (`discount`.`disc_type_id` = 6);
+
+
+# Dumping structure for view rzd.discount_rzdservice
+DROP VIEW IF EXISTS `discount_rzdservice`;
+# Removing temporary table and create final VIEW structure
+DROP TABLE IF EXISTS `discount_rzdservice`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `discount_rzdservice` AS select `discount`.`disc_id` AS `disc_id` from `discount` where (`discount`.`disc_type_id` = 8);
+
+
+# Dumping structure for view rzd.discount_rzdwork
+DROP VIEW IF EXISTS `discount_rzdwork`;
+# Removing temporary table and create final VIEW structure
+DROP TABLE IF EXISTS `discount_rzdwork`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `discount_rzdwork` AS select `discount`.`disc_id` AS `disc_id` from `discount` where (`discount`.`disc_type_id` = 7);
+
+
+# Dumping structure for view rzd.discount_study
+DROP VIEW IF EXISTS `discount_study`;
+# Removing temporary table and create final VIEW structure
+DROP TABLE IF EXISTS `discount_study`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `discount_study` AS select `discount`.`disc_id` AS `disc_id` from `discount` where (`discount`.`disc_type_id` = 5);
+
+
+# Dumping structure for view rzd.discount_war
+DROP VIEW IF EXISTS `discount_war`;
+# Removing temporary table and create final VIEW structure
+DROP TABLE IF EXISTS `discount_war`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `discount_war` AS select `discount`.`disc_id` AS `disc_id` from `discount` where (`discount`.`disc_type_id` = 4);
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

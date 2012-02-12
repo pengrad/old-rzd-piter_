@@ -3,7 +3,7 @@
 # Server version:               5.1.50-community
 # Server OS:                    Win32
 # HeidiSQL version:             6.0.0.3603
-# Date/time:                    2012-02-12 15:50:05
+# Date/time:                    2012-02-12 20:38:35
 # --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -137,9 +137,7 @@ CREATE TABLE IF NOT EXISTS `file` (
   `SumServ` double DEFAULT NULL COMMENT 'сумма услуги',
   `NDSServ` double DEFAULT NULL COMMENT 'НДС услуги',
   `TimeCreate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Дата записи файла',
-  `TimeCalcReport` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'Отчетный день, за который считать файл',
-  PRIMARY KEY (`FileId`),
-  KEY `ix__file__TimeCalcReport` (`TimeCalcReport`) USING BTREE
+  PRIMARY KEY (`FileId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 # Data exporting was unselected.
@@ -151,8 +149,11 @@ CREATE TABLE IF NOT EXISTS `sector` (
   `sect_id` int(10) unsigned NOT NULL,
   `sect_name` varchar(100) NOT NULL,
   `sect_dir_id` int(10) unsigned NOT NULL,
+  `sect_parent_id` int(10) unsigned DEFAULT NULL COMMENT 'Ссылка на родительский участок, если участок вложенный',
   PRIMARY KEY (`sect_id`),
   KEY `fk__sector__sect_dir_id` (`sect_dir_id`),
+  KEY `fk__sector__sect_parent_id` (`sect_parent_id`),
+  CONSTRAINT `fk__sector__sect_parent_id` FOREIGN KEY (`sect_parent_id`) REFERENCES `sector` (`sect_id`),
   CONSTRAINT `fk__sector__sect_dir_id` FOREIGN KEY (`sect_dir_id`) REFERENCES `direction` (`dir_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -164,10 +165,21 @@ DROP TABLE IF EXISTS `station`;
 CREATE TABLE IF NOT EXISTS `station` (
   `stat_id` int(10) unsigned NOT NULL,
   `stat_name` varchar(100) NOT NULL,
-  `stat_sect_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`stat_id`),
-  KEY `fk__station__stat_sect_id` (`stat_sect_id`),
-  CONSTRAINT `fk__station__stat_sect_id` FOREIGN KEY (`stat_sect_id`) REFERENCES `sector` (`sect_id`)
+  PRIMARY KEY (`stat_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+# Data exporting was unselected.
+
+
+# Dumping structure for table rzd.station_sector_cross
+DROP TABLE IF EXISTS `station_sector_cross`;
+CREATE TABLE IF NOT EXISTS `station_sector_cross` (
+  `stat_id` int(10) unsigned NOT NULL,
+  `sect_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`stat_id`,`sect_id`),
+  KEY `fk__station_sector_cross__sect_id` (`sect_id`),
+  CONSTRAINT `fk__station_sector_cross__stat_id` FOREIGN KEY (`stat_id`) REFERENCES `station` (`stat_id`),
+  CONSTRAINT `fk__station_sector_cross__sect_id` FOREIGN KEY (`sect_id`) REFERENCES `sector` (`sect_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 # Data exporting was unselected.
@@ -208,8 +220,10 @@ CREATE TABLE IF NOT EXISTS `ticket` (
   `NDS` double DEFAULT NULL COMMENT 'НДС по ручной клади',
   `Bl` int(11) DEFAULT NULL COMMENT 'Номер бланка',
   `SN` varchar(15) DEFAULT NULL COMMENT 'СНИЛС',
+  `TimeCalcReport` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'Отчетный день, за который считать билет',
   PRIMARY KEY (`TicketId`),
   KEY `FK__ticket__FileId` (`FileId`),
+  KEY `ix__ticket__TimeCalcReport` (`TimeCalcReport`) USING BTREE,
   CONSTRAINT `FK__ticket__FileId` FOREIGN KEY (`FileId`) REFERENCES `file` (`FileId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

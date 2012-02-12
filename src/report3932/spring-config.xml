@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+
+
+    <bean id="mainDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <!--<property name="url" value="jdbc:mysql://10.20.100.22:1433/uniform?useUnicode=true&amp;characterEncoding=UTF-8&amp;dumpQueriesOnException=true"/>-->
+        <property name="url" value="jdbc:mysql://localhost/rzd"/>
+        <property name="username" value="root"/>
+        <property name="password" value="12345"/>
+    </bean>
+    <!--<bean id="mainDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">-->
+    <!--<property name="driverClassName" value="com.mysql.jdbc.Driver"/>-->
+    <!--<property name="url"-->
+    <!--value="jdbc:mysql://localhost:3306/uniform?useUnicode=true&amp;characterEncoding=UTF-8&amp;dumpQueriesOnException=true"/>-->
+    <!--<property name="username" value="root"/>-->
+    <!--<property name="password" value="12345"/>-->
+    <!--</bean>-->
+
+
+    <!-- Транзакции тоже будем конфигурировать аннотациями, очень удобно :) -->
+
+
+    <!-- Менеджер транзакций: привязываем его к нашему DataSource -->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="mainDataSource"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="txManager" mode="proxy"/>
+
+    <!--<bean id="uniformDAO" class="dao.UniformDAO">-->
+        <!--<property name="dataSource" ref="mainDataSource"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="brigadeDAO" class="dao.BrigadeDAO">-->
+        <!--<property name="dataSource" ref="mainDataSource"/>-->
+        <!--<property name="uniformDAO" ref="uniformDAO"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="warehouseDAO" class="dao.WarehouseDAO">-->
+        <!--<property name="dataSource" ref="mainDataSource"/>-->
+        <!--<property name="uniformDAO" ref="uniformDAO"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="specialityDAO" class="dao.SpecialityDAO">-->
+        <!--<property name="dataSource" ref="mainDataSource"/>-->
+        <!--<property name="uniformDAO" ref="uniformDAO"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="userDAO" class="dao.UserDAO">-->
+        <!--<property name="dataSource" ref="mainDataSource"/>-->
+        <!--<property name="specialityDAO" ref="specialityDAO"/>-->
+        <!--<property name="brigadeDAO" ref="brigadeDAO"/>-->
+        <!--<property name="uniformDAO" ref="uniformDAO"/>-->
+    <!--</bean>-->
+    <!--<bean id="adminDAO" class="dao.AdminDAO">-->
+        <!--<property name="dataSource" ref="mainDataSource"/>-->
+    <!--</bean>-->
+
+
+</beans>

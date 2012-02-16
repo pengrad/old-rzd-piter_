@@ -151,7 +151,7 @@ public class Report3932 implements Report {
         String dateBegin = db.format(dateReport);
         String dateEnd = db.format(dateReportEnd);
         // получения списка станций в зависимости от сегмента
-        Object stationId;
+        List<Integer> stationId;
         if (segment == ReportSegment.DIRECTION) {
             stationId = template.queryForList("select distinct t3.stat_id from direction t1 join sector t2 on t1.dir_id=t2.sect_dir_id join station_sector_cross t3 on t2.sect_id=t3.sect_id where dir_id = ?;",
                     Integer.class, segmentId);
@@ -159,13 +159,13 @@ public class Report3932 implements Report {
             stationId = template.queryForList("select distinct t2.stat_id from sector t1 join station_sector_cross t2 on t1.sect_id=t2.sect_id where t1.sect_id = ?;",
                     Integer.class, segmentId);
         } else { // считаем что это станция
-            stationId = segmentId;
+            stationId = Collections.nCopies(1, segmentId);
         }
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(template);
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("dBegin", dateBegin);
         parameters.addValue("dEnd", dateEnd);
-        parameters.addValue("stations", stationId);
+        parameters.addValue("stations", stationId.size() > 0 ? stationId : "null");
         List<Map<String, Object>> listIncoms = namedParameterJdbcTemplate.queryForList(QUERY_MONEY, parameters);
         List<Map<String, Object>> listTickets = namedParameterJdbcTemplate.queryForList(QUERY_TICKETS, parameters);
         List<Map<String, Object>> listAbonements = namedParameterJdbcTemplate.queryForList(QUERY_ABONEMENTS, parameters);
@@ -200,7 +200,6 @@ public class Report3932 implements Report {
         if (segment == ReportSegment.DIRECTION) {
             stationId = template.queryForList("select distinct t3.stat_id from direction t1 join sector t2 on t1.dir_id=t2.sect_dir_id join station_sector_cross t3 on t2.sect_id=t3.sect_id where dir_id = ?;",
                     Integer.class, segmentId);
-            System.out.println(stationId);
         } else if (segment == ReportSegment.SECTOR) {
             stationId = template.queryForList("select distinct t2.stat_id from sector t1 join station_sector_cross t2 on t1.sect_id=t2.sect_id where t1.sect_id = ?;",
                     Integer.class, segmentId);
@@ -236,11 +235,11 @@ public class Report3932 implements Report {
         }
     }
 
-    private StringBuilder recordToString(Map<String, Object> record){
+    private StringBuilder recordToString(Map<String, Object> record) {
         StringBuilder sb = new StringBuilder();
-        for(String header : HEADERS) {
+        for (String header : HEADERS) {
             Object o = record.get(header);
-            if(o != null) {
+            if (o != null) {
                 sb.append(Arrays.copyOf(o.toString().toCharArray(), 10));
                 sb.append(' ');
             }
@@ -254,9 +253,9 @@ public class Report3932 implements Report {
         report.setDataSource(context.getBean("mainDataSource", DataSource.class));
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         GregorianCalendar gc = new GregorianCalendar(2012, 1, 12);
-        // report.buildXml(gc.getTime(), ReportSegment.DIRECTION, 0, System.out);
+         report.buildXml(gc.getTime(), ReportSegment.DIRECTION, 0, System.out);
         //System.out.println(baos.toString());
-     //   report.buildText(gc.getTime(), ReportSegment.DIRECTION, 0, new FileOutputStream("d:\\12.txt"));
+        //   report.buildText(gc.getTime(), ReportSegment.DIRECTION, 0, new FileOutputStream("d:\\12.txt"));
         report.buildText(gc.getTime(), ReportSegment.DIRECTION, -12, System.out);
     }
 }

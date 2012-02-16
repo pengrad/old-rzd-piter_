@@ -3,6 +3,7 @@ use rzd;
 truncate table discount;
 truncate table direction;
 truncate table sector;
+truncate table temp_ab;
 
 #Льготы
 insert discount(disc_id, disc_type_name, disc_type_id)values
@@ -86,3 +87,44 @@ insert direction(dir_id, dir_name) values
 insert sector(sect_id, sect_name, sect_dir_id, sect_parent_id) values
 (1,'УП Витебский',3,null),
 (2,'УП Детское Село',3,null);
+
+#Абонементы
+INSERT INTO `temp_ab` (`a_type`) VALUES (101);
+INSERT INTO `temp_ab` (`a_type`) VALUES (102);
+INSERT INTO `temp_ab` (`a_type`) VALUES (103);
+INSERT INTO `temp_ab` (`a_type`) VALUES (104);
+INSERT INTO `temp_ab` (`a_type`) VALUES (105);
+INSERT INTO `temp_ab` (`a_type`) VALUES (106);
+INSERT INTO `temp_ab` (`a_type`) VALUES (107);
+INSERT INTO `temp_ab` (`a_type`) VALUES (108);
+INSERT INTO `temp_ab` (`a_type`) VALUES (109);
+INSERT INTO `temp_ab` (`a_type`) VALUES (110);
+INSERT INTO `temp_ab` (`a_type`) VALUES (111);
+INSERT INTO `temp_ab` (`a_type`) VALUES (112);
+INSERT INTO `temp_ab` (`a_type`) VALUES (301);
+INSERT INTO `temp_ab` (`a_type`) VALUES (302);
+INSERT INTO `temp_ab` (`a_type`) VALUES (303);
+INSERT INTO `temp_ab` (`a_type`) VALUES (304);
+INSERT INTO `temp_ab` (`a_type`) VALUES (305);
+INSERT INTO `temp_ab` (`a_type`) VALUES (306);
+INSERT INTO `temp_ab` (`a_type`) VALUES (307);
+INSERT INTO `temp_ab` (`a_type`) VALUES (309);
+INSERT INTO `temp_ab` (`a_type`) VALUES (310);
+INSERT INTO `temp_ab` (`a_type`) VALUES (311);
+INSERT INTO `temp_ab` (`a_type`) VALUES (312);
+INSERT INTO `temp_ab` (`a_type`) VALUES (401);
+INSERT INTO `temp_ab` (`a_type`) VALUES (402);
+INSERT INTO `temp_ab` (`a_type`) VALUES (403);
+INSERT INTO `temp_ab` (`a_type`) VALUES (404);
+INSERT INTO `temp_ab` (`a_type`) VALUES (405);
+INSERT INTO `temp_ab` (`a_type`) VALUES (406);
+INSERT INTO `temp_ab` (`a_type`) VALUES (407);
+INSERT INTO `temp_ab` (`a_type`) VALUES (408);
+INSERT INTO `temp_ab` (`a_type`) VALUES (409);
+INSERT INTO `temp_ab` (`a_type`) VALUES (410);
+INSERT INTO `temp_ab` (`a_type`) VALUES (411);
+INSERT INTO `temp_ab` (`a_type`) VALUES (412);
+INSERT INTO `temp_ab` (`a_type`) VALUES (501);
+INSERT INTO `temp_ab` (`a_type`) VALUES (502);
+INSERT INTO `temp_ab` (`a_type`) VALUES (503);
+INSERT INTO `temp_ab` (`a_type`) VALUES (504);

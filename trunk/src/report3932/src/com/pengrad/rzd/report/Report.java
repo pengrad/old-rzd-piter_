@@ -10,5 +10,10 @@ public interface Report {
         STATION, SECTOR, DIRECTION
     }
 
+    enum TerminalType {
+        MKTK, PKTK, ALL
+    }
+
     void buildXml(Date dateReport, ReportSegment segment, int segmentId, OutputStream os) throws IOException;
+    void buildText(Date dateReport, ReportSegment segment, int segmentId, OutputStream os) throws IOException;
 }

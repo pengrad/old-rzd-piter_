@@ -215,8 +215,8 @@ CREATE TABLE `sector` (
   PRIMARY KEY (`sect_id`),
   KEY `fk__sector__sect_dir_id` (`sect_dir_id`),
   KEY `fk__sector__sect_parent_id` (`sect_parent_id`),
-  CONSTRAINT `fk__sector__sect_parent_id` FOREIGN KEY (`sect_parent_id`) REFERENCES `sector` (`sect_id`),
-  CONSTRAINT `fk__sector__sect_dir_id` FOREIGN KEY (`sect_dir_id`) REFERENCES `direction` (`dir_id`)
+  CONSTRAINT `fk__sector__sect_dir_id` FOREIGN KEY (`sect_dir_id`) REFERENCES `direction` (`dir_id`),
+  CONSTRAINT `fk__sector__sect_parent_id` FOREIGN KEY (`sect_parent_id`) REFERENCES `sector` (`sect_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -246,8 +246,20 @@ CREATE TABLE `station_sector_cross` (
   `sect_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`stat_id`,`sect_id`),
   KEY `fk__station_sector_cross__sect_id` (`sect_id`),
-  CONSTRAINT `fk__station_sector_cross__stat_id` FOREIGN KEY (`stat_id`) REFERENCES `station` (`stat_id`),
-  CONSTRAINT `fk__station_sector_cross__sect_id` FOREIGN KEY (`sect_id`) REFERENCES `sector` (`sect_id`)
+  CONSTRAINT `fk__station_sector_cross__sect_id` FOREIGN KEY (`sect_id`) REFERENCES `sector` (`sect_id`),
+  CONSTRAINT `fk__station_sector_cross__stat_id` FOREIGN KEY (`stat_id`) REFERENCES `station` (`stat_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `temp_ab`
+--
+
+DROP TABLE IF EXISTS `temp_ab`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `temp_ab` (
+  `a_type` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -466,4 +478,4 @@ USE `rzd`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-02-13  0:13:45
+-- Dump completed on 2012-02-16  6:05:50

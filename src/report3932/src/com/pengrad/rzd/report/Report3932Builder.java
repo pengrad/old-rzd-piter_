@@ -14,7 +14,7 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class Report3932 implements Report {
+public class Report3932Builder implements Report {
 
     private DataSource dataSource;
 
@@ -228,7 +228,6 @@ public class Report3932 implements Report {
         os.flush();
     }
 
-
     private void addAttributesToElement(Element e, Map<String, Object> attrs) {
         for (Map.Entry<String, Object> attr : attrs.entrySet()) {
             e.addAttribute(attr.getKey(), attr.getValue() == null ? null : attr.getValue().toString());
@@ -247,8 +246,10 @@ public class Report3932 implements Report {
         return sb;
     }
 
+
+
     public static void main(String[] args) throws IOException {
-        Report3932 report = new Report3932();
+        Report3932Builder report = new Report3932Builder();
         ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
         report.setDataSource(context.getBean("mainDataSource", DataSource.class));
         ByteArrayOutputStream baos = new ByteArrayOutputStream();

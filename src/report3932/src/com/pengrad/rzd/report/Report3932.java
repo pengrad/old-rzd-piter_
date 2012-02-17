@@ -1,4 +1,4 @@
 package com.pengrad.rzd.report;
 
-public class ReportData {
+public class Report3932 {
 }

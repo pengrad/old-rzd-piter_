@@ -3,8 +3,8 @@ from ticket t1
 	join file t2 on t1.FileId=t2.FileId
 where t1.TimeCalcReport >= '20010101' and t1.TimeCalcReport < '20130101'
 	and t2.PlaceTerm in (0)
+	and (null is null or t2.TypeTerm = null)
 	and ifnull(t1.a,0) <> 1
-	
 union all	
 
 select 'm-pay' type, ifnull(sum(t1.S),0) sum, null sumPay, 
@@ -20,6 +20,7 @@ from ticket t1
 	join file t2 on t1.FileId=t2.FileId
 where t1.TimeCalcReport >= '20010101' and t1.TimeCalcReport < '20130101'
 	and t2.PlaceTerm in (0)
+	and (null is null or t2.TypeTerm = null)	
 	and ifnull(t1.a,0) <> 1
 	and ifnull(t1.TicketTypeL,0) not in (select disc_id from discount_rzdservice)
 	
@@ -32,5 +33,6 @@ from ticket t1
 	join file t2 on t1.FileId=t2.FileId
 where t1.TimeCalcReport >= '20010101' and t1.TimeCalcReport < '20130101'
 	and t2.PlaceTerm in (0)
+	and (null is null or t2.TypeTerm = null)	
 	and ifnull(a,0) <> 1
 	and ifnull(t1.TicketTypeL,0) in (select disc_id from discount_rzdservice);

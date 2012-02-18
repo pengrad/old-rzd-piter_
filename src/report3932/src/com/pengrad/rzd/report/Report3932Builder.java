@@ -177,8 +177,8 @@ public class Report3932Builder implements Report {
         report.setDataSource(context.getBean("mainDataSource", DataSource.class));
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         GregorianCalendar gc = new GregorianCalendar(2012, 1, 12);
-//         report.buildXml(gc.getTime(), ReportSegment.DIRECTION, 0, System.out);
-//        report.buildText(gc.getTime(), ReportSegment.DIRECTION, 123, TerminalType.ALL, System.out);
+         report.buildXml(gc.getTime(), ReportSegment.DIRECTION, 0, TerminalType.ALL, System.out);
+        report.buildText(gc.getTime(), ReportSegment.DIRECTION, 123, TerminalType.ALL, System.out);
         report.buildXls(gc.getTime(), ReportSegment.DIRECTION, 123, TerminalType.ALL, new FileOutputStream("d:\\tt.xls"));
     }
 }

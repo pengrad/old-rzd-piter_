@@ -14,6 +14,7 @@ from ticket t1
 	join file t2 on t1.FileId=t2.FileId
 where t1.TimeCalcReport >= '20010101' and t1.TimeCalcReport < '20130101'
 	and t2.PlaceTerm in (0)
+	and (null is null or t2.TypeTerm = null)	
 	and ifnull(t1.A,0) <> 1
 	
 union all	
@@ -26,6 +27,7 @@ from ticket t1
 	join file t2 on t1.FileId=t2.FileId
 where t1.TimeCalcReport >= '20010101' and t1.TimeCalcReport < '20130101'
 	and t2.PlaceTerm in (0)
+	and (null is null or t2.TypeTerm = null)	
 	and ifnull(t1.A,0) <> 1
 	and ifnull(t1.R,0) = 0
 	
@@ -39,5 +41,6 @@ from ticket t1
 	join file t2 on t1.FileId=t2.FileId
 where t1.TimeCalcReport >= '20010101' and t1.TimeCalcReport < '20130101'
 	and t2.PlaceTerm in (0)
+	and (null is null or t2.TypeTerm = null)	
 	and ifnull(t1.A,0) <> 1
 	and ifnull(t1.R,0) = 1;

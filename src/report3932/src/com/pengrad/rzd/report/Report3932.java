@@ -16,6 +16,7 @@ public class Report3932 {
             "\tjoin file t2 on t1.FileId=t2.FileId\n" +
             "where t1.TimeCalcReport >= :dBegin and t1.TimeCalcReport < :dEnd\n" +
             "\tand t2.PlaceTerm in (:stations)\n" +
+            "\tand (:terminal is null or t2.TypeTerm = :terminal)\n" +
             "\tand ifnull(t1.a,0) <> 1\n" +
             "\t\n" +
             "union all\t\n" +
@@ -33,6 +34,7 @@ public class Report3932 {
             "\tjoin file t2 on t1.FileId=t2.FileId\n" +
             "where t1.TimeCalcReport >= :dBegin and t1.TimeCalcReport < :dEnd\n" +
             "\tand t2.PlaceTerm in (:stations)\n" +
+            "\tand (:terminal is null or t2.TypeTerm = :terminal)\n" +
             "\tand ifnull(t1.a,0) <> 1\n" +
             "\tand ifnull(t1.TicketTypeL,0) not in (select disc_id from discount_rzdservice)\n" +
             "\t\n" +
@@ -45,6 +47,7 @@ public class Report3932 {
             "\tjoin file t2 on t1.FileId=t2.FileId\n" +
             "where t1.TimeCalcReport >= :dBegin and t1.TimeCalcReport < :dEnd\n" +
             "\tand t2.PlaceTerm in (:stations)\n" +
+            "\tand (:terminal is null or t2.TypeTerm = :terminal)\n" +
             "\tand ifnull(a,0) <> 1\n" +
             "\tand ifnull(t1.TicketTypeL,0) in (select disc_id from discount_rzdservice);";
 
@@ -64,6 +67,7 @@ public class Report3932 {
             "\tjoin file t2 on t1.FileId=t2.FileId\n" +
             "where t1.TimeCalcReport >= :dBegin and t1.TimeCalcReport < :dEnd\n" +
             "\tand t2.PlaceTerm in (:stations)\n" +
+            "\tand (:terminal is null or t2.TypeTerm = :terminal)\n" +
             "\tand ifnull(t1.A,0) <> 1\n" +
             "\t\n" +
             "union all\t\n" +
@@ -76,6 +80,7 @@ public class Report3932 {
             "\tjoin file t2 on t1.FileId=t2.FileId\n" +
             "where t1.TimeCalcReport >= :dBegin and t1.TimeCalcReport < :dEnd\n" +
             "\tand t2.PlaceTerm in (:stations)\n" +
+            "\tand (:terminal is null or t2.TypeTerm = :terminal)\n" +
             "\tand ifnull(t1.A,0) <> 1\n" +
             "\tand ifnull(t1.R,0) = 0\n" +
             "\t\n" +
@@ -89,18 +94,20 @@ public class Report3932 {
             "\tjoin file t2 on t1.FileId=t2.FileId\n" +
             "where t1.TimeCalcReport >= :dBegin and t1.TimeCalcReport < :dEnd\n" +
             "\tand t2.PlaceTerm in (:stations)\n" +
+            "\tand (:terminal is null or t2.TypeTerm = :terminal)\n" +
             "\tand ifnull(t1.A,0) <> 1\n" +
             "\tand ifnull(t1.R,0) = 1;";
 
     public static final String QUERY_ABONEMENTS = "select 'ab-all' type, \n" +
             "\t\tcount(t1.TicketId) as sum,\n" +
-            "\t\tifnull(sum(case when t2.L is null then 1 else 0 end),0) as sumPay,\n" +
-            "\t\tifnull(sum(case when t2.L is not null then 1 else 0 end),0) as sumRzdWork\n" +
+            "\t\tifnull(sum(case when tL.L is null then 1 else 0 end),0) as sumPay,\n" +
+            "\t\tifnull(sum(case when tL.L is not null then 1 else 0 end),0) as sumRzdWork\n" +
             "from ticket t1\n" +
-            "\tjoin file tf on t1.FileId=tf.FileId\n" +
-            "\tleft join (select disc_id as L from discount_rzdwork) t2 on t1.TicketTypeL=t2.L\n" +
+            "\tjoin file t2 on t1.FileId=t2.FileId\n" +
+            "\tleft join (select disc_id as L from discount_rzdwork) tL on t1.TicketTypeL=tL.L\n" +
             "where t1.TimeCalcReport >= :dBegin and t1.TimeCalcReport < :dEnd\n" +
-            "\tand tf.PlaceTerm in (:stations)\n" +
+            "\tand t2.PlaceTerm in (:stations)\n" +
+            "\tand (:terminal is null or t2.TypeTerm = :terminal)\n" +
             "\tand t1.TicketTypeID in (select a_type from temp_ab)\n" +
             "\n" +
             "union all \n" +
@@ -112,28 +119,33 @@ public class Report3932 {
             "from temp_ab ta left join \n" +
             "(select t1.TicketTypeId,\n" +
             "\t\tcount(t1.TicketId) as sum,\n" +
-            "\t\tifnull(sum(case when t2.L is null then 1 else 0 end),0) as sumPay,\n" +
-            "\t\tifnull(sum(case when t2.L is not null then 1 else 0 end),0) as sumRzdWork\n" +
+            "\t\tifnull(sum(case when tL.L is null then 1 else 0 end),0) as sumPay,\n" +
+            "\t\tifnull(sum(case when tL.L is not null then 1 else 0 end),0) as sumRzdWork\n" +
             "from ticket t1 \n" +
-            "\tjoin file tf on t1.FileId=tf.FileId\n" +
-            "\tleft join (select disc_id as L from discount_rzdwork) t2 on t1.TicketTypeL=t2.L\n" +
+            "\tjoin file t2 on t1.FileId=t2.FileId\n" +
+            "\tleft join (select disc_id as L from discount_rzdwork) tL on t1.TicketTypeL=tL.L\n" +
             "where t1.TimeCalcReport >= :dBegin and t1.TimeCalcReport < :dEnd\n" +
-            "\tand tf.PlaceTerm in (:stations)\n" +
+            "\tand t2.PlaceTerm in (:stations)\n" +
+            "\tand (:terminal is null or t2.TypeTerm = :terminal)\n" +
             "\tand t1.TicketTypeID in (select a_type from temp_ab)\n" +
             "group by t1.TicketTypeId\n" +
             ") t1 on ta.a_type=t1.TicketTypeId;";
 
-    private Report3932(List<Map<String, Object>> incoms, List<Map<String, Object>> tickets, List<Map<String, Object>> abonements) {
+    public Report3932(List<Map<String, Object>> incoms, List<Map<String, Object>> tickets, List<Map<String, Object>> abonements, Date dateReport, String dateReportString) {
         this.incoms = incoms;
         this.tickets = tickets;
         this.abonements = abonements;
+        this.dateReport = dateReport;
+        this.dateReportString = dateReportString;
     }
 
     private List<Map<String, Object>> incoms;
     private List<Map<String, Object>> tickets;
     private List<Map<String, Object>> abonements;
+    private Date dateReport;
+    private String dateReportString;
 
-    static Report3932 buildReport(JdbcTemplate template, Date dateReport, Report.ReportSegment segment, int segmentId) {
+    static Report3932 buildReport(JdbcTemplate template, Date dateReport, Report.ReportSegment segment, int segmentId, Report.TerminalType terminalType) {
         // вычисление даты окончания
         SimpleDateFormat db = new SimpleDateFormat("yyyyMMdd");
         GregorianCalendar c = new GregorianCalendar();
@@ -157,11 +169,18 @@ public class Report3932 {
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("dBegin", dateBegin);
         parameters.addValue("dEnd", dateEnd);
-        parameters.addValue("stations", stationId.size() > 0 ? stationId : "null");
+        parameters.addValue("stations", stationId.size() > 0 ? stationId : null);
+        parameters.addValue("terminal", getTerminalName(terminalType));
         List<Map<String, Object>> listIncoms = namedParameterJdbcTemplate.queryForList(QUERY_MONEY, parameters);
         List<Map<String, Object>> listTickets = namedParameterJdbcTemplate.queryForList(QUERY_TICKETS, parameters);
         List<Map<String, Object>> listAbonements = namedParameterJdbcTemplate.queryForList(QUERY_ABONEMENTS, parameters);
-        return new Report3932(listIncoms, listTickets, listAbonements);
+        return new Report3932(listIncoms, listTickets, listAbonements, dateReport, dateBegin);
+    }
+
+    private static String getTerminalName(Report.TerminalType terminalType) {
+        if(terminalType== Report.TerminalType.MKTK) return "МКТК";
+        if(terminalType== Report.TerminalType.PKTK) return "PKTK";
+        return null;
     }
 
     public List<Map<String, Object>> getIncoms() {
@@ -174,5 +193,13 @@ public class Report3932 {
 
     public List<Map<String, Object>> getAbonements() {
         return abonements;
+    }
+
+    public Date getDateReport() {
+        return dateReport;
+    }
+
+    public String getDateReportString() {
+        return dateReportString;
     }
 }

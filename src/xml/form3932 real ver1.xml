@@ -1,6 +1,6 @@
  <?xml version="1.0" encoding="UTF-8"?>
 <form type="3932">
-<report date="18012012" segmentType="station|sector|direction" segmentId="2001233" terminalType="MKTK|PKTK|ALL">
+<report date="20120118" segmentType="station|sector|direction" segmentId="2001233" terminalType="MKTK|PKTK|ALL">
 <!-- Деньги -->
 <element type="zd" al="10" pl="10"/>
 <element type="zn" al="10" fs="10" fn="10" rg="10" vs="10" st="10" rl="10" rm="10"/>

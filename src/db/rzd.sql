@@ -197,7 +197,7 @@ CREATE TABLE `file` (
   `NDSServ` double DEFAULT NULL COMMENT 'НДС услуги',
   `TimeCreate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Дата записи файла',
   PRIMARY KEY (`FileId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -259,7 +259,8 @@ DROP TABLE IF EXISTS `temp_ab`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `temp_ab` (
-  `a_type` int(11) NOT NULL
+  `a_type` int(11) NOT NULL,
+  `a_name` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -308,8 +309,45 @@ CREATE TABLE `ticket` (
   KEY `FK__ticket__FileId` (`FileId`),
   KEY `ix__ticket__TimeCalcReport` (`TimeCalcReport`) USING BTREE,
   CONSTRAINT `FK__ticket__FileId` FOREIGN KEY (`FileId`) REFERENCES `file` (`FileId`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping routines for database 'rzd'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `test` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `test`(in s varchar(1000))
+BEGIN
+
+  declare i1,i2 int default 1;    
+  
+    create temporary table A(i int);
+  
+	select locate(',',s,1) into i2;
+  WHILE i2 > 0 DO
+ 	 insert A(i) select substring(s,i1,i2-i1);
+    set i1 = i2+1;
+    select locate(',',s,i1) into i2;
+  END WHILE;
+  insert A(i) select substring(s,i1,length(s)-i1+1);  
+  select * from a;
+  
+  drop table a;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Current Database: `rzd`
@@ -478,4 +516,4 @@ USE `rzd`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-02-18 18:45:07
+-- Dump completed on 2012-02-20  2:10:44

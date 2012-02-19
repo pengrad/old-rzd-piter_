@@ -1,0 +1,30 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+<form type="3932">
+<report date="18012012" segmentType="station|sector|direction" segmentId="2001233" terminalType="MKTK|PKTK|ALL">
+<!-- Деньги -->
+<zd al="10" pl="10"/>
+<zn al="10" fs="10" fn="10" rg="10" vs="10" st="10" rl="10" rm="10"/>
+<zp al="10" rs="10"/>
+
+<!-- Билеты разовые -->
+<br al="10" pl="10" fs="10" fn="10" rg="10" vs="10" st="10" rl="10" rm="10" rs="10"/>
+<br1 al="10" pl="10"/>
+<br2 al="10" pl="10"/>
+
+<!-- Абонементы -->
+<ba al="10" pl="10" rm="10"/>
+<ed05 al="10" pl="10" rm="10"/>
+<ed25 al="10" pl="10" rm="10"/>
+<em01 al="10" pl="10" rm="10"/>
+<em12 al="10" pl="10" rm="10"/>
+<rd10 al="10" pl="10" rm="10"/>
+<rd25 al="10" pl="10" rm="10"/>
+<rm01 al="10" pl="10" rm="10"/>
+<rm12 al="10" pl="10" rm="10"/>
+<dd05 al="10" pl="10" rm="10"/>
+<dd16 al="10" pl="10" rm="10"/>
+<dm10 al="10" pl="10" rm="10"/>
+<dm90 al="10" pl="10" rm="10"/>
+
+</report>
+</form>

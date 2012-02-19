@@ -10,8 +10,24 @@ import java.util.*;
 public class Report3932 {
 
     public static final String[] HEADERS = new String[]{"type", "sum", "sumPay", "sumFedSoc", "sumFedNonSoc", "sumRegion", "sumWar", "sumStudy", "sumRZDPersonal", "sumRZDWork", "sumRZDService", "sumService"};
+    public static HashMap<String, String> HEADERS_MAP = new HashMap<String, String>(12);
 
-    public static final String QUERY_MONEY = "select 'm-all' type, ifnull(sum(t1.S),0) sum, ifnull(sum(t1.S),0) sumPay, null sumFedSoc, null sumFedNonSoc, null sumRegion, null sumWar, null sumStudy, null sumRZDPersonal, null sumRZDWork, null sumRZDService, 0 sumService\n" +
+    static {
+        HEADERS_MAP.put("type", "type");
+        HEADERS_MAP.put("sum", "al");
+        HEADERS_MAP.put("sumPay", "pl");
+        HEADERS_MAP.put("sumFedSoc", "fs");
+        HEADERS_MAP.put("sumFedNonSoc", "fn");
+        HEADERS_MAP.put("sumRegion", "rg");
+        HEADERS_MAP.put("sumWar", "vs");
+        HEADERS_MAP.put("sumStudy", "st");
+        HEADERS_MAP.put("sumRZDPersonal", "rl");
+        HEADERS_MAP.put("sumRZDWork", "rm");
+        HEADERS_MAP.put("sumRZDService", "rs");
+        HEADERS_MAP.put("sumService", "bg");
+    }
+
+    public static final String QUERY_MONEY = "select 'zd' type, ifnull(sum(t1.S),0) sum, ifnull(sum(t1.S),0) sumPay, null sumFedSoc, null sumFedNonSoc, null sumRegion, null sumWar, null sumStudy, null sumRZDPersonal, null sumRZDWork, null sumRZDService, 0 sumService\n" +
             "from ticket t1\n" +
             "\tjoin file t2 on t1.FileId=t2.FileId\n" +
             "where t1.TimeCalcReport >= :dBegin and t1.TimeCalcReport < :dEnd\n" +
@@ -21,7 +37,7 @@ public class Report3932 {
             "\t\n" +
             "union all\t\n" +
             "\n" +
-            "select 'm-pay' type, ifnull(sum(t1.S),0) sum, null sumPay, \n" +
+            "select 'zn' type, ifnull(sum(t1.S),0) sum, null sumPay, \n" +
             "\tifnull(sum(case when t1.TicketTypeL in (select disc_id from discount_fedsoc) then t1.S else 0 end),0) sumFedSoc, \n" +
             "\tifnull(sum(case when t1.TicketTypeL in (select disc_id from discount_fednonsoc) then t1.S else 0 end),0) sumFedNonSoc, \n" +
             "\tifnull(sum(case when t1.TicketTypeL in (select disc_id from discount_region) then t1.S else 0 end),0) sumRegion, \n" +
@@ -40,7 +56,7 @@ public class Report3932 {
             "\t\n" +
             "union all\t\n" +
             "\n" +
-            "select 'm-out-pay' type, ifnull(sum(t1.S),0) sum, null sumPay, null sumFedSoc, null sumFedNonSoc, null sumRegion, null sumWar, null sumStudy, null sumRZDPersonal, null sumRZDWork, \n" +
+            "select 'zp' type, ifnull(sum(t1.S),0) sum, null sumPay, null sumFedSoc, null sumFedNonSoc, null sumRegion, null sumWar, null sumStudy, null sumRZDPersonal, null sumRZDWork, \n" +
             "\tifnull(sum(t1.S),0) sumRZDService, \n" +
             "\tnull sumService\n" +
             "from ticket t1\n" +
@@ -51,7 +67,7 @@ public class Report3932 {
             "\tand ifnull(a,0) <> 1\n" +
             "\tand ifnull(t1.TicketTypeL,0) in (select disc_id from discount_rzdservice);";
 
-    public static final String QUERY_TICKETS = "select 't-all' type,\n" +
+    public static final String QUERY_TICKETS = "select 'br' type,\n" +
             "\tcount(t1.TicketId) sum, \n" +
             "\tifnull(sum(case when t1.TicketTypeL not in (select disc_id from discount) then 1 else 0 end),0) sumPay, \n" +
             "\tifnull(sum(case when t1.TicketTypeL in (select disc_id from discount_fedsoc) then 1 else 0 end),0) sumFedSoc, \n" +
@@ -72,7 +88,7 @@ public class Report3932 {
             "\t\n" +
             "union all\t\n" +
             "\n" +
-            "select't-one-way' type,\n" +
+            "select'b1' type,\n" +
             "\tcount(t1.TicketId) sum, \n" +
             "\tifnull(sum(case when t1.TicketTypeL not in (select disc_id from discount) then 1 else 0 end),0) sumPay, \n" +
             "\tnull sumFedSoc, null sumFedNonSoc, null sumRegion, null sumWar, null sumStudy, null sumRZDPersonal, null sumRZDWork, null sumRZDService, null sumService\n" +
@@ -86,7 +102,7 @@ public class Report3932 {
             "\t\n" +
             "union all\n" +
             "\n" +
-            "select 't-round' type,\n" +
+            "select 'b2' type,\n" +
             "\tcount(t1.TicketId) sum, \n" +
             "\tifnull(sum(case when t1.TicketTypeL not in (select disc_id from discount) then 1 else 0 end),0) sumPay, \n" +
             "\tnull sumFedSoc, null sumFedNonSoc, null sumRegion, null sumWar, null sumStudy, null sumRZDPersonal, null sumRZDWork, null sumRZDService, null sumService\n" +
@@ -98,10 +114,10 @@ public class Report3932 {
             "\tand ifnull(t1.A,0) <> 1\n" +
             "\tand ifnull(t1.R,0) = 1;";
 
-    public static final String QUERY_ABONEMENTS = "select 'ab-all' type, \n" +
+    public static final String QUERY_ABONEMENTS = "select 'ba' type, \n" +
             "\t\tcount(t1.TicketId) as sum,\n" +
             "\t\tifnull(sum(case when tL.L is null then 1 else 0 end),0) as sumPay,\n" +
-            "\t\tifnull(sum(case when tL.L is not null then 1 else 0 end),0) as sumRzdWork\n" +
+            "\t\tifnull(sum(case when tL.L is not null then 1 else 0 end),0) as sumRZDWork\n" +
             "from ticket t1\n" +
             "\tjoin file t2 on t1.FileId=t2.FileId\n" +
             "\tleft join (select disc_id as L from discount_rzdwork) tL on t1.TicketTypeL=tL.L\n" +
@@ -112,15 +128,15 @@ public class Report3932 {
             "\n" +
             "union all \n" +
             "\n" +
-            "select concat('ab-',cast(ta.a_type as char)) type,\n" +
+            "select ta.a_name type,\n" +
             "\tifnull(t1.sum,0) as sum,\n" +
             "\tifnull(t1.sumPay,0) as sumPay,\n" +
-            "\tifnull(t1.sumRzdWork,0) as sumRzdWork\n" +
+            "\tifnull(t1.sumRzdWork,0) as sumRZDWork\n" +
             "from temp_ab ta left join \n" +
             "(select t1.TicketTypeId,\n" +
             "\t\tcount(t1.TicketId) as sum,\n" +
             "\t\tifnull(sum(case when tL.L is null then 1 else 0 end),0) as sumPay,\n" +
-            "\t\tifnull(sum(case when tL.L is not null then 1 else 0 end),0) as sumRzdWork\n" +
+            "\t\tifnull(sum(case when tL.L is not null then 1 else 0 end),0) as sumRZDWork\n" +
             "from ticket t1 \n" +
             "\tjoin file t2 on t1.FileId=t2.FileId\n" +
             "\tleft join (select disc_id as L from discount_rzdwork) tL on t1.TicketTypeL=tL.L\n" +
@@ -131,19 +147,17 @@ public class Report3932 {
             "group by t1.TicketTypeId\n" +
             ") t1 on ta.a_type=t1.TicketTypeId;";
 
-    public Report3932(List<Map<String, Object>> incoms, List<Map<String, Object>> tickets, List<Map<String, Object>> abonements, Date dateReport, String dateReportString) {
+    public Report3932(List<Map<String, Object>> incoms, List<Map<String, Object>> tickets, List<Map<String, Object>> abonements, Date dateReport) {
         this.incoms = incoms;
         this.tickets = tickets;
         this.abonements = abonements;
         this.dateReport = dateReport;
-        this.dateReportString = dateReportString;
     }
 
     private List<Map<String, Object>> incoms;
     private List<Map<String, Object>> tickets;
     private List<Map<String, Object>> abonements;
     private Date dateReport;
-    private String dateReportString;
 
     static Report3932 buildReport(JdbcTemplate template, Date dateReport, Report.ReportSegment segment, int segmentId, Report.TerminalType terminalType) {
         // вычисление даты окончания
@@ -174,12 +188,12 @@ public class Report3932 {
         List<Map<String, Object>> listIncoms = namedParameterJdbcTemplate.queryForList(QUERY_MONEY, parameters);
         List<Map<String, Object>> listTickets = namedParameterJdbcTemplate.queryForList(QUERY_TICKETS, parameters);
         List<Map<String, Object>> listAbonements = namedParameterJdbcTemplate.queryForList(QUERY_ABONEMENTS, parameters);
-        return new Report3932(listIncoms, listTickets, listAbonements, dateReport, dateBegin);
+        return new Report3932(listIncoms, listTickets, listAbonements, dateReport);
     }
 
     private static String getTerminalName(Report.TerminalType terminalType) {
-        if(terminalType== Report.TerminalType.MKTK) return "МКТК";
-        if(terminalType== Report.TerminalType.PKTK) return "PKTK";
+        if (terminalType == Report.TerminalType.MKTK) return "МКТК";
+        if (terminalType == Report.TerminalType.PKTK) return "PKTK";
         return null;
     }
 
@@ -199,7 +213,4 @@ public class Report3932 {
         return dateReport;
     }
 
-    public String getDateReportString() {
-        return dateReportString;
-    }
 }

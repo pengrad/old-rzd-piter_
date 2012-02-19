@@ -1,0 +1,30 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+<form type="3932">
+<report date="18012012" segmentType="station|sector|direction" segmentId="2001233" terminalType="MKTK|PKTK|ALL">
+<!-- Деньги -->
+<element type="zd" al="10" pl="10"/>
+<element type="zn" al="10" fs="10" fn="10" rg="10" vs="10" st="10" rl="10" rm="10"/>
+<element type="zp" al="10" rs="10"/>
+
+<!-- Билеты разовые -->
+<element type="br" al="10" pl="10" fs="10" fn="10" rg="10" vs="10" st="10" rl="10" rm="10" rs="10"/>
+<element type="br1" al="10" pl="10"/>
+<element type="br2" al="10" pl="10"/>
+
+<!-- Абонементы -->
+<element type="ba" al="10" pl="10" rm="10"/>
+<element type="ed05" al="10" pl="10" rm="10"/>
+<element type="ed25" al="10" pl="10" rm="10"/>
+<element type="em01" al="10" pl="10" rm="10"/>
+<element type="em12" al="10" pl="10" rm="10"/>
+<element type="rd10" al="10" pl="10" rm="10"/>
+<element type="rd25" al="10" pl="10" rm="10"/>
+<element type="rm01" al="10" pl="10" rm="10"/>
+<element type="rm12" al="10" pl="10" rm="10"/>
+<element type="dd05" al="10" pl="10" rm="10"/>
+<element type="dd16" al="10" pl="10" rm="10"/>
+<element type="dm10" al="10" pl="10" rm="10"/>
+<element type="dm90" al="10" pl="10" rm="10"/>
+
+</report>
+</form>

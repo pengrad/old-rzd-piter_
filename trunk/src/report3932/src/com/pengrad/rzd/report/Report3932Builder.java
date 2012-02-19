@@ -37,14 +37,20 @@ public class Report3932Builder implements Report {
         DOMDocument doc = new DOMDocument();
         Element root = doc.addElement("form");
         root.addAttribute("type", "3932");
-        Element header = root.addElement("header");
-        Element money = header.addElement("money");
-        Element tickets = header.addElement("tickets");
+        Element header = root.addElement("report");
+        SimpleDateFormat f = new SimpleDateFormat("ddMMyyyy");
+        header.addAttribute("date", f.format(report.getDateReport()));
+        header.addAttribute("segmentType", segment.toString().toLowerCase());
+        header.addAttribute("segmentId", String.valueOf(segmentId));
+        header.addAttribute("terminalType", terminal.toString());
         for (Map<String, Object> attr : listIncoms) {
-            addAttributesToElement(money.addElement("incom"), attr);
+            addAttributesToElement(header.addElement("element"), attr);
         }
         for (Map<String, Object> attr : listTickets) {
-            addAttributesToElement(tickets.addElement("ticket"), attr);
+            addAttributesToElement(header.addElement("element"), attr);
+        }
+        for (Map<String, Object> attr : listAbonements) {
+            addAttributesToElement(header.addElement("element"), attr);
         }
         XMLWriter w = new XMLWriter(os);
         w.write(doc);
@@ -56,11 +62,12 @@ public class Report3932Builder implements Report {
         List<Map<String, Object>> listIncoms = report.getIncoms();
         List<Map<String, Object>> listTickets = report.getTickets();
         List<Map<String, Object>> listAbonements = report.getAbonements();
+        SimpleDateFormat f = new SimpleDateFormat("ddMMyyyy");
         int fieldLength = 10;
         StringBuilder sb = new StringBuilder();
         sb.append(Arrays.copyOf(segment.toString().toLowerCase().toCharArray(), fieldLength)).append(' ').append(Arrays.copyOf(String.valueOf(segmentId).toCharArray(), fieldLength)).append("\n");
         sb.append("terminal  ").append(' ').append(Arrays.copyOf(terminal.toString().toLowerCase().toCharArray(), fieldLength)).append("\n");
-        sb.append("date      ").append(' ').append(Arrays.copyOf(report.getDateReportString().toCharArray(), fieldLength)).append("\n");
+        sb.append("date      ").append(' ').append(Arrays.copyOf(f.format(report.getDateReport()).toCharArray(), fieldLength)).append("\n");
         for (Map<String, Object> record : listIncoms) {
             sb.append(recordToString(record, fieldLength)).append('\n');
         }
@@ -87,7 +94,7 @@ public class Report3932Builder implements Report {
         if (segment == ReportSegment.STATION) header.append("По станции ");
         header.append(segmentId).append(", ");
         if (terminal != TerminalType.ALL) header.append("тип терминала ").append(terminal.toString()).append(", ");
-        SimpleDateFormat f = new SimpleDateFormat("yyyy.MM.dd");
+        SimpleDateFormat f = new SimpleDateFormat("dd.MM.yyyy");
         header.append("за ").append(f.format(report.getDateReport()));
         InputStream inp = new FileInputStream("res/template3932.xls");
         Workbook wb = WorkbookFactory.create(inp);
@@ -156,7 +163,9 @@ public class Report3932Builder implements Report {
 
     private void addAttributesToElement(Element e, Map<String, Object> attrs) {
         for (Map.Entry<String, Object> attr : attrs.entrySet()) {
-            e.addAttribute(attr.getKey(), attr.getValue() == null ? null : attr.getValue().toString());
+            String key = attr.getKey();
+            String newKey = Report3932.HEADERS_MAP.get(key);
+            e.addAttribute(newKey == null ? key : newKey, attr.getValue() == null ? null : attr.getValue().toString());
         }
     }
 
@@ -177,7 +186,7 @@ public class Report3932Builder implements Report {
         report.setDataSource(context.getBean("mainDataSource", DataSource.class));
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         GregorianCalendar gc = new GregorianCalendar(2012, 1, 12);
-         report.buildXml(gc.getTime(), ReportSegment.DIRECTION, 0, TerminalType.ALL, System.out);
+        report.buildXml(gc.getTime(), ReportSegment.DIRECTION, 0, TerminalType.ALL, System.out);
         report.buildText(gc.getTime(), ReportSegment.DIRECTION, 123, TerminalType.ALL, System.out);
         report.buildXls(gc.getTime(), ReportSegment.DIRECTION, 123, TerminalType.ALL, new FileOutputStream("d:\\tt.xls"));
     }

@@ -1,4 +1,4 @@
-select 'm-all' type, ifnull(sum(t1.S),0) sum, ifnull(sum(t1.S),0) sumPay, null sumFedSoc, null sumFedNonSoc, null sumRegion, null sumWar, null sumStudy, null sumRZDPersonal, null sumRZDWork, null sumRZDService, 0 sumService
+select 'zd' type, ifnull(sum(t1.S),0) sum, ifnull(sum(t1.S),0) sumPay, null sumFedSoc, null sumFedNonSoc, null sumRegion, null sumWar, null sumStudy, null sumRZDPersonal, null sumRZDWork, null sumRZDService, 0 sumService
 from ticket t1
 	join file t2 on t1.FileId=t2.FileId
 where t1.TimeCalcReport >= '20010101' and t1.TimeCalcReport < '20130101'
@@ -7,7 +7,7 @@ where t1.TimeCalcReport >= '20010101' and t1.TimeCalcReport < '20130101'
 	and ifnull(t1.a,0) <> 1
 union all	
 
-select 'm-pay' type, ifnull(sum(t1.S),0) sum, null sumPay, 
+select 'zn' type, ifnull(sum(t1.S),0) sum, null sumPay, 
 	ifnull(sum(case when t1.TicketTypeL in (select disc_id from discount_fedsoc) then t1.S else 0 end),0) sumFedSoc, 
 	ifnull(sum(case when t1.TicketTypeL in (select disc_id from discount_fednonsoc) then t1.S else 0 end),0) sumFedNonSoc, 
 	ifnull(sum(case when t1.TicketTypeL in (select disc_id from discount_region) then t1.S else 0 end),0) sumRegion, 
@@ -26,7 +26,7 @@ where t1.TimeCalcReport >= '20010101' and t1.TimeCalcReport < '20130101'
 	
 union all	
 
-select 'm-out-pay' type, ifnull(sum(t1.S),0) sum, null sumPay, null sumFedSoc, null sumFedNonSoc, null sumRegion, null sumWar, null sumStudy, null sumRZDPersonal, null sumRZDWork, 
+select 'zp' type, ifnull(sum(t1.S),0) sum, null sumPay, null sumFedSoc, null sumFedNonSoc, null sumRegion, null sumWar, null sumStudy, null sumRZDPersonal, null sumRZDWork, 
 	ifnull(sum(t1.S),0) sumRZDService, 
 	null sumService
 from ticket t1

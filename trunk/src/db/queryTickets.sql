@@ -1,4 +1,4 @@
-select 't-all' type,
+select 'br' type,
 	count(t1.TicketId) sum, 
 	ifnull(sum(case when t1.TicketTypeL not in (select disc_id from discount) then 1 else 0 end),0) sumPay, 
 	ifnull(sum(case when t1.TicketTypeL in (select disc_id from discount_fedsoc) then 1 else 0 end),0) sumFedSoc, 
@@ -19,7 +19,7 @@ where t1.TimeCalcReport >= '20010101' and t1.TimeCalcReport < '20130101'
 	
 union all	
 
-select't-one-way' type,
+select'br1' type,
 	count(t1.TicketId) sum, 
 	ifnull(sum(case when t1.TicketTypeL not in (select disc_id from discount) then 1 else 0 end),0) sumPay, 
 	null sumFedSoc, null sumFedNonSoc, null sumRegion, null sumWar, null sumStudy, null sumRZDPersonal, null sumRZDWork, null sumRZDService, null sumService
@@ -33,7 +33,7 @@ where t1.TimeCalcReport >= '20010101' and t1.TimeCalcReport < '20130101'
 	
 union all
 
-select 't-round' type,
+select 'br2' type,
 	count(t1.TicketId) sum, 
 	ifnull(sum(case when t1.TicketTypeL not in (select disc_id from discount) then 1 else 0 end),0) sumPay, 
 	null sumFedSoc, null sumFedNonSoc, null sumRegion, null sumWar, null sumStudy, null sumRZDPersonal, null sumRZDWork, null sumRZDService, null sumService

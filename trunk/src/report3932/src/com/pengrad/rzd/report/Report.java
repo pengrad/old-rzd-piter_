@@ -19,4 +19,5 @@ public interface Report {
     void buildXml(Date dateReport, ReportSegment segment, int segmentId, TerminalType terminal, OutputStream os) throws IOException;
     void buildText(Date dateReport, ReportSegment segment, int segmentId, TerminalType terminal, OutputStream os) throws IOException;
     void buildXls(Date dateReport, ReportSegment segment, int segmentId, TerminalType terminal, OutputStream os) throws IOException, InvalidFormatException;
+    void buildXmlNonAggregate(Date dateReport, ReportSegment segment, int segmentId, TerminalType terminal, OutputStream os) throws IOException;
 }

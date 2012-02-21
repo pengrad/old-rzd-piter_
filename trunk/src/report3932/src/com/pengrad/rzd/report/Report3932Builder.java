@@ -161,11 +161,51 @@ public class Report3932Builder implements Report {
         wb.write(os);
     }
 
+    public void buildXmlNonAggregate(Date dateReport, ReportSegment segment, int segmentId, TerminalType terminal, OutputStream os) throws IOException {
+        JdbcTemplate template = new JdbcTemplate(dataSource);
+        Collection<Report3932> reports = Report3932.buildNonAggregateReports(template, dateReport, segment, segmentId, terminal);
+        DOMDocument doc = new DOMDocument();
+        Element root = doc.addElement("form");
+        root.addAttribute("type", "3932");
+        for(Report3932 report : reports) {
+            Element header = root.addElement("report");
+            SimpleDateFormat f = new SimpleDateFormat("ddMMyyyy");
+            header.addAttribute("date", f.format(report.getDateReport()));
+            header.addAttribute("stationId", String.valueOf(report.getSegmentId()));
+            header.addAttribute("terminalType", terminal.toString());
+            for (Map<String, Object> attr : report.getIncoms()) {
+                addAttributesToElement(header.addElement("element"), attr, "type");
+            }
+            for (Map<String, Object> attr : report.getTickets()) {
+                addAttributesToElement(header.addElement("element"), attr, "type");
+            }
+            for (Map<String, Object> attr : report.getAbonements()) {
+                addAttributesToElement(header.addElement("element"), attr, "type");
+            }
+        }
+        XMLWriter w = new XMLWriter(os);
+        w.write(doc);
+    }
+
     private void addAttributesToElement(Element e, Map<String, Object> attrs) {
         for (Map.Entry<String, Object> attr : attrs.entrySet()) {
-            String key = attr.getKey();
+            String key = attr.getKey();            
             String newKey = Report3932.HEADERS_MAP.get(key);
-            e.addAttribute(newKey == null ? key : newKey, attr.getValue() == null ? null : attr.getValue().toString());
+            e.addAttribute(newKey == null ? key : newKey, attr.getValue() == null ? null : attr.getValue().toString());            
+        }
+    }
+    
+    private void addAttributesToElement(Element e, Map<String, Object> attrs, String elementRenameField) {
+        for (Map.Entry<String, Object> attr : attrs.entrySet()) {
+            String key = attr.getKey();            
+            if(key.equalsIgnoreCase(elementRenameField)) {
+                if(attr.getValue() != null) {
+                    e.setName(attr.getValue().toString());
+                }
+            } else {
+                String newKey = Report3932.HEADERS_MAP.get(key);
+                e.addAttribute(newKey == null ? key : newKey, attr.getValue() == null ? null : attr.getValue().toString());
+            }
         }
     }
 
@@ -186,7 +226,7 @@ public class Report3932Builder implements Report {
         report.setDataSource(context.getBean("mainDataSource", DataSource.class));
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         GregorianCalendar gc = new GregorianCalendar(2012, 1, 12);
-        report.buildXml(gc.getTime(), ReportSegment.DIRECTION, 0, TerminalType.ALL, System.out);
+        report.buildXmlNonAggregate(gc.getTime(), ReportSegment.SECTOR, 1, TerminalType.ALL, System.out);
         report.buildText(gc.getTime(), ReportSegment.DIRECTION, 123, TerminalType.ALL, System.out);
         report.buildXls(gc.getTime(), ReportSegment.DIRECTION, 123, TerminalType.ALL, new FileOutputStream("d:\\tt.xls"));
     }

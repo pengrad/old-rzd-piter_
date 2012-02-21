@@ -147,17 +147,19 @@ public class Report3932 {
             "group by t1.TicketTypeId\n" +
             ") t1 on ta.a_type=t1.TicketTypeId;";
 
-    public Report3932(List<Map<String, Object>> incoms, List<Map<String, Object>> tickets, List<Map<String, Object>> abonements, Date dateReport) {
+    public Report3932(List<Map<String, Object>> incoms, List<Map<String, Object>> tickets, List<Map<String, Object>> abonements, Date dateReport, int segmentId) {
         this.incoms = incoms;
         this.tickets = tickets;
         this.abonements = abonements;
         this.dateReport = dateReport;
+        this.segmentId = segmentId;
     }
 
     private List<Map<String, Object>> incoms;
     private List<Map<String, Object>> tickets;
     private List<Map<String, Object>> abonements;
     private Date dateReport;
+    private int segmentId;
 
     static Report3932 buildReport(JdbcTemplate template, Date dateReport, Report.ReportSegment segment, int segmentId, Report.TerminalType terminalType) {
         // вычисление даты окончания
@@ -188,7 +190,25 @@ public class Report3932 {
         List<Map<String, Object>> listIncoms = namedParameterJdbcTemplate.queryForList(QUERY_MONEY, parameters);
         List<Map<String, Object>> listTickets = namedParameterJdbcTemplate.queryForList(QUERY_TICKETS, parameters);
         List<Map<String, Object>> listAbonements = namedParameterJdbcTemplate.queryForList(QUERY_ABONEMENTS, parameters);
-        return new Report3932(listIncoms, listTickets, listAbonements, dateReport);
+        return new Report3932(listIncoms, listTickets, listAbonements, dateReport, segmentId);
+    }
+
+    static Collection<Report3932> buildNonAggregateReports(JdbcTemplate template, Date dateReport, Report.ReportSegment segment, int segmentId, Report.TerminalType terminalType) {
+        List<Integer> stations;
+        if (segment == Report.ReportSegment.DIRECTION) {
+            stations = template.queryForList("select distinct t3.stat_id from direction t1 join sector t2 on t1.dir_id=t2.sect_dir_id join station_sector_cross t3 on t2.sect_id=t3.sect_id where dir_id = ?;",
+                    Integer.class, segmentId);
+        } else if (segment == Report.ReportSegment.SECTOR) {
+            stations = template.queryForList("select distinct t2.stat_id from sector t1 join station_sector_cross t2 on t1.sect_id=t2.sect_id where t1.sect_id = ?;",
+                    Integer.class, segmentId);
+        } else { // считаем что это станция
+            stations = Collections.nCopies(1, segmentId);
+        }
+        ArrayList<Report3932> reports = new ArrayList<Report3932>(stations.size());
+        for(int stationId : stations) {
+            reports.add(buildReport(template, dateReport, Report.ReportSegment.STATION, stationId, terminalType));
+        }        
+        return reports;
     }
 
     private static String getTerminalName(Report.TerminalType terminalType) {
@@ -213,4 +233,7 @@ public class Report3932 {
         return dateReport;
     }
 
+    public int getSegmentId() {
+        return segmentId;
+    }
 }

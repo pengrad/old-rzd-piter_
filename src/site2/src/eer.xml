@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form type="3932">
+    <report date="24022012" stationId="2004672" terminalType="ALL">
+        <zd al="675086.199999998" pl="675086.199999998" bg="0"/>
+        <zn al="675086.199999998" fs="0.0" fn="0.0" rg="0.0" vs="0.0" st="0.0" rl="0.0" rm="0.0"/>
+        <zp al="0.0" rs="0.0"/>
+        <br al="6534" pl="2661" fs="0" fn="0" rg="0" vs="0" st="0" rl="0" rm="0" rs="0" bg="0"/>
+        <b1 al="5290" pl="2570"/>
+        <b2 al="1244" pl="91"/>
+        <ba al="4" pl="4" rm="0"/>
+        <em01 al="1" pl="1" rm="0"/>
+        <em02 al="0" pl="0" rm="0"/>
+        <em03 al="0" pl="0" rm="0"/>
+        <em04 al="0" pl="0" rm="0"/>
+        <em05 al="0" pl="0" rm="0"/>
+        <em06 al="0" pl="0" rm="0"/>
+        <em12 al="0" pl="0" rm="0"/>
+        <ed05 al="0" pl="0" rm="0"/>
+        <ed10 al="0" pl="0" rm="0"/>
+        <ed15 al="0" pl="0" rm="0"/>
+        <ed20 al="0" pl="0" rm="0"/>
+        <ed25 al="0" pl="0" rm="0"/>
+        <rm01 al="0" pl="0" rm="0"/>
+        <rm02 al="0" pl="0" rm="0"/>
+        <rm03 al="0" pl="0" rm="0"/>
+        <rm04 al="0" pl="0" rm="0"/>
+        <rm05 al="0" pl="0" rm="0"/>
+        <rm06 al="0" pl="0" rm="0"/>
+        <rm12 al="0" pl="0" rm="0"/>
+        <rd10 al="0" pl="0" rm="0"/>
+        <rd15 al="0" pl="0" rm="0"/>
+        <rd20 al="0" pl="0" rm="0"/>
+        <rd25 al="0" pl="0" rm="0"/>
+        <dd05 al="0" pl="0" rm="0"/>
+        <dd06 al="0" pl="0" rm="0"/>
+        <dd07 al="1" pl="1" rm="0"/>
+        <dd08 al="0" pl="0" rm="0"/>
+        <dd09 al="0" pl="0" rm="0"/>
+        <dd10 al="0" pl="0" rm="0"/>
+        <dd11 al="0" pl="0" rm="0"/>
+        <dd12 al="0" pl="0" rm="0"/>
+        <dd13 al="0" pl="0" rm="0"/>
+        <dd14 al="0" pl="0" rm="0"/>
+        <dd15 al="0" pl="0" rm="0"/>
+        <dd16 al="2" pl="2" rm="0"/>
+        <dm10 al="0" pl="0" rm="0"/>
+        <dm20 al="0" pl="0" rm="0"/>
+        <dm60 al="0" pl="0" rm="0"/>
+        <dm90 al="0" pl="0" rm="0"/>
+    </report>
+</form>

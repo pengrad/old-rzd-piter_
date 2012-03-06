@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Evgeniy
@@ -11,27 +12,34 @@
 <head>
     <title>Вход в систему</title>
     <link href="<%=request.getContextPath()%>/css/css.css" rel="stylesheet" type="text/css"/>
-
 </head>
 <body style="background:white">
 <div style="text-align:center;width:100%;">
-<div style="margin:0 auto;height:150px;width:900px;background:url('<%=request.getContextPath()%>/images/header2Login.jpg')"></div>
+    <div style="margin:0 auto;height:150px;width:900px;background:url('<%=request.getContextPath()%>/images/header2Login.jpg')"></div>
     <div class="module" style="width:250px;margin:0 auto">
         <div>
             <div>
                 <div style="height: 180px; ">
                     <div style="text-align:left;padding:5px">
-                      <span style="font-size:14pt;color:red">Вход в систему</span>
+                        <span style="font-size:14pt;color:red">Вход в систему</span>
                     </div>
                     <div style="text-align:center;">
-                        <p>Логин</p>
-                        <input type="text" size="20">
+                        <form action="<c:url value="/j_spring_security_check"/>" method="POST">
+                            <p>Логин</p>
+                            <input style="background:lightgoldenrodyellow" name="j_username"
+                                   value="<c:out value="${SPRING_SECURITY_LAST_USERNAME}"/>"
+                                   type="text" size="20">
 
-                        <p>Пароль</p>
-                        <input type="password" size="20">
-                        <div style="padding:10px">
-                        <input type="button" value="Войти" size="15">
-                        </div>
+                            <p>Пароль</p>
+                            <input style="background:lightgoldenrodyellow" name="j_password" type="password" size="20">
+
+                            <div style="color:red;font-size:9pt">
+                                <%=(request.getParameter("login_error") != null ? (request.getParameter("login_error").toString().equals("1") ? "Неверный логин или пароль" : "") : "")%>
+                            </div>
+                            <div style="padding:10px">
+                                <input type="submit" value="Войти" size="15">
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

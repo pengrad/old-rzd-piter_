@@ -1,3 +1,3 @@
 <%
-response.sendRedirect(request.getContextPath()+"/addFile/uploadFile.htm");
+    response.sendRedirect(request.getContextPath() + "/upload/uploadFile.htm");
 %>

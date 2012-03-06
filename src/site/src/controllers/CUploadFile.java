@@ -10,6 +10,7 @@ import parser.ParserKFileXML;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
@@ -106,6 +107,29 @@ public class CUploadFile {
 //        }
 //        return message;
     }
+
+    @RequestMapping(value = "upload/uploadAll.htm", method = RequestMethod.GET)
+    @ResponseBody
+    public String allUpload(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            java.io.File ff = new java.io.File("H:\\проект РЖД\\2010-11\\2010-11");
+            java.io.File[] kk = ff.listFiles();
+            for (int i = 0; i < kk.length; i++) {
+                InputStream is = new FileInputStream(kk[i]);
+                File fileLoad = parserKFileXML.parse(is);
+                for (Ticket ticket : fileLoad.getTickets()) {
+                    ticket.setTimeCalcReport(ticket.getT());
+                }
+                System.out.println("add");
+                fileManager.addFile(fileLoad);
+                is.close();
+            }
+            return "SUCCESS";
+        } catch (Exception e) {
+            return "ERROR";
+        }
+    }
+
 
 //    @RequestMapping(value = "test.htm", method = RequestMethod.GET)
 //    public String setFileUpload(HttpServletRequest request) {

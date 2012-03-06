@@ -1,4 +1,4 @@
-use rzd;
+﻿use rzd;
 
 truncate table discount;
 truncate table direction;
@@ -87,6 +87,119 @@ insert direction(dir_id, dir_name) values
 insert sector(sect_id, sect_name, sect_dir_id, sect_parent_id) values
 (1,'УП Витебский',3,null),
 (2,'УП Детское Село',3,null);
+
+#Станции УП Детское Село
+insert into station (stat_id,stat_name) values (2007889,'АНТРОПШИНО ККБР');
+insert into station (stat_id,stat_name) values (2007850,'ВЫРИЦА ККБР');
+insert into station (stat_id,stat_name) values (2007804,'Д.СЕЛО-ДОР');
+insert into station (stat_id,stat_name) values (2007843,'Д.СЕЛО-ППК (РБК)');
+insert into station (stat_id,stat_name) values (2007802,'КУПЧИН-ДОР');
+insert into station (stat_id,stat_name) values (2007806,'ОРЕДЕЖ ККБР');
+insert into station (stat_id,stat_name) values (2007805,'ПАВЛОВСК ККБР');
+insert into station (stat_id,stat_name) values (2004780,'ПАРОВОЗНЫЙ МУЗЕЙ');
+insert into station (stat_id,stat_name) values (2004923,'ОП 21 КМ');
+insert into station (stat_id,stat_name) values (2004182,'ДЕТСКОЕ СЕЛО');
+insert into station (stat_id,stat_name) values (2004181,'ПАВЛОВСК');
+insert into station (stat_id,stat_name) values (2005046,'АНТРОПШИНО');
+insert into station (stat_id,stat_name) values (2005096,'КОБРАЛОВО');
+insert into station (stat_id,stat_name) values (2005236,'СЕМРИНО');
+insert into station (stat_id,stat_name) values (2004781,'ОП 46 КМ');
+insert into station (stat_id,stat_name) values (2005454,'СУСАНИНО');
+insert into station (stat_id,stat_name) values (2005369,'КРАСНИЦЫ');
+insert into station (stat_id,stat_name) values (2005296,'МИХАЙЛОВКА');
+insert into station (stat_id,stat_name) values (2004180,'ВЫРИЦА');
+insert into station (stat_id,stat_name) values (2004803,'ПЛ 63 КМ');
+insert into station (stat_id,stat_name) values (2004179,'СЛУДИЦЫ');
+insert into station (stat_id,stat_name) values (2004804,'ПЛ 78 КМ');
+insert into station (stat_id,stat_name) values (2004805,'ПЛ 80 КМ');
+insert into station (stat_id,stat_name) values (2004178,'НОВИНКА');
+insert into station (stat_id,stat_name) values (2004807,'ПЛ 92 КМ');
+insert into station (stat_id,stat_name) values (2004806,'ПЛ 90 КМ');
+insert into station (stat_id,stat_name) values (2004177,'ЧАЩА');
+insert into station (stat_id,stat_name) values (2005431,'ОП 100 КМ');
+insert into station (stat_id,stat_name) values (2005445,'ОП 101 КМ');
+insert into station (stat_id,stat_name) values (2004176,'ЧОЛОВО');
+insert into station (stat_id,stat_name) values (2004808,'ПЛ 117 КМ');
+insert into station (stat_id,stat_name) values (2004175,'ТАРКОВИЧИ');
+insert into station (stat_id,stat_name) values (2005448,'ОП 125 КМ');
+insert into station (stat_id,stat_name) values (2004641,'ОРЕДЕЖ');
+insert into station (stat_id,stat_name) values (2005295,'ПЛ 34 КМ');
+insert into station (stat_id,stat_name) values (2005940,'ПЛ 36 КМ');
+insert into station (stat_id,stat_name) values (2004802,'ПЛ 40 КМ');
+insert into station (stat_id,stat_name) values (2004240,'НОВОЛИСИНО');
+insert into station (stat_id,stat_name) values (2005421,'ВЛАДИМИРСКАЯ');
+insert into station (stat_id,stat_name) values (2005358,'1 ПЛАТФОРМА');
+insert into station (stat_id,stat_name) values (2004401,'2 ПЛАТФОРМА');
+insert into station (stat_id,stat_name) values (2004434,'3 ПЛАТФОРМА');
+insert into station (stat_id,stat_name) values (2004436,'4 ПЛАТФОРМА');
+insert into station (stat_id,stat_name) values (2005026,'ПОСЕЛОК');
+
+
+insert into station_sector_cross (stat_id,sect_id) values (2007889,2);
+insert into station_sector_cross (stat_id,sect_id) values (2007850,2);
+insert into station_sector_cross (stat_id,sect_id) values (2007804,2);
+insert into station_sector_cross (stat_id,sect_id) values (2007843,2);
+insert into station_sector_cross (stat_id,sect_id) values (2007802,2);
+insert into station_sector_cross (stat_id,sect_id) values (2007806,2);
+insert into station_sector_cross (stat_id,sect_id) values (2004780,2);
+insert into station_sector_cross (stat_id,sect_id) values (2004923,2);
+insert into station_sector_cross (stat_id,sect_id) values (2004182,2);
+insert into station_sector_cross (stat_id,sect_id) values (2004181,2);
+insert into station_sector_cross (stat_id,sect_id) values (2005046,2);
+insert into station_sector_cross (stat_id,sect_id) values (2005096,2);
+insert into station_sector_cross (stat_id,sect_id) values (2005236,2);
+insert into station_sector_cross (stat_id,sect_id) values (2005454,2);
+insert into station_sector_cross (stat_id,sect_id) values (2005369,2);
+insert into station_sector_cross (stat_id,sect_id) values (2005296,2);
+insert into station_sector_cross (stat_id,sect_id) values (2004180,2);
+insert into station_sector_cross (stat_id,sect_id) values (2004803,2);
+insert into station_sector_cross (stat_id,sect_id) values (2004179,2);
+insert into station_sector_cross (stat_id,sect_id) values (2004804,2);
+insert into station_sector_cross (stat_id,sect_id) values (2004805,2);
+insert into station_sector_cross (stat_id,sect_id) values (2004178,2);
+insert into station_sector_cross (stat_id,sect_id) values (2004807,2);
+insert into station_sector_cross (stat_id,sect_id) values (2004806,2);
+insert into station_sector_cross (stat_id,sect_id) values (2004177,2);
+insert into station_sector_cross (stat_id,sect_id) values (2005431,2);
+insert into station_sector_cross (stat_id,sect_id) values (2005445,2);
+insert into station_sector_cross (stat_id,sect_id) values (2004176,2);
+insert into station_sector_cross (stat_id,sect_id) values (2004808,2);
+insert into station_sector_cross (stat_id,sect_id) values (2004175,2);
+insert into station_sector_cross (stat_id,sect_id) values (2005448,2);
+insert into station_sector_cross (stat_id,sect_id) values (2004641,2);
+insert into station_sector_cross (stat_id,sect_id) values (2005295,2);
+insert into station_sector_cross (stat_id,sect_id) values (2005940,2);
+insert into station_sector_cross (stat_id,sect_id) values (2004802,2);
+insert into station_sector_cross (stat_id,sect_id) values (2004240,2);
+insert into station_sector_cross (stat_id,sect_id) values (2005421,2);
+insert into station_sector_cross (stat_id,sect_id) values (2005358,2);
+insert into station_sector_cross (stat_id,sect_id) values (2004401,2);
+insert into station_sector_cross (stat_id,sect_id) values (2004434,2);
+insert into station_sector_cross (stat_id,sect_id) values (2004436,2);
+insert into station_sector_cross (stat_id,sect_id) values (2005026,2);
+
+#Станции УП Витебский
+insert into station (stat_id,stat_name) values (2007883,'ВИТ ППК');
+insert into station (stat_id,stat_name) values (2007803,'С-ПЕТ-ВИТ ККБР');
+insert into station (stat_id,stat_name) values (2004003,'С-ПЕТ-ВИТ');
+insert into station (stat_id,stat_name) values (2004801,'БОРОВАЯ');
+insert into station (stat_id,stat_name) values (2005315,'ВОЗДУХОПЛАВАТЕЛЬНЫЙ ПАРК');
+insert into station (stat_id,stat_name) values (2005020,'ПРОСПЕКТ СЛАВЫ');
+insert into station (stat_id,stat_name) values (2005001,'КУПЧИНО');
+insert into station (stat_id,stat_name) values (2005166,'ШУШАРЫ');
+insert into station (stat_id,stat_name) values (2007884,'СЗППК СПб ВИТЕБСКИЙ РЕВИЗОРЫ');
+
+
+insert into station_sector_cross (stat_id,sect_id) values (2007883,1);
+insert into station_sector_cross (stat_id,sect_id) values (2007803,1);
+insert into station_sector_cross (stat_id,sect_id) values (2004003,1);
+insert into station_sector_cross (stat_id,sect_id) values (2004801,1);
+insert into station_sector_cross (stat_id,sect_id) values (2005315,1);
+insert into station_sector_cross (stat_id,sect_id) values (2005020,1);
+insert into station_sector_cross (stat_id,sect_id) values (2005001,1);
+insert into station_sector_cross (stat_id,sect_id) values (2005166,1);
+insert into station_sector_cross (stat_id,sect_id) values (2007884,1);
+
 
 #Абонементы
 INSERT INTO `temp_ab` (`a_type`, `a_name`) VALUES (101, 'em01');

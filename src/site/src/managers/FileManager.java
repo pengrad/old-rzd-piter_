@@ -482,8 +482,6 @@ public class FileManager {
                     /*32*/ticket.getTimeCalcReport()
             );
         }
-
-
     }
 
 

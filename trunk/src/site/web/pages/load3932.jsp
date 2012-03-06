@@ -33,7 +33,14 @@
             var linkDownload = $(e).attr("link");
             var dateReport = $(e).parent().parent().find("input[name=dateReport]").val();
             var typeTerm = $(e).parent().parent().find("select[name=typeTerm]").val();
-            window.location = linkDownload + "&dateReport=" + dateReport + "&typeTerm=" + typeTerm;
+            var img = $(e).html();
+            <%--$(e).html("<img src='<%=request.getContextPath()%>/images/ajax_wait_9.gif' title='Экспорт в формате XML'/>");--%>
+//            alert("**");
+//            window.location = linkDownload + "&dateReport=" + dateReport + "&typeTerm=" + typeTerm;
+            window.open(linkDownload + "&dateReport=" + dateReport + "&typeTerm=" + typeTerm, '', 'height=600,width=850,left=50,top=150,directories=no,scrollbars=yes,resizable=yes');
+
+//            alert("*****");
+//            $(e).html(img);
             return false;
         }
         function load3932ByIDStation(e) {
@@ -121,6 +128,8 @@
         <span>Администрирование&nbsp;<img src="<%=request.getContextPath()%>/images/h3-bg.gif" alt="">&nbsp;<a
                 href="<%=request.getContextPath()%>/3932/direction.htm">Формирование справки 3932</a></span>
     </div>
+    <a href="<%=request.getContextPath()%>/upload/uploadAll.htm">dowload all</a>
+
     <div class="tabs">
         <table cellpadding="0" cellspacing="0" style="position:relative;bottom:-3px">
             <tr>
@@ -162,7 +171,7 @@
         <table class="tableRow" style="width:670px">
             <%for (ReportSegment rSegment : repSegment) {%>
             <tr>
-                <td style="width:350px;">
+                <td style="width:330px;">
                     <%if (linkLevel != null) {%>
                     <a href="<%=linkLevel+rSegment.getIdSegment()%>">
                         <%=rSegment.getNameSegment()%>
@@ -182,7 +191,7 @@
                         <option value="<%=Helper.TYPE_TERM_PKTK%>">ПКТК</option>
                     </select>
                 </td>
-                <td style="width:90px;">
+                <td style="width:100px;">
                     <a href="#" link="<%=linkDownloadXML+rSegment.getIdSegment()%>" onclick="load3932(this)">
                         <img src="<%=request.getContextPath()%>/images/xml.png" title="Экспорт в формате XML"/>
                     </a>
@@ -234,11 +243,12 @@
                    link="<%=linkDownloadTXTByStation%>" onclick="load3932ByIDStation(this)">
                     <img src="<%=request.getContextPath()%>/images/text.png" title="Экспорт в формате TXT"/>
                 </a>
+
                 <div id="info" style="padding:20px;text-align:center;font-size:12pt;color:red"></div>
             </div>
         </form>
     </div>
-      <div id="shedule" style="display:none;">
+    <div id="shedule" style="display:none;">
         <p class="infoMessage">
             В дальнейшем здесь будет настройка планировщика, для автоматической передаче на FTP
         </p>

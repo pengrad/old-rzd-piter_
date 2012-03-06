@@ -27,7 +27,7 @@ public class Report3932 {
         HEADERS_MAP.put("sumService", "bg");
     }
 
-    public static final String QUERY_MONEY = "select 'zd' type, ifnull(sum(t1.S),0) sum, ifnull(sum(t1.S),0) sumPay, null sumFedSoc, null sumFedNonSoc, null sumRegion, null sumWar, null sumStudy, null sumRZDPersonal, null sumRZDWork, null sumRZDService, 0 sumService\n" +
+    public static final String QUERY_MONEY = "select 'zd' type, ifnull(round(sum(t1.S),1),0) sum, ifnull(round(sum(t1.S),1),0) sumPay, null sumFedSoc, null sumFedNonSoc, null sumRegion, null sumWar, null sumStudy, null sumRZDPersonal, null sumRZDWork, null sumRZDService, 0 sumService\n" +
             "from ticket t1\n" +
             "\tjoin file t2 on t1.FileId=t2.FileId\n" +
             "where t1.TimeCalcReport >= :dBegin and t1.TimeCalcReport < :dEnd\n" +
@@ -37,14 +37,14 @@ public class Report3932 {
             "\t\n" +
             "union all\t\n" +
             "\n" +
-            "select 'zn' type, ifnull(sum(t1.S),0) sum, null sumPay, \n" +
-            "\tifnull(sum(case when t1.TicketTypeL in (select disc_id from discount_fedsoc) then t1.S else 0 end),0) sumFedSoc, \n" +
-            "\tifnull(sum(case when t1.TicketTypeL in (select disc_id from discount_fednonsoc) then t1.S else 0 end),0) sumFedNonSoc, \n" +
-            "\tifnull(sum(case when t1.TicketTypeL in (select disc_id from discount_region) then t1.S else 0 end),0) sumRegion, \n" +
-            "\tifnull(sum(case when t1.TicketTypeL in (select disc_id from discount_war) then t1.S else 0 end),0) sumWar,\n" +
-            "\tifnull(sum(case when t1.TicketTypeL in (select disc_id from discount_study) then t1.S else 0 end),0) sumStudy,\n" +
-            "\tifnull(sum(case when t1.TicketTypeL in (select disc_id from discount_rzdpersonal) then t1.S else 0 end),0) sumRZDPersonal,\n" +
-            "\tifnull(sum(case when t1.TicketTypeL in (select disc_id from discount_rzdwork) then t1.S else 0 end),0) sumRZDWork,\t\n" +
+            "select 'zn' type, ifnull(sum(round(t1.S,1)),0) sum, null sumPay, \n" +
+            "\tifnull(sum(case when t1.TicketTypeL in (select disc_id from discount_fedsoc) then round(t1.S,1) else 0 end),0) sumFedSoc, \n" +
+            "\tifnull(sum(case when t1.TicketTypeL in (select disc_id from discount_fednonsoc) then round(t1.S,1) else 0 end),0) sumFedNonSoc, \n" +
+            "\tifnull(sum(case when t1.TicketTypeL in (select disc_id from discount_region) then round(t1.S,1) else 0 end),0) sumRegion, \n" +
+            "\tifnull(sum(case when t1.TicketTypeL in (select disc_id from discount_war) then round(t1.S,1) else 0 end),0) sumWar,\n" +
+            "\tifnull(sum(case when t1.TicketTypeL in (select disc_id from discount_study) then round(t1.S,1) else 0 end),0) sumStudy,\n" +
+            "\tifnull(sum(case when t1.TicketTypeL in (select disc_id from discount_rzdpersonal) then round(t1.S,1) else 0 end),0) sumRZDPersonal,\n" +
+            "\tifnull(sum(case when t1.TicketTypeL in (select disc_id from discount_rzdwork) then round(t1.S,1) else 0 end),0) sumRZDWork,\t\n" +
             "\tnull sumRZDService, null sumService\n" +
             "from ticket t1\n" +
             "\tjoin file t2 on t1.FileId=t2.FileId\n" +
@@ -56,8 +56,8 @@ public class Report3932 {
             "\t\n" +
             "union all\t\n" +
             "\n" +
-            "select 'zp' type, ifnull(sum(t1.S),0) sum, null sumPay, null sumFedSoc, null sumFedNonSoc, null sumRegion, null sumWar, null sumStudy, null sumRZDPersonal, null sumRZDWork, \n" +
-            "\tifnull(sum(t1.S),0) sumRZDService, \n" +
+            "select 'zp' type, ifnull(sum(round(t1.S,1)),0) sum, null sumPay, null sumFedSoc, null sumFedNonSoc, null sumRegion, null sumWar, null sumStudy, null sumRZDPersonal, null sumRZDWork, \n" +
+            "\tifnull(sum(round(t1.S,1)),0) sumRZDService, \n" +
             "\tnull sumService\n" +
             "from ticket t1\n" +
             "\tjoin file t2 on t1.FileId=t2.FileId\n" +
@@ -207,7 +207,7 @@ public class Report3932 {
         ArrayList<Report3932> reports = new ArrayList<Report3932>(stations.size());
         for(int stationId : stations) {
             reports.add(buildReport(template, dateReport, Report.ReportSegment.STATION, stationId, terminalType));
-        }
+        }        
         return reports;
     }
 
@@ -237,4 +237,3 @@ public class Report3932 {
         return segmentId;
     }
 }
-

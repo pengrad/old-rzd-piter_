@@ -32,7 +32,7 @@
             upload1 = new SWFUpload({
 
                 // Backend Settings
-                upload_url: "<%=request.getContextPath()%>/upload/upload.htm; jsessionid=<%=request.getSession().getId()%>",    // Relative to the SWF file (or you can use absolute paths)
+                upload_url: "<%=request.getContextPath()%>/upload/upload.htm?JSESSIONID=<%=request.getSession().getId()%>",    // Relative to the SWF file (or you can use absolute paths)
 
                 // File Upload Settings
                 file_size_limit : "10240000",    // 100MB
@@ -51,6 +51,7 @@
                 upload_error_handler : uploadError,
                 upload_success_handler : uploadSuccess,
                 upload_complete_handler : uploadComplete,
+                prevent_swf_caching:false,
                 //                button_action:SWFUpload.START_UPLOAD,
 
                 //                postData:{www:'rrrr'},
@@ -61,7 +62,7 @@
                 button_height: 22,
 
                 // Flash Settings
-                flash_url : "<%=request.getContextPath()%>/swfupload/swfupload.swf",
+                flash_url : "<%=request.getContextPath()%>/swfupload/swfupload.swf?t=<%=new Date().getTime()%>",
 
                 //IMPORTANT: you need to set file_post_name otherwise flash sets it as Filedata, which does not conform to bean naming conventions.
                 file_post_name: "kFile",

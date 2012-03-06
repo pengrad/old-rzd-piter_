@@ -44,6 +44,7 @@ public class CUploadFile {
     @RequestMapping(value = "upload/upload.htm", method = RequestMethod.POST)
     @ResponseBody
     public String setFileUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "kFile", required = false) MultipartFile kfile, @RequestParam(value = "typeTimeCalcReport", required = true) int typeTimeCalcReport, @RequestParam(value = "timeCalcReport", required = false) String timeCalcReport) {
+        System.out.println("************");
         MultipartFile multipartFile = kfile;
         String fileName = "";
         try {

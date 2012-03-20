@@ -30,7 +30,7 @@ http://www.springframework.org/schema/security ">
         <intercept-url pattern="/**" access="isAuthenticated()"/>
         <remember-me/>
         <session-management invalid-session-url="/login.jsp">
-            <concurrency-control max-sessions="2" error-if-maximum-exceeded="true"/>
+            <concurrency-control max-sessions="2000" error-if-maximum-exceeded="true"/>
         </session-management>
     </http>
     <authentication-manager>

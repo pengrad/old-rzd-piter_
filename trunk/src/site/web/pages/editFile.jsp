@@ -152,7 +152,7 @@
         <div id="timeCalcReport" style="text-align:left;padding:20px">
             <form action="<%=request.getContextPath()%>/edit/searchForEditFile.htm" method="get">
                 <div style="padding-left:10px;padding-top:10px;vertical-align: middle;">
-                    <span style="font-size:12pt;color:gray;">&nbsp;&nbsp;Дата&nbsp;&nbsp;</span>
+                    <span style="font-size:12pt;color:gray;">&nbsp;&nbsp;Дата загрузки&nbsp;&nbsp;</span>
                     <input style="font-size:12pt;" class="datepicker" name="dateReport" readonly size="8" type="input"
                            value="<%=dateReport!=null?(String)dateReport:new SimpleDateFormat("dd.MM.yyyy").format(new Date())%>"/>
                     <span style="font-size:12pt;color:gray;">&nbsp;&nbsp;Код станции&nbsp;&nbsp;</span>

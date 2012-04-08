@@ -93,11 +93,82 @@ public class FileManager {
                 file.setSumServ(rs.getDouble("SumServ"));
                 file.setNDSServ(rs.getDouble("NDSServ"));
                 file.setTimeCreate(rs.getTimestamp("TimeCreate"));
-                file.setTickets(getTicketsByFileId(file.getFileId()));
+//                file.setTickets(getTicketsByFileId(file.getFileId()));
                 return file;
             }
         }, date, idStation);
     }
+
+//    public Collection<File> getFilesUploadToday() {
+//        String query = "select\n" +
+//                /*0 */"FileID,\n" +
+//                /*1 */"FileName,\n" +
+//                /*2 */"NumTerm,\n" +
+//                /*3 */"SmenaNum,\n" +
+//                /*4 */"PlaceTerm,\n" +
+//                /*5 */"Month,\n" +
+//                /*6 */"TimeOpen,\n" +
+//                /*7 */"FirstTicket,\n" +
+//                /*8 */"Sum,\n" +
+//                /*9 */"TimeClose,\n" +
+//                /*10*/"NumTickets,\n" +
+//                /*11*/"LenTape,\n" +
+//                /*12*/"TypeTerm,\n" +
+//                /*13*/"SoftVersion,\n" +
+//                /*14*/"INN,\n" +
+//                /*15*/"FIO,\n" +
+//                /*16*/"CardOut,\n" +
+//                /*17*/"CardIn,\n" +
+//                /*18*/"Sup,\n" +
+//                /*19*/"Cancel,\n" +
+//                /*20*/"NumProc,\n" +
+//                /*21*/"SumProc,\n" +
+//                /*22*/"SumEKLZ,\n" +
+//                /*23*/"SCol,\n" +
+//                /*24*/"STax,\n" +
+//                /*25*/"Blank,\n" +
+//                /*26*/"SumRet,\n" +
+//                /*27*/"SumServ,\n" +
+//                /*28*/"NDSServ,\n" +
+//                /*29*/"TimeCreate\n" +
+//                "from file where date(TimeCreate)=CURRENT_DATE() order by FileName;";
+//        return db.query(query, new RowMapper<File>() {
+//            public File mapRow(java.sql.ResultSet rs, int i) throws SQLException {
+//                File file = new File();
+//                file.setFileId(rs.getInt("FileID"));
+//                file.setFileName(rs.getString("FileName"));
+//                file.setNumTerm(rs.getInt("NumTerm"));
+//                file.setSmenaNum(rs.getInt("SmenaNum"));
+//                file.setPlaceTerm(rs.getInt("PlaceTerm"));
+//                file.setMonth(rs.getInt("Month"));
+//                file.setTimeOpen(rs.getTimestamp("TimeOpen"));
+//                file.setFirstTicket(rs.getInt("FirstTicket"));
+//                file.setSum(rs.getDouble("Sum"));
+//                file.setTimeClose(rs.getTimestamp("TimeClose"));
+//                file.setNumTickets(rs.getInt("NumTickets"));
+//                file.setLenTape(rs.getDouble("LenTape"));
+//                file.setTypeTerm(rs.getString("TypeTerm"));
+//                file.setSoftVersion(rs.getString("SoftVersion"));
+//                file.setINN(rs.getString("INN"));
+//                file.setFIO(rs.getString("FIO"));
+//                file.setCardOut(rs.getDouble("CardOut"));
+//                file.setCardIn(rs.getDouble("CardIn"));
+//                file.setSup(rs.getDouble("Sup"));
+//                file.setCancel(rs.getDouble("Cancel"));
+//                file.setNumProc(rs.getInt("NumProc"));
+//                file.setSumProc(rs.getDouble("SumProc"));
+//                file.setSumEKLZ(rs.getDouble("SumEklz"));
+//                file.setSCol(rs.getDouble("SCol"));
+//                file.setSTax(rs.getDouble("STax"));
+//                file.setBlank(rs.getInt("Blank"));
+//                file.setSumRet(rs.getDouble("SumRet"));
+//                file.setSumServ(rs.getDouble("SumServ"));
+//                file.setNDSServ(rs.getDouble("NDSServ"));
+//                file.setTimeCreate(rs.getTimestamp("TimeCreate"));
+//                return file;
+//            }
+//        });
+//    }
 
     public File getFileById(int fileId) {
         String query = "select\n" +
@@ -336,8 +407,7 @@ public class FileManager {
         db.update("delete from ticket where TicketId=?;", ticketId);
     }
 
-
-        @Transactional(readOnly = false, rollbackFor = Exception.class)
+    @Transactional(readOnly = false, rollbackFor = Exception.class)
     public void addFile(final File fileLoad) throws Exception {
         JdbcTemplate db = new JdbcTemplate(dataSource);
         String query = "";
@@ -446,7 +516,7 @@ public class FileManager {
                 "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?\n" +
                 ");";
         int id = db.queryForInt("select LAST_INSERT_ID()");
-       for (Ticket ticket : fileLoad.getTickets()) {
+        for (Ticket ticket : fileLoad.getTickets()) {
             db.update(query,
                     /*1 */id,
                     /*2 */ticket.getPerevozGkey(),

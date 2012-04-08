@@ -96,7 +96,7 @@ public class Report3932Builder implements Report {
         if (terminal != TerminalType.ALL) header.append("тип терминала ").append(terminal.toString()).append(", ");
         SimpleDateFormat f = new SimpleDateFormat("dd.MM.yyyy");
         header.append("за ").append(f.format(report.getDateReport()));
-        InputStream inp = new FileInputStream("c:/res/template3932.xls");
+        InputStream inp = getClass().getResourceAsStream("/res/template3932.xls");
         Workbook wb = WorkbookFactory.create(inp);
         Sheet s = wb.getSheetAt(0);
         s.getRow(1).getCell(0).setCellValue(header.toString());

@@ -26,7 +26,6 @@ public class ParserKFileXML {
            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
            DocumentBuilder db = dbf.newDocumentBuilder();
            Document dom = db.parse(is);
-
            Element root = dom.getDocumentElement();
            fileLoad.setFileName(root.getAttribute("Name"));
            Element eHead = (Element) root.getElementsByTagName("Head").item(0);

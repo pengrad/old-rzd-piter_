@@ -380,6 +380,7 @@ div.module div div div div {
 .tableRow td {
     border-bottom: 1px lightgray solid; /* стиль рамки ячеек */
     padding: 10px;
+    vertical-align:middle;
 }
 
 .tableRow tr:hover{
@@ -405,8 +406,11 @@ div.module div div div div {
 .tabs .between {
     width: 7px;
 }
+.tabs td{
+    vertical-align:middle;
+}
 
-.tabs td span {
+.tabs td span{
     display: block;
     margin-top: 5px;
     padding-left: 15px;

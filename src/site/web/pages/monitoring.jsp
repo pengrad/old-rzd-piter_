@@ -3,15 +3,15 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="objects.MonitoringSegment" %>
 <%@ page import="java.util.Collection" %>
+<%@ page import="utils.Helper" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <%
     Collection<MonitoringSegment> monSegment = (Collection<MonitoringSegment>) request.getAttribute("monSegment");
-    String linkLevel = (request.getAttribute("linkLevel") != null ? (String) request.getAttribute("linkLevel") : null);
 %>
 <html>
 <head>
-    <title>Миниторин загрузки К - файлов в систему</title>
+    <title>Мониторин загрузки К - файлов в систему</title>
     <link href="<%=request.getContextPath()%>/css/css.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.7.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/js.js"></script>
@@ -162,7 +162,7 @@
                             }
                         });
                     }});
-              return false;
+                return false;
             });
         });
 
@@ -183,69 +183,101 @@
     <div>
         <div style="text-align:right;padding-right:20px"><a href="#" onclick="alert('Функция еще не реализована')">Задать
             станции для мониторинга</a></div>
-        <div class="tabs">
-            <table cellpadding="0" cellspacing="0" style="position:relative;bottom:-3px">
-                <tr>
-                    <td class="between"></td>
-                    <td><img id="v1_l" src="<%=request.getContextPath()%>/images/active_left.gif"/></td>
-                    <td class="selected" onclick="v_1()">
-                        <span>Текущее состояние</span>
-                    </td>
-                    <td><img id="v1_r" src="<%=request.getContextPath()%>/images/active_right.gif"/></td>
-                    <td class="between"></td>
-                    <td><img id="v2_l" src="<%=request.getContextPath()%>/images/inactive_left.gif"/></td>
-                    <td class="unselected" onclick="v_2()">
-                        <span>Загружено К - файлов</span>
-                    </td>
-                    <td style="margin-left:10px;">
-                        <img id="v2_r" src="<%=request.getContextPath()%>/images/inactive_right.gif"/>
-                    </td>
-                    <td class="between"></td>
-                    <td><img id="v3_l" src="<%=request.getContextPath()%>/images/inactive_left.gif"/></td>
-                    <td class="unselected" onclick="v_3()">
-                        <span>Не загружено К - файлов</span>
-                    </td>
-                    <td style="margin-left:10px;">
-                        <img id="v3_r" src="<%=request.getContextPath()%>/images/inactive_right.gif"/>
-                    </td>
-                </tr>
-            </table>
-        </div>
+        <%--<div class="tabs">--%>
+        <%--<table cellpadding="0" cellspacing="0" style="position:relative;bottom:-3px">--%>
+        <%--<tr>--%>
+        <%--<td class="between"></td>--%>
+        <%--<td><img id="v1_l" src="<%=request.getContextPath()%>/images/active_left.gif"/></td>--%>
+        <%--<td class="selected" onclick="v_1()">--%>
+        <%--<span>Текущее состояние</span>--%>
+        <%--</td>--%>
+        <%--<td><img id="v1_r" src="<%=request.getContextPath()%>/images/active_right.gif"/></td>--%>
+        <%--<td class="between"></td>--%>
+        <%--<td><img id="v2_l" src="<%=request.getContextPath()%>/images/inactive_left.gif"/></td>--%>
+        <%--<td class="unselected" onclick="v_2()">--%>
+        <%--<span>Загружено К - файлов</span>--%>
+        <%--</td>--%>
+        <%--<td style="margin-left:10px;">--%>
+        <%--<img id="v2_r" src="<%=request.getContextPath()%>/images/inactive_right.gif"/>--%>
+        <%--</td>--%>
+        <%--<td class="between"></td>--%>
+        <%--<td><img id="v3_l" src="<%=request.getContextPath()%>/images/inactive_left.gif"/></td>--%>
+        <%--<td class="unselected" onclick="v_3()">--%>
+        <%--<span>Не загружено К - файлов</span>--%>
+        <%--</td>--%>
+        <%--<td style="margin-left:10px;">--%>
+        <%--<img id="v3_r" src="<%=request.getContextPath()%>/images/inactive_right.gif"/>--%>
+        <%--</td>--%>
+        <%--</tr>--%>
+        <%--</table>--%>
+        <%--</div>--%>
         <div id="base">
             <div id="timeCalcReport" style="text-align:left;padding:20px">
-                <form action="<%=request.getContextPath()%>/monDirection.htm" method="get">
+                <form action="<%=request.getContextPath()%>/mon/<%=request.getAttribute("typeSegment")%>.htm"
+                      method="get">
                     <div style="padding-left:10px;padding-top:10px;vertical-align: middle;">
-                        <span style="font-size:12pt;color:gray;">&nbsp;&nbsp;Дата&nbsp;&nbsp;</span>
-                        <input style="font-size:12pt;" class="datepicker" name="dateMon" readonly size="8" type="input"
-                               value="<%=new SimpleDateFormat("dd.MM.yyyy").format(new Date())%>"/>
-                        <input type="button" value="Смотреть" onclick="alert('Не загружены коды станций')"/>
+                        <span style="font-size:12pt;color:gray;">&nbsp;&nbsp;Дата загрузки&nbsp;&nbsp;</span>
+                        <input type="hidden" name="idSegment" value="<%=request.getAttribute("idSegment")%>"/>
+                        <input style="font-size:12pt;" class="datepicker" name="date" readonly size="8" type="input"
+                               value="<%=new SimpleDateFormat("dd.MM.yyyy").format(request.getAttribute("date"))%>"/>
+                        <input type="submit" value="Смотреть"/>
                     </div>
                 </form>
             </div>
             <%if (monSegment.size() > 0) {%>
             <div style="text-align:right;margin:10px">
-                <img src="<%=request.getContextPath()%>/images/ok.png" alt="Данные загружены"/>
-                <span style="color:gray;">-данные загрудены</span>
-                <img src="<%=request.getContextPath()%>/images/error.png" alt="Данные не загружены"/>
-                <span style="color:gray;">-данные не загружены</span>
-                <img src="<%=request.getContextPath()%>/images/noActive.png" alt="Не ведется мониторинг"/>
-                <span style="color:gray;">-не ведется мониторинг</span>
+                <%--<img src="<%=request.getContextPath()%>/images/ok.png" alt="Данные загружены"/>--%>
+                <%--<span style="color:gray;">-данные загрудены</span>--%>
+                <%--<img src="<%=request.getContextPath()%>/images/error.png" alt="Данные не загружены"/>--%>
+                <%--<span style="color:gray;">-данные не загружены</span>--%>
+                <%--<img src="<%=request.getContextPath()%>/images/noActive.png" alt="Не ведется мониторинг"/>--%>
+                <%--<span style="color:gray;">-не ведется мониторинг</span>--%>
+                <span style="color:gray;">загружено</span>
+                <span style="color:gray;">/</span>
+                <span style="color:gray;">норма</span>
             </div>
-            <table class="tableRow">
+            <table class="tableRow" style="width:680px">
+                <tr>
+                    <th></th>
+                    <th>MKTK</th>
+                    <th>PTKT</th>
+                </tr>
                 <%for (MonitoringSegment mSegment : monSegment) {%>
                 <tr>
-                    <td style="width:500px;">
-                        <%if (linkLevel != null) {%>
-                        <a href="<%=linkLevel+mSegment.getId()%>"><%=mSegment.getName()%>
+                    <td style="width:470px;">
+                        <%if (!request.getAttribute("typeSegmentForLink").equals("")) {%>
+                        <a href="<%=request.getContextPath()%>/mon/<%=request.getAttribute("typeSegmentForLink")%>.htm?date=<%=new SimpleDateFormat("dd.MM.yyyy").format(request.getAttribute("date"))%>&idSegment=<%=mSegment.getId()%>">
+                            <%=mSegment.getName()%>
                         </a>
                         <%} else {%>
                         <span><%=mSegment.getName()%></span>
                         <%}%>
                     </td>
-                    <td style="width:50px;">
-                        <img src="<%=request.getContextPath()%>/images/ok.png" alt="Данные загружены"/>
+                    <%--<td style="width:50px;">--%>
+                    <%--<img src="<%=request.getContextPath()%>/images/ok.png" alt="Данные загружены"/>--%>
+                    <%--</td>--%>
+                    <td style="width:100px;text-align:center;">
+                        <%if (request.getAttribute("typeSegment").equals(Helper.segment.station)) {%>
+                        <a href="<%=request.getContextPath()%>/edit/searchForEditFile.htm?dateReport=<%=new SimpleDateFormat("dd.MM.yyyy").format(request.getAttribute("date"))%>&idStation=<%=mSegment.getId()%>&typeTerm=<%=Helper.typeTerm.MKTK%>">
+                            <%=mSegment.getCountUploadMKTK()%>
+                        </a>
+                        <%} else {%>
+                        <%=mSegment.getCountUploadMKTK()%>
+                        <%}%>
+                        <span>/</span>
+                        <span><%=mSegment.getCountNormMKTK()%></span>
                     </td>
-                    <td style="width:70px;">200/200</td>
+                    <td style="width:100px;text-align:center;">
+                        <%if (request.getAttribute("typeSegment").equals(Helper.segment.station)) {%>
+                        <a href="<%=request.getContextPath()%>/edit/searchForEditFile.htm?dateReport=<%=new SimpleDateFormat("dd.MM.yyyy").format(request.getAttribute("date"))%>&idStation=<%=mSegment.getId()%>&typeTerm=<%=Helper.typeTerm.PKTK%>">
+                            <%=mSegment.getCountUploadPKTK()%>
+                        </a>
+                        <%} else {%>
+                        <%=mSegment.getCountUploadPKTK()%>
+                        <%}%>
+                        <span>/</span>
+                        <span><%=mSegment.getCountNormPKTK()%></span>
+                    </td>
                 </tr>
                 <%}%>
             </table>

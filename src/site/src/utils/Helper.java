@@ -2,6 +2,11 @@ package utils;
 
 import com.pengrad.rzd.report.Report;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Evgeniy
@@ -10,6 +15,14 @@ import com.pengrad.rzd.report.Report;
  * To change this template use File | Settings | File Templates.
  */
 public class Helper {
+    public static enum segment {
+        station, sector, direction
+    }
+
+    public static enum typeTerm {
+        ALL, MKTK, PKTK
+    }
+
     public final static int SEGMENT_DIRECTION = 0;
     public final static int SEGMENT_SECTOR = 1;
     public final static int SEGMENT_STATION = 2;
@@ -56,6 +69,15 @@ public class Helper {
                 return Report.TerminalType.ALL;
             }
         }
+    }
+
+    public static Date getCurrentDate() throws Exception {
+//        GregorianCalendar gc = new GregorianCalendar();
+//        gc.clear(Calendar.MINUTE);
+//        gc.clear(Calendar.SECOND);
+//        gc.clear(Calendar.MILLISECOND);
+        return new SimpleDateFormat("dd.MM.yyyy").parse(new SimpleDateFormat("dd.MM.yyyy").format(new Date()));
+//        return gc.getTime();
     }
 
 }

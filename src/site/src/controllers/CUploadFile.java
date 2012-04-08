@@ -1,9 +1,11 @@
 package controllers;
 
 import managers.FileManager;
+import objects.FileUploadMessage;
 import objects.File;
 import objects.Ticket;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import parser.ParserKFileXML;
@@ -13,7 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * Created by IntelliJ IDEA.
@@ -43,8 +48,7 @@ public class CUploadFile {
 
     @RequestMapping(value = "upload/upload.htm", method = RequestMethod.POST)
     @ResponseBody
-    public String setFileUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "kFile", required = false) MultipartFile kfile, @RequestParam(value = "typeTimeCalcReport", required = true) int typeTimeCalcReport, @RequestParam(value = "timeCalcReport", required = false) String timeCalcReport) {
-        System.out.println("************");
+    public FileUploadMessage setFileUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "file", required = false) MultipartFile kfile, @RequestParam(value = "typeTimeCalcReport", required = true) int typeTimeCalcReport, @RequestParam(value = "timeCalcReport", required = false) String timeCalcReport) {
         MultipartFile multipartFile = kfile;
         String fileName = "";
         try {
@@ -56,7 +60,9 @@ public class CUploadFile {
                 is = multipartFile.getInputStream();
                 File fileLoad = null;
                 if (fileName.substring(fileName.length() - 3, fileName.length()).equalsIgnoreCase("XML")) {
-                    fileLoad = parserKFileXML.parse(is);
+//                    fileLoad = parserKFileXML.parse(is);
+                    fileLoad = new ParserKFileXML().parse(is);
+
                 } else {
 
                 }
@@ -85,7 +91,7 @@ public class CUploadFile {
                     }
                 }
                 fileManager.addFile(fileLoad);
-                return "SUCCESS";
+                return new FileUploadMessage(0, "ок", "ок");
             } finally {
                 if (is != null) {
                     try {
@@ -94,21 +100,14 @@ public class CUploadFile {
                         e.printStackTrace();
                     }
                 }
-
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return "ERROR";
+            return new FileUploadMessage(100, "Ошибка формата файла", e.getMessage());
         }
-
-//        try {
-//            response.(1111,"Ошибка загрузки файла");
-//        } catch (IOException e) {
-//            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//        }
-//        return message;
     }
 
+  
     @RequestMapping(value = "upload/uploadAll.htm", method = RequestMethod.GET)
     @ResponseBody
     public String allUpload(HttpServletRequest request, HttpServletResponse response) {
@@ -130,14 +129,4 @@ public class CUploadFile {
             return "ERROR";
         }
     }
-
-
-//    @RequestMapping(value = "test.htm", method = RequestMethod.GET)
-//    public String setFileUpload(HttpServletRequest request) {
-//        System.out.println("*******************");
-//
-//        return "1";
-//
-//    }
-
 }

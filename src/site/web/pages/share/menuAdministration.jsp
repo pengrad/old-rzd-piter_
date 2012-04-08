@@ -15,13 +15,16 @@
                 <td><a href="<%=request.getContextPath()%>/mon/direction.htm">Мониторинг</a></td>
             </tr>
             <tr>
-                <td><a href="<%=request.getContextPath()%>/upload/uploadFile.htm">Загрузка</a></td>
+                <td><a href="<%=request.getContextPath()%>/upload/uploadFile.htm#upload">Загрузка</a></td>
             </tr>
             <tr>
                 <td><a href="<%=request.getContextPath()%>/edit/searchForEditFile.htm">Корректировка</a></td>
             </tr>
             <tr>
                 <td><a href="<%=request.getContextPath()%>/3932/direction.htm">Формирование 3932</a></td>
+            </tr>
+            <tr>
+                <td><a href="<%=request.getContextPath()%>/nsiSegment/view.htm">НСИ по станциям</a></td>
             </tr>
         </table>
     </div>

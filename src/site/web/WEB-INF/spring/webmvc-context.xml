@@ -18,13 +18,16 @@
     <bean id="mainDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <!--<property name="url" value="jdbc:mysql://10.20.100.22:1433/uniform?useUnicode=true&amp;characterEncoding=UTF-8&amp;dumpQueriesOnException=true" />-->
-        <property name="url"
-        value="jdbc:mysql://localhost:3307/rzd?useUnicode=true&amp;characterEncoding=UTF-8&amp;dumpQueriesOnException=true"/>
         <!--<property name="url"-->
-                  <!--value="jdbc:mysql://gid1-2:3307/rzd?useUnicode=true&amp;characterEncoding=UTF-8&amp;dumpQueriesOnException=true"/>-->
+                  <!--value="jdbc:mysql://localhost:3307/rzd?useUnicode=true&amp;characterEncoding=UTF-8&amp;dumpQueriesOnException=true"/>-->
+        <property name="url"
+                    value="jdbc:mysql://62.76.41.48:3306/rzd?useUnicode=true&amp;characterEncoding=UTF-8&amp;dumpQueriesOnException=true"/>
 
-        <property name="username" value="root"/>
-        <property name="password" value="12345"/>
+        <!--<property name="url"-->
+        <!--value="jdbc:mysql://gid1-2:3307/rzd?useUnicode=true&amp;characterEncoding=UTF-8&amp;dumpQueriesOnException=true"/>-->
+
+        <property name="username" value="rzd"/>
+        <property name="password" value="rzd"/>
     </bean>
     <!-- Менеджер транзакций: привязываем его к нашему DataSource -->
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -47,6 +50,7 @@
     <bean id="report" class="com.pengrad.rzd.report.Report3932Builder">
         <property name="dataSource" ref="mainDataSource"/>
     </bean>
+
 
     <!--<bean id="report" class="test.ReportTest">-->
     <!--&lt;!&ndash;<property name="dataSource" ref="mainDataSource"/>&ndash;&gt;-->
@@ -73,6 +77,10 @@
     </bean>
 
     <bean id="cEditFile" class="controllers.CEditFile">
+        <property name="fileManager" ref="fileManager"/>
+    </bean>
+
+    <bean id="cNSISegment" class="controllers.CNSISegment">
         <property name="fileManager" ref="fileManager"/>
     </bean>
 

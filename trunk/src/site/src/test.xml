@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Envelope>
+    <Header>
+        <RoutingInf>
+            <EnvelopeID>ID сообщения</EnvelopeID>
+            <InitialEnvelopeID>Ссылка на ID сообщения, в ответ на которое формирутся соощение</InitialEnvelopeID>
+            <SenderInformation>Информация об отправителе</SenderInformation>
+            <ReceiverInformation>Информация о получателе</ReceiverInformation>
+            <PreparationDateTime>Дата и время создания сообщения</PreparationDateTime>
+            <Priority>Приоритет обработки</Priority>
+            <Expiration>Время жизни сообщения</Expiration>
+            <ConfirmationRequest>
+                <COD>Запрос об уведомление о доставке</COD>
+            </ConfirmationRequest>
+        </RoutingInf>
+        <Attachments>Используется в случае передачи бинарных данных</Attachments>
+        <ApplicationInf>
+            <SoftKind>Тип программного обеспечения</SoftKind>
+            <SoftVersion>версия альбома/версия спецификации</SoftVersion>
+            <MessageKind>Тип сообщения</MessageKind>
+        </ApplicationInf>
+        <EDHeader>
+            <MessageType>Код(тип) сообщения</MessageType>
+            <ProccessID>ID процесса</ProccessID>
+            <ParticipantID>Идентификатор информационной системы декларанта или оператора информационных услуг
+            </ParticipantID>
+            <SenderCustoms>
+                <CustomsCode></CustomsCode>
+                <ExchType></ExchType>
+            </SenderCustoms>
+            <ReceiverCustoms>
+                <CustomsCode></CustomsCode>
+                <ExchType></ExchType>
+            </ReceiverCustoms>
+        </EDHeader>
+    </Header>
+    <!--Сообщение-->
+    <Body>
+        <Signature>
+            ...
+            <Object id="xx">
+                Прикладной документ
+            </Object>
+            ...
+        </Signature>
+    </Body>
+    <!--Сообщение-контейнер-->
+    <Body>
+        <Signature>
+            ...
+            <Object id="xx">
+                ...
+                <ContainerDoc>
+                    <Order>Порядок обработки</Order>
+                    <DocBody>
+                        <Signature>
+                            ...
+                            <Object id="xx">
+                                Прикладной документ
+                            </Object>
+                            ...
+                        </Signature>
+                    </DocBody>
+                </ContainerDoc>
+                ...
+            </Object>
+            ...
+        </Signature>
+    </Body>
+</Envelope>

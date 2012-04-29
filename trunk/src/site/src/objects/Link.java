@@ -7,9 +7,14 @@ package objects;
  * Time: 21:39:17
  * To change this template use File | Settings | File Templates.
  */
-public class LinkHeader {
+public class Link {
     private String name;
     private String link;
+
+    public Link(String name, String link) {
+        this.name = name;
+        this.link = link;
+    }
 
     public String getName() {
         return name;

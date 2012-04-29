@@ -384,7 +384,7 @@ div.module div div div div {
 }
 
 .tableRow tr:hover{
-      background: #f2f2f2;
+      background: #f2f2f2!important;
 }
 
 .tableRow th {

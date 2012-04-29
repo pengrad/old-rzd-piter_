@@ -18,16 +18,19 @@
     <bean id="mainDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <!--<property name="url" value="jdbc:mysql://10.20.100.22:1433/uniform?useUnicode=true&amp;characterEncoding=UTF-8&amp;dumpQueriesOnException=true" />-->
-        <!--<property name="url"-->
-                  <!--value="jdbc:mysql://localhost:3307/rzd?useUnicode=true&amp;characterEncoding=UTF-8&amp;dumpQueriesOnException=true"/>-->
         <property name="url"
-                    value="jdbc:mysql://62.76.41.48:3306/rzd?useUnicode=true&amp;characterEncoding=UTF-8&amp;dumpQueriesOnException=true"/>
+                  value="jdbc:mysql://localhost:3307/rzd?useUnicode=true&amp;characterEncoding=UTF-8&amp;dumpQueriesOnException=true"/>
+        <!--<property name="url"-->
+        <!--value="jdbc:mysql://62.76.41.48:3306/rzd?useUnicode=true&amp;characterEncoding=UTF-8&amp;dumpQueriesOnException=true"/>-->
 
         <!--<property name="url"-->
         <!--value="jdbc:mysql://gid1-2:3307/rzd?useUnicode=true&amp;characterEncoding=UTF-8&amp;dumpQueriesOnException=true"/>-->
 
-        <property name="username" value="rzd"/>
-        <property name="password" value="rzd"/>
+        <!--<property name="username" value="rzd"/>-->
+        <!--<property name="password" value="rzd"/>-->
+        <property name="username" value="root"/>
+        <property name="password" value="12345"/>
+
     </bean>
     <!-- Менеджер транзакций: привязываем его к нашему DataSource -->
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -50,7 +53,15 @@
     <bean id="report" class="com.pengrad.rzd.report.Report3932Builder">
         <property name="dataSource" ref="mainDataSource"/>
     </bean>
-
+    <bean id="nsiSegmentManager" class="managers.NSISegmentManager">
+        <property name="dataSource" ref="mainDataSource"/>
+    </bean>
+    <bean id="dataManager" class="managers.DataManager">
+        <property name="dataSource" ref="mainDataSource"/>
+    </bean>
+    <bean id="cashiersManager" class="managers.CashiersManager">
+        <property name="dataSource" ref="mainDataSource"/>
+    </bean>
 
     <!--<bean id="report" class="test.ReportTest">-->
     <!--&lt;!&ndash;<property name="dataSource" ref="mainDataSource"/>&ndash;&gt;-->
@@ -69,6 +80,7 @@
     <bean id="cMonitoring" class="controllers.CMonitoring">
         <property name="monitoringManager" ref="monitoringManager"/>
         <property name="fileManager" ref="fileManager"/>
+        <property name="dataManager" ref="dataManager"/>
     </bean>
 
     <bean id="cDownload3932" class="controllers.CDownload3932">
@@ -82,8 +94,12 @@
 
     <bean id="cNSISegment" class="controllers.CNSISegment">
         <property name="fileManager" ref="fileManager"/>
+        <property name="nsiSegmentManager" ref="nsiSegmentManager"/>
+        <property name="dataManager" ref="dataManager"/>
     </bean>
-
+    <bean id="cCashiers" class="controllers.CCashiers">
+        <property name="cashiersManager" ref="cashiersManager"/>
+    </bean>
 
     <!--Прочие бины-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

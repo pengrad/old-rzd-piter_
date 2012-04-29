@@ -1,5 +1,6 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
+<%@ page import="utils.Helper" %>
 <%--
   Created by IntelliJ IDEA.
   User: Evgeniy
@@ -50,7 +51,7 @@
 
             uploader.bind('UploadFile', function(up, params) {
                 up.settings.multipart_params = {
-                    typeTimeCalcReport :$("input[name=typeTimeCalcReport]").val(),
+                    typeTimeCalcReport :$("input[name=typeTimeCalcReport]:checked").val(),
                     timeCalcReport:$("input[name=timeCalcReport]").val()
                 };
             });
@@ -123,6 +124,12 @@
                 //                alert( $('#' + file.id + " .status").html());
             });
         });
+        function showSelectDate() {
+            $("#cTimeCalcReport").show();
+        }
+        function hideSelectDate() {
+            $("#cTimeCalcReport").hide();
+        }
         <%--function v_1() {--%>
         <%--$("#v1_l").attr('src', '<%=request.getContextPath()%>/images/active_left.gif');--%>
         <%--$($("#v1_l").parents()[0]).next().attr('class', 'selected');--%>
@@ -222,8 +229,9 @@
         <%--<form id="form1" action="upload/upload.htm" method="post"--%>
         <%--enctype="multipart/form-data">--%>
         <div style="text-align:right;padding-right:20px">
-            <a href="<%=request.getContextPath()%>/mon/direction.htm?date=<%=new SimpleDateFormat("dd.MM.yyyy").format(new Date())%>">Загружено
-                сегодня</a>
+            <a href="<%=request.getContextPath()%>/mon/direction.htm?typeTimeCalcReport=<%=Helper.typeTimeCalcReport.DATE_UPLOAD%>&date=<%=new SimpleDateFormat("dd.MM.yyyy").format(new Date())%>">
+                Загружено сегодня
+            </a>
         </div>
         <p class="infoMessage">
             Для загрузки файлов выберите тип отчетной даты затем нажмите "Выбрать файлы", после чего
@@ -236,11 +244,11 @@
             <table>
                 <tr>
                     <td style="height:30px;vertical-align:middle;">
-                        <input name="typeTimeCalcReport" type="radio" checked value="0"/>
+                        <input onclick="hideSelectDate()" name="typeTimeCalcReport" type="radio" checked value="<%=Helper.typeTimeCalcReport.DATE_FILE%>"/>
                         <span>дата в файле</span>
-                        <input name="typeTimeCalcReport" type="radio" value="1"/>
+                        <input onclick="hideSelectDate()" name="typeTimeCalcReport" type="radio" value="<%=Helper.typeTimeCalcReport.DATE_UPLOAD%>"/>
                         <span>дата загрузки</span>
-                        <input name="typeTimeCalcReport" type="radio" value="2"/>
+                        <input onclick="showSelectDate()" name="typeTimeCalcReport" type="radio" value="<%=Helper.typeTimeCalcReport.DATE_INPUT%>"/>
                         <span>задать дату</span>
                     </td>
                     <td style="height:30px;vertical-align:middle;">

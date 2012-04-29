@@ -1,13 +1,15 @@
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="objects.MonitoringSegment" %>
+<%@ page import="objects.SegmentInfo" %>
 <%@ page import="java.util.Collection" %>
 <%@ page import="utils.Helper" %>
+<%@ page import="objects.Link" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <%
-    Collection<MonitoringSegment> monSegment = (Collection<MonitoringSegment>) request.getAttribute("monSegment");
+    Collection<SegmentInfo> monSegment = (Collection<SegmentInfo>) request.getAttribute("monSegment");
+    Collection<Link> links = (Collection<Link>) request.getAttribute("links");
 %>
 <html>
 <head>
@@ -174,10 +176,24 @@
 <jsp:include page="/pages/share/menuAdministration.jsp"/>
 <div id="data">
     <div class="infoPath">
-        <span>Администрирование&nbsp;
-            <img src="<%=request.getContextPath()%>/images/h3-bg.gif" alt="">&nbsp;
-            <a href="<%=request.getContextPath()%>/mon/direction.htm">Мониторинг загрузки К - файлов</a>
+        <img src="<%=request.getContextPath()%>/images/h3-bg.gif" alt="">&nbsp;
+        <a href="<%=request.getContextPath()%>/mon/direction.htm?typeTimeCalcReport=<%=request.getAttribute("typeTimeCalcReport")%>&date=<%=new SimpleDateFormat("dd.MM.yyyy").format(request.getAttribute("date"))%>">
+            Мониторинг загрузки К - файлов
+        </a>
+        <% if (links != null) {%>
+        <%for (Link link : links) {%>
+        <img src="<%=request.getContextPath()%>/images/h3-bg.gif" alt="">&nbsp;
+        <%if (link.getLink() != null) {%>
+        <a href="<%=request.getContextPath()%>/<%=link.getLink()%>">
+            <%=link.getName()%>
+        </a>
+        <%} else {%>
+        <span>
+              <%=link.getName()%>
         </span>
+        <%}%>
+        <%}%>
+        <%}%>
     </div>
 
     <div>
@@ -216,7 +232,12 @@
                 <form action="<%=request.getContextPath()%>/mon/<%=request.getAttribute("typeSegment")%>.htm"
                       method="get">
                     <div style="padding-left:10px;padding-top:10px;vertical-align: middle;">
-                        <span style="font-size:12pt;color:gray;">&nbsp;&nbsp;Дата загрузки&nbsp;&nbsp;</span>
+                        <span style="font-size:12pt;color:gray;">&nbsp;&nbsp;Тип отчетной даты&nbsp;&nbsp;</span>
+                        <input name="typeTimeCalcReport" type="radio" <%=(request.getAttribute("typeTimeCalcReport").equals(Helper.typeTimeCalcReport.DATE_FILE) ? "checked" : "")%> value="<%=Helper.typeTimeCalcReport.DATE_FILE%>"/>
+                        <span>дата в файле</span>
+                        <input name="typeTimeCalcReport" type="radio" <%=(request.getAttribute("typeTimeCalcReport").equals(Helper.typeTimeCalcReport.DATE_UPLOAD) ? "checked" : "")%> value="<%=Helper.typeTimeCalcReport.DATE_UPLOAD%>"/>
+                        <span>дата загрузки</span>
+                        <span style="font-size:12pt;color:gray;">&nbsp;&nbsp;Дата&nbsp;&nbsp;</span>
                         <input type="hidden" name="idSegment" value="<%=request.getAttribute("idSegment")%>"/>
                         <input style="font-size:12pt;" class="datepicker" name="date" readonly size="8" type="input"
                                value="<%=new SimpleDateFormat("dd.MM.yyyy").format(request.getAttribute("date"))%>"/>
@@ -241,12 +262,14 @@
                     <th></th>
                     <th>MKTK</th>
                     <th>PTKT</th>
+                    <th>АБП-09</th>
+                    <th>СПКИ102М</th>
                 </tr>
-                <%for (MonitoringSegment mSegment : monSegment) {%>
+                <%for (SegmentInfo mSegment : monSegment) {%>
                 <tr>
-                    <td style="width:470px;">
+                    <td style="width:370px;">
                         <%if (!request.getAttribute("typeSegmentForLink").equals("")) {%>
-                        <a href="<%=request.getContextPath()%>/mon/<%=request.getAttribute("typeSegmentForLink")%>.htm?date=<%=new SimpleDateFormat("dd.MM.yyyy").format(request.getAttribute("date"))%>&idSegment=<%=mSegment.getId()%>">
+                        <a href="<%=request.getContextPath()%>/mon/<%=request.getAttribute("typeSegmentForLink")%>.htm?typeTimeCalcReport=<%=request.getAttribute("typeTimeCalcReport")%>&date=<%=new SimpleDateFormat("dd.MM.yyyy").format(request.getAttribute("date"))%>&idSegment=<%=mSegment.getId()%>">
                             <%=mSegment.getName()%>
                         </a>
                         <%} else {%>
@@ -256,9 +279,9 @@
                     <%--<td style="width:50px;">--%>
                     <%--<img src="<%=request.getContextPath()%>/images/ok.png" alt="Данные загружены"/>--%>
                     <%--</td>--%>
-                    <td style="width:100px;text-align:center;">
+                    <td style="width:70px;text-align:center;">
                         <%if (request.getAttribute("typeSegment").equals(Helper.segment.station)) {%>
-                        <a href="<%=request.getContextPath()%>/edit/searchForEditFile.htm?dateReport=<%=new SimpleDateFormat("dd.MM.yyyy").format(request.getAttribute("date"))%>&idStation=<%=mSegment.getId()%>&typeTerm=<%=Helper.typeTerm.MKTK%>">
+                        <a href="<%=request.getContextPath()%>/edit/searchForEditFile.htm?typeTimeCalcReport=<%=request.getAttribute("typeTimeCalcReport")%>&dateReport=<%=new SimpleDateFormat("dd.MM.yyyy").format(request.getAttribute("date"))%>&idStation=<%=mSegment.getId()%>&typeTerm=<%=Helper.typeTerm.MKTK%>">
                             <%=mSegment.getCountUploadMKTK()%>
                         </a>
                         <%} else {%>
@@ -267,9 +290,9 @@
                         <span>/</span>
                         <span><%=mSegment.getCountNormMKTK()%></span>
                     </td>
-                    <td style="width:100px;text-align:center;">
+                    <td style="width:70px;text-align:center;">
                         <%if (request.getAttribute("typeSegment").equals(Helper.segment.station)) {%>
-                        <a href="<%=request.getContextPath()%>/edit/searchForEditFile.htm?dateReport=<%=new SimpleDateFormat("dd.MM.yyyy").format(request.getAttribute("date"))%>&idStation=<%=mSegment.getId()%>&typeTerm=<%=Helper.typeTerm.PKTK%>">
+                        <a href="<%=request.getContextPath()%>/edit/searchForEditFile.htm?typeTimeCalcReport=<%=request.getAttribute("typeTimeCalcReport")%>&dateReport=<%=new SimpleDateFormat("dd.MM.yyyy").format(request.getAttribute("date"))%>&idStation=<%=mSegment.getId()%>&typeTerm=<%=Helper.typeTerm.PKTK%>">
                             <%=mSegment.getCountUploadPKTK()%>
                         </a>
                         <%} else {%>
@@ -278,12 +301,34 @@
                         <span>/</span>
                         <span><%=mSegment.getCountNormPKTK()%></span>
                     </td>
+                    <td style="width:70px;text-align:center;">
+                        <%if (request.getAttribute("typeSegment").equals(Helper.segment.station)) {%>
+                        <a href="<%=request.getContextPath()%>/edit/searchForEditFile.htm?typeTimeCalcReport=<%=request.getAttribute("typeTimeCalcReport")%>&dateReport=<%=new SimpleDateFormat("dd.MM.yyyy").format(request.getAttribute("date"))%>&idStation=<%=mSegment.getId()%>&typeTerm=<%=Helper.typeTerm.ABP09%>">
+                            <%=mSegment.getCountUploadABP09()%>
+                        </a>
+                        <%} else {%>
+                        <%=mSegment.getCountUploadABP09()%>
+                        <%}%>
+                        <span>/</span>
+                        <span><%=mSegment.getCountNormABP09()%></span>
+                    </td>
+                    <td style="width:70px;text-align:center;">
+                        <%if (request.getAttribute("typeSegment").equals(Helper.segment.station)) {%>
+                        <a href="<%=request.getContextPath()%>/edit/searchForEditFile.htm?typeTimeCalcReport=<%=request.getAttribute("typeTimeCalcReport")%>&dateReport=<%=new SimpleDateFormat("dd.MM.yyyy").format(request.getAttribute("date"))%>&idStation=<%=mSegment.getId()%>&typeTerm=<%=Helper.typeTerm.SPKI102M%>">
+                            <%=mSegment.getCountUploadSPKI102M()%>
+                        </a>
+                        <%} else {%>
+                        <%=mSegment.getCountUploadSPKI102M()%>
+                        <%}%>
+                        <span>/</span>
+                        <span><%=mSegment.getCountNormSPKI102M()%></span>
+                    </td>
                 </tr>
                 <%}%>
             </table>
             <%} else {%>
-            <div class="infoMessage" style="text-align:center;font-size:20px;color:gray;padding:30px">Данные временно
-                отсутсвуют
+            <div class="infoMessage" style="text-align:center;font-size:20px;color:gray;padding:30px">
+                Данные отсутствуют
             </div>
             <%}%>
         </div>

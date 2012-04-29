@@ -1,13 +1,13 @@
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="objects.MonitoringSegment" %>
+<%@ page import="objects.SegmentInfo" %>
 <%@ page import="java.util.Collection" %>
 <%@ page import="objects.File" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <%
-    Collection<MonitoringSegment> monSegment = (Collection<MonitoringSegment>) request.getAttribute("monSegment");
+    Collection<SegmentInfo> monSegment = (Collection<SegmentInfo>) request.getAttribute("monSegment");
     String linkLevel = (request.getAttribute("linkLevel") != null ? (String) request.getAttribute("linkLevel") : null);
     Collection<File> files = (Collection<File>) request.getAttribute("files");
     Object dateReport = request.getAttribute("dateReport");
@@ -117,11 +117,6 @@
                             if (data) {
                                 alert("Запись успешо удалена");
                                 window.location.reload(true);
-                            <%--window.location = <%=request.getContextPath()%>/edit/--%>
-                            <%--searchForEditFile.htm ? dateReport =--%>
-                            <%--<%=dateReport%>&--%>
-                            <%--idStation =--%>
-                            <%--<%=idStation%>--%>
                             } else {
                                 alert("Во время удаления, возникла ошибка, попробуте еще раз");
                             }

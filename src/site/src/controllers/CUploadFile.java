@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import parser.ParserKFileXML;
+import utils.Helper;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -48,7 +49,10 @@ public class CUploadFile {
 
     @RequestMapping(value = "upload/upload.htm", method = RequestMethod.POST)
     @ResponseBody
-    public FileUploadMessage setFileUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "file", required = false) MultipartFile kfile, @RequestParam(value = "typeTimeCalcReport", required = true) int typeTimeCalcReport, @RequestParam(value = "timeCalcReport", required = false) String timeCalcReport) {
+    public FileUploadMessage setFileUpload(
+            @RequestParam(value = "file", required = false) MultipartFile kfile,
+            @RequestParam(value = "typeTimeCalcReport", required = true) Helper.typeTimeCalcReport typeTimeCalcReport,
+            @RequestParam(value = "timeCalcReport", required = false) String timeCalcReport) {
         MultipartFile multipartFile = kfile;
         String fileName = "";
         try {
@@ -60,36 +64,27 @@ public class CUploadFile {
                 is = multipartFile.getInputStream();
                 File fileLoad = null;
                 if (fileName.substring(fileName.length() - 3, fileName.length()).equalsIgnoreCase("XML")) {
-//                    fileLoad = parserKFileXML.parse(is);
                     fileLoad = new ParserKFileXML().parse(is);
-
                 } else {
 
                 }
-                switch (typeTimeCalcReport) {
-                    case 0: { //отчетная дата из KFile
-                        for (Ticket ticket : fileLoad.getTickets()) {
-                            ticket.setTimeCalcReport(ticket.getT());
-                        }
-                        break;
-                    }
-                    case 1: {  //отчетная дата - дата загрузки
-                        for (Ticket ticket : fileLoad.getTickets()) {
-                            ticket.setTimeCalcReport(new Date());
-                        }
-                        break;
-                    }
-                    case 2: { //произвольная отчетная дата
-                        Date d = parserKFileXML.parseDate(timeCalcReport);
-                        for (Ticket ticket : fileLoad.getTickets()) {
-                            ticket.setTimeCalcReport(d);
-                        }
-                        break;
-                    }
-                    default: {
-                        throw new Exception("Not found typeTimeCalcReport");
+                if (typeTimeCalcReport.equals(Helper.typeTimeCalcReport.DATE_FILE)) { //отчетная дата из KFile
+                    for (Ticket ticket : fileLoad.getTickets()) {
+                        ticket.setTimeCalcReport(ticket.getT());
                     }
                 }
+                if (typeTimeCalcReport.equals(Helper.typeTimeCalcReport.DATE_UPLOAD)) {  //отчетная дата - дата загрузки
+                    for (Ticket ticket : fileLoad.getTickets()) {
+                        ticket.setTimeCalcReport(new Date());
+                    }
+                }
+                if (typeTimeCalcReport.equals(Helper.typeTimeCalcReport.DATE_INPUT)) { //произвольная отчетная дата
+                    Date d = parserKFileXML.parseDate(timeCalcReport);
+                    for (Ticket ticket : fileLoad.getTickets()) {
+                        ticket.setTimeCalcReport(d);
+                    }
+                }
+
                 fileManager.addFile(fileLoad);
                 return new FileUploadMessage(0, "ок", "ок");
             } finally {
@@ -107,10 +102,13 @@ public class CUploadFile {
         }
     }
 
-  
+
     @RequestMapping(value = "upload/uploadAll.htm", method = RequestMethod.GET)
     @ResponseBody
-    public String allUpload(HttpServletRequest request, HttpServletResponse response) {
+    public String allUpload
+            (HttpServletRequest
+                    request, HttpServletResponse
+                    response) {
         try {
             java.io.File ff = new java.io.File("H:\\проект РЖД\\2010-11\\2010-11");
             java.io.File[] kk = ff.listFiles();

@@ -1,5 +1,4 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="objects.LinkHeader" %>
 <%--
   Created by IntelliJ IDEA.
   User: Evgeniy

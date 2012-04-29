@@ -35,13 +35,13 @@ $(document).ready(function() {
 
 });
 
-function showTimeCalcReport(e) {
-    if ($(e).val() == 2) {
-        $("#cTimeCalcReport").show();
-    } else {
-        $("#cTimeCalcReport").hide();
-    }
-}
+//function showTimeCalcReport(e) {
+//    if ($(e).val() == 2) {
+//        $("#cTimeCalcReport").show();
+//    } else {
+//        $("#cTimeCalcReport").hide();
+//    }
+//}
 
 
 

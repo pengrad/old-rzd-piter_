@@ -20,7 +20,11 @@ public class Helper {
     }
 
     public static enum typeTerm {
-        ALL, MKTK, PKTK
+        ALL, MKTK, PKTK, ABP09, SPKI102M
+    }
+
+    public static enum typeTimeCalcReport {
+        DATE_UPLOAD, DATE_FILE, DATE_INPUT
     }
 
     public final static int SEGMENT_DIRECTION = 0;

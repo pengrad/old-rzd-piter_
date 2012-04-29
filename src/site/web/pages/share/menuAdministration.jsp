@@ -24,7 +24,10 @@
                 <td><a href="<%=request.getContextPath()%>/3932/direction.htm">Формирование 3932</a></td>
             </tr>
             <tr>
-                <td><a href="<%=request.getContextPath()%>/nsiSegment/view.htm">НСИ по станциям</a></td>
+                <td><a href="<%=request.getContextPath()%>/nsiSegment/direction.htm">НСИ по станциям</a></td>
+            </tr>
+            <tr>
+                <td><a href="<%=request.getContextPath()%>/cashiers/view.htm">Разъездные кассиры</a></td>
             </tr>
         </table>
     </div>

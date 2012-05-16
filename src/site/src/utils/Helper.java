@@ -15,6 +15,10 @@ import java.util.GregorianCalendar;
  * To change this template use File | Settings | File Templates.
  */
 public class Helper {
+    public static enum action {
+        view, add, edit, delete
+    }
+
     public static enum segment {
         station, sector, direction
     }

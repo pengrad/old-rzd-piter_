@@ -29,6 +29,9 @@
             <tr>
                 <td><a href="<%=request.getContextPath()%>/cashiers/view.htm">Разъездные кассиры</a></td>
             </tr>
+            <tr>
+                <td><a href="<%=request.getContextPath()%>/pages/testVaadin.jsp">Тест вадин</a></td>
+            </tr>
         </table>
     </div>
     <div class="bottom"></div>

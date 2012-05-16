@@ -8,6 +8,7 @@ package objects;
  * To change this template use File | Settings | File Templates.
  */
 public class SegmentInfo {
+   private int typeSegment;
     private int id;
     private String name;
     private int countUploadMKTK;
@@ -26,6 +27,14 @@ public class SegmentInfo {
     public SegmentInfo(int id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public int getTypeSegment() {
+        return typeSegment;
+    }
+
+    public void setTypeSegment(int typeSegment) {
+        this.typeSegment = typeSegment;
     }
 
     public int getId() {

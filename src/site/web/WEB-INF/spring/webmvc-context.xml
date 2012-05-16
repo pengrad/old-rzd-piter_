@@ -13,6 +13,9 @@
 
     <mvc:annotation-driven/>
     <tx:annotation-driven transaction-manager="txManager" mode="proxy"/>
+    <context:spring-configured/>
+    <context:component-scan base-package="vaadin"/>
+
 
     <!--Дата сурс-->
     <bean id="mainDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -61,6 +64,10 @@
     </bean>
     <bean id="cashiersManager" class="managers.CashiersManager">
         <property name="dataSource" ref="mainDataSource"/>
+        <property name="dataManager" ref="dataManager"/>
+    </bean>
+    <bean id="reportCashiers1Builder" class="report.cashiers.report1.ReportCashiers1Builder">
+        <property name="dataSource" ref="mainDataSource"/>
     </bean>
 
     <!--<bean id="report" class="test.ReportTest">-->
@@ -99,6 +106,11 @@
     </bean>
     <bean id="cCashiers" class="controllers.CCashiers">
         <property name="cashiersManager" ref="cashiersManager"/>
+        <property name="reportCashiers1Builder" ref="reportCashiers1Builder"/>
+        <property name="dataManager" ref="dataManager"/>
+    </bean>
+    <bean id="cSegmentSelect" class="controllers.CSegmentSelect">
+        <property name="dataManager" ref="dataManager"/>
     </bean>
 
     <!--Прочие бины-->

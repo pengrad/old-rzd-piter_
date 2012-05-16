@@ -261,7 +261,7 @@
                 <tr>
                     <th></th>
                     <th>MKTK</th>
-                    <th>PTKT</th>
+                    <th>ПКТК</th>
                     <th>АБП-09</th>
                     <th>СПКИ102М</th>
                 </tr>
@@ -281,7 +281,7 @@
                     <%--</td>--%>
                     <td style="width:70px;text-align:center;">
                         <%if (request.getAttribute("typeSegment").equals(Helper.segment.station)) {%>
-                        <a href="<%=request.getContextPath()%>/edit/searchForEditFile.htm?typeTimeCalcReport=<%=request.getAttribute("typeTimeCalcReport")%>&dateReport=<%=new SimpleDateFormat("dd.MM.yyyy").format(request.getAttribute("date"))%>&idStation=<%=mSegment.getId()%>&typeTerm=<%=Helper.typeTerm.MKTK%>">
+                        <a href="<%=request.getContextPath()%>/edit/searchForEditFile.htm?typeTimeCalcReport=<%=request.getAttribute("typeTimeCalcReport")%>&dateReport=<%=new SimpleDateFormat("dd.MM.yyyy").format(request.getAttribute("date"))%>&station=<%=mSegment.getId()%>&typeTerm=<%=Helper.typeTerm.MKTK%>">
                             <%=mSegment.getCountUploadMKTK()%>
                         </a>
                         <%} else {%>
@@ -292,7 +292,7 @@
                     </td>
                     <td style="width:70px;text-align:center;">
                         <%if (request.getAttribute("typeSegment").equals(Helper.segment.station)) {%>
-                        <a href="<%=request.getContextPath()%>/edit/searchForEditFile.htm?typeTimeCalcReport=<%=request.getAttribute("typeTimeCalcReport")%>&dateReport=<%=new SimpleDateFormat("dd.MM.yyyy").format(request.getAttribute("date"))%>&idStation=<%=mSegment.getId()%>&typeTerm=<%=Helper.typeTerm.PKTK%>">
+                        <a href="<%=request.getContextPath()%>/edit/searchForEditFile.htm?typeTimeCalcReport=<%=request.getAttribute("typeTimeCalcReport")%>&dateReport=<%=new SimpleDateFormat("dd.MM.yyyy").format(request.getAttribute("date"))%>&station=<%=mSegment.getId()%>&typeTerm=<%=Helper.typeTerm.PKTK%>">
                             <%=mSegment.getCountUploadPKTK()%>
                         </a>
                         <%} else {%>
@@ -303,7 +303,7 @@
                     </td>
                     <td style="width:70px;text-align:center;">
                         <%if (request.getAttribute("typeSegment").equals(Helper.segment.station)) {%>
-                        <a href="<%=request.getContextPath()%>/edit/searchForEditFile.htm?typeTimeCalcReport=<%=request.getAttribute("typeTimeCalcReport")%>&dateReport=<%=new SimpleDateFormat("dd.MM.yyyy").format(request.getAttribute("date"))%>&idStation=<%=mSegment.getId()%>&typeTerm=<%=Helper.typeTerm.ABP09%>">
+                        <a href="<%=request.getContextPath()%>/edit/searchForEditFile.htm?typeTimeCalcReport=<%=request.getAttribute("typeTimeCalcReport")%>&dateReport=<%=new SimpleDateFormat("dd.MM.yyyy").format(request.getAttribute("date"))%>&station=<%=mSegment.getId()%>&typeTerm=<%=Helper.typeTerm.ABP09%>">
                             <%=mSegment.getCountUploadABP09()%>
                         </a>
                         <%} else {%>
@@ -314,7 +314,7 @@
                     </td>
                     <td style="width:70px;text-align:center;">
                         <%if (request.getAttribute("typeSegment").equals(Helper.segment.station)) {%>
-                        <a href="<%=request.getContextPath()%>/edit/searchForEditFile.htm?typeTimeCalcReport=<%=request.getAttribute("typeTimeCalcReport")%>&dateReport=<%=new SimpleDateFormat("dd.MM.yyyy").format(request.getAttribute("date"))%>&idStation=<%=mSegment.getId()%>&typeTerm=<%=Helper.typeTerm.SPKI102M%>">
+                        <a href="<%=request.getContextPath()%>/edit/searchForEditFile.htm?typeTimeCalcReport=<%=request.getAttribute("typeTimeCalcReport")%>&dateReport=<%=new SimpleDateFormat("dd.MM.yyyy").format(request.getAttribute("date"))%>&station=<%=mSegment.getId()%>&typeTerm=<%=Helper.typeTerm.SPKI102M%>">
                             <%=mSegment.getCountUploadSPKI102M()%>
                         </a>
                         <%} else {%>

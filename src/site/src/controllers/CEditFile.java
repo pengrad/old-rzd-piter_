@@ -16,6 +16,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import utils.Helper;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
@@ -63,12 +64,29 @@ public class CEditFile {
 
 
     @RequestMapping(value = "edit/searchForEditFile.htm", method = RequestMethod.GET)
-    public String openEditKFilePage(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "dateReport", required = false) String dateReport, @RequestParam(value = "idStation", required = false) Integer idStation, Model model) throws Exception {
-        if (dateReport != null && idStation != null) {
-            model.addAttribute("dateReport", dateReport);
-            model.addAttribute("idStation", idStation);
-            model.addAttribute("files", fileManager.getFiles(new SimpleDateFormat("dd.MM.yyyy").parse(dateReport), idStation));
+    public String openEditKFilePage(HttpServletRequest request, HttpServletResponse response,
+                                    @RequestParam(value = "typeTimeCalcReport", required = false) Helper.typeTimeCalcReport typeTimeCalcReport,
+                                    @RequestParam(value = "dateReport", required = false) String dateReport,
+                                    @RequestParam(value = "station", required = false) Integer station,
+                                    @RequestParam(value = "typeTerm", required = false) Helper.typeTerm typeTerm,
+                                    Model model) throws Exception {
+        if (typeTimeCalcReport == null) {
+            typeTimeCalcReport = Helper.typeTimeCalcReport.DATE_UPLOAD;
         }
+        if (dateReport == null) {
+            dateReport = new SimpleDateFormat("dd.MM.yyyy").format(new Date());
+        }
+        if (station == null) {
+            station = 2004003;
+        }
+        if (typeTerm == null) {
+            typeTerm = Helper.typeTerm.ALL;
+        }
+        model.addAttribute("typeTimeCalcReport", typeTimeCalcReport);
+        model.addAttribute("dateReport", dateReport);
+        model.addAttribute("station", station);
+        model.addAttribute("typeTerm", typeTerm);
+        model.addAttribute("files", fileManager.getFiles(new SimpleDateFormat("dd.MM.yyyy").parse(dateReport), station, typeTimeCalcReport, typeTerm));
         return "/pages/editFile.jsp";
     }
 

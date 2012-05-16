@@ -3,12 +3,11 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="objects.SegmentInfo" %>
 <%@ page import="java.util.Collection" %>
-<%@ page import="objects.ReportSegment" %>
 <%@ page import="utils.Helper" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <%
-    Collection<ReportSegment> repSegment = (Collection<ReportSegment>) request.getAttribute("repSegment");
+    Collection<SegmentInfo> repSegment = (Collection<SegmentInfo>) request.getAttribute("repSegment");
     String linkLevel = (request.getAttribute("linkLevel") != null ? (String) request.getAttribute("linkLevel") : null);
     String linkDownloadXML = (request.getAttribute("linkDownloadXML") != null ? (String) request.getAttribute("linkDownloadXML") : null);
     String linkDownloadTXT = (request.getAttribute("linkDownloadTXT") != null ? (String) request.getAttribute("linkDownloadTXT") : null);
@@ -34,13 +33,13 @@
             var dateReport = $(e).parent().parent().find("input[name=dateReport]").val();
             var typeTerm = $(e).parent().parent().find("select[name=typeTerm]").val();
             var img = $(e).html();
-            <%--$(e).html("<img src='<%=request.getContextPath()%>/images/ajax_wait_9.gif' title='Экспорт в формате XML'/>");--%>
-//            alert("**");
-//            window.location = linkDownload + "&dateReport=" + dateReport + "&typeTerm=" + typeTerm;
+        <%--$(e).html("<img src='<%=request.getContextPath()%>/images/ajax_wait_9.gif' title='Экспорт в формате XML'/>");--%>
+            //            alert("**");
+            //            window.location = linkDownload + "&dateReport=" + dateReport + "&typeTerm=" + typeTerm;
             window.open(linkDownload + "&dateReport=" + dateReport + "&typeTerm=" + typeTerm, '', 'height=600,width=850,left=50,top=150,directories=no,scrollbars=yes,resizable=yes');
 
-//            alert("*****");
-//            $(e).html(img);
+            //            alert("*****");
+            //            $(e).html(img);
             return false;
         }
         function load3932ByIDStation(e) {
@@ -169,15 +168,15 @@
             <span style="color:gray;">-экспорт в формате TXT</span>
         </div>
         <table class="tableRow" style="width:670px">
-            <%for (ReportSegment rSegment : repSegment) {%>
+            <%for (SegmentInfo rSegment : repSegment) {%>
             <tr>
                 <td style="width:330px;">
                     <%if (linkLevel != null) {%>
-                    <a href="<%=linkLevel+rSegment.getIdSegment()%>">
-                        <%=rSegment.getNameSegment()%>
+                    <a href="<%=linkLevel+rSegment.getId()%>">
+                        <%=rSegment.getName()%>
                     </a>
                     <%} else {%>
-                    <span><%=rSegment.getNameSegment()%></span>
+                    <span><%=rSegment.getName()%></span>
                     <%}%>
                 </td>
                 <td style="width:130px;vertical-align: middle;">
@@ -192,13 +191,13 @@
                     </select>
                 </td>
                 <td style="width:100px;">
-                    <a href="#" link="<%=linkDownloadXML+rSegment.getIdSegment()%>" onclick="load3932(this)">
+                    <a href="#" link="<%=linkDownloadXML+rSegment.getId()%>" onclick="load3932(this)">
                         <img src="<%=request.getContextPath()%>/images/xml.png" title="Экспорт в формате XML"/>
                     </a>
-                    <a href="#" link="<%=linkDownloadXLS+rSegment.getIdSegment()%>" onclick="load3932(this)">
+                    <a href="#" link="<%=linkDownloadXLS+rSegment.getId()%>" onclick="load3932(this)">
                         <img src="<%=request.getContextPath()%>/images/excel.png" title="Экспорт в формате EXCEL"/>
                     </a>
-                    <a href="#" link="<%=linkDownloadTXT+rSegment.getIdSegment()%>" onclick="load3932(this)">
+                    <a href="#" link="<%=linkDownloadTXT+rSegment.getId()%>" onclick="load3932(this)">
                         <img src="<%=request.getContextPath()%>/images/text.png" title="Экспорт в формате TXT"/>
                     </a>
                 </td>

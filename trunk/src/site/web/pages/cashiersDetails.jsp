@@ -35,32 +35,30 @@
 <script src="<%=request.getContextPath()%>/js/amcharts/raphael.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-    var chart;
     var chartData = [];
+    <%--alert(new Date('<%=new SimpleDateFormat("yyyy.MM.dd").format(new Date())%>'));--%>
     <%for(PlanCashiers pc:cashiers.getPlanCashiers()){%>
     chartData.push({
-        date: new Date(<%=new SimpleDateFormat("yyyy, MM, dd").format(pc.getDate())%>),
+        date: new Date('<%=new SimpleDateFormat("yyyy.MM.dd").format(pc.getDate())%>'),
         visits: <%=pc.getPlanBase()%>,
         hits: <%=pc.getFactBase()%>
     });
     <%}%>
+    var chartData2 = [];
+    <%for(PlanCashiers pc:cashiers.getPlanCashiers()){%>
+    chartData2.push({
+        date: new Date('<%=new SimpleDateFormat("yyyy.MM.dd").format(pc.getDate())%>'),
+        visits: <%=pc.getPlanRzd()%>,
+        hits: <%=pc.getFactRzd()%>
+    });
+    <%}%>
     AmCharts.ready(function () {
-        // generate some random data first
-        //                generateChartData();
         // SERIAL CHART
-        chart = new AmCharts.AmSerialChart();
+        var chart = new AmCharts.AmSerialChart();
         chart.pathToImages = "/lib/samples/javascript/images/";
-        //                chart.panEventsEnabled = true;
-        //                chart.zoomOutButton = {
-        //                    backgroundColor: "#000000",
-        //                    backgroundAlpha: 0.15
-        //                };
+        chart.panEventsEnabled = true;
         chart.dataProvider = chartData;
         chart.categoryField = "date";
-
-        // listen for "dataUpdated" event (fired when chart is inited) and call zoomChart method when it happens
-        //                chart.addListener("dataUpdated", zoomChart);
-
         // AXES
         // category
         var categoryAxis = chart.categoryAxis;
@@ -69,30 +67,12 @@
         categoryAxis.dashLength = 1;
         categoryAxis.gridAlpha = 0.15;
         categoryAxis.axisColor = "#DADADA";
-
         // first value axis (on the left)
         var valueAxis1 = new AmCharts.ValueAxis();
         valueAxis1.axisColor = "#FF6600";
         valueAxis1.axisThickness = 2;
         valueAxis1.gridAlpha = 0;
         chart.addValueAxis(valueAxis1);
-
-        // second value axis (on the right)
-        var valueAxis2 = new AmCharts.ValueAxis();
-        valueAxis2.position = "right"; // this line makes the axis to appear on the right
-        valueAxis2.axisColor = "#FCD202";
-        valueAxis2.gridAlpha = 0;
-        valueAxis2.axisThickness = 2;
-        chart.addValueAxis(valueAxis2);
-        //
-        //                // third value axis (on the left, detached)
-        //                valueAxis3 = new AmCharts.ValueAxis();
-        //                valueAxis3.offset = 50; // this line makes the axis to appear detached from plot area
-        //                valueAxis3.gridAlpha = 0;
-        //                valueAxis3.axisColor = "#B0DE09";
-        //                valueAxis3.axisThickness = 2;
-        //                chart.addValueAxis(valueAxis3);
-
         // GRAPHS
         // first graph
         var graph1 = new AmCharts.AmGraph();
@@ -105,66 +85,62 @@
 
         // second graph
         var graph2 = new AmCharts.AmGraph();
-        graph2.valueAxis = valueAxis2; // we have to indicate which value axis should be used
+        graph2.valueAxis = valueAxis1; // we have to indicate which value axis should be used
         graph2.title = "yellow line";
         graph2.valueField = "hits";
         graph2.bullet = "square";
         graph2.hideBulletsCount = 31;
         chart.addGraph(graph2);
-
-        //                // third graph
-        //                var graph3 = new AmCharts.AmGraph();
-        //                graph3.valueAxis = valueAxis3; // we have to indicate which value axis should be used
-        //                graph3.valueField = "views";
-        //                graph3.title = "green line";
-        //                graph3.bullet = "triangleUp";
-        //                graph3.hideBulletsCount = 30;
-        //                chart.addGraph(graph3);
-
         // CURSOR
         var chartCursor = new AmCharts.ChartCursor();
         chartCursor.cursorPosition = "mouse";
         chart.addChartCursor(chartCursor);
-
-        //                // SCROLLBAR
-        //                var chartScrollbar = new AmCharts.ChartScrollbar();
-        //                chart.addChartScrollbar(chartScrollbar);
-
-        // LEGEND
-        //                var legend = new AmCharts.AmLegend();
-        //                legend.marginLeft = 31;
-        //                chart.addLegend(legend);
-
-        // WRITE
-        chart.write("chartdiv");
+        chart.write("planBase");
     });
+    AmCharts.ready(function () {
+        // SERIAL CHART
+        var chart = new AmCharts.AmSerialChart();
+        chart.pathToImages = "/lib/samples/javascript/images/";
+        chart.dataProvider = chartData2;
+        chart.categoryField = "date";
+        // AXES
+        // category
+        var categoryAxis = chart.categoryAxis;
+        categoryAxis.parseDates = true; // as our data is date-based, we set parseDates to true
+        categoryAxis.minPeriod = "DD"; // our data is daily, so we set minPeriod to DD
+        categoryAxis.dashLength = 1;
+        categoryAxis.gridAlpha = 0.15;
+        categoryAxis.axisColor = "#DADADA";
+        // first value axis (on the left)
+        var valueAxis1 = new AmCharts.ValueAxis();
+        valueAxis1.axisColor = "#FF6600";
+        valueAxis1.axisThickness = 2;
+        valueAxis1.gridAlpha = 0;
+        chart.addValueAxis(valueAxis1);
+        // GRAPHS
+        // first graph
+        var graph1 = new AmCharts.AmGraph();
+        graph1.valueAxis = valueAxis1; // we have to indicate which value axis should be used
+        graph1.title = "red line";
+        graph1.valueField = "visits";
+        graph1.bullet = "round";
+        graph1.hideBulletsCount = 31;
+        chart.addGraph(graph1);
 
-    // generate some random data, quite different range
-    function generateChartData() {
-
-
-        var firstDate = new Date();
-        firstDate.setDate(firstDate.getDate() - 50);
-
-        for (var i = 0; i < 31; i++) {
-            var newDate = new Date(firstDate);
-            newDate.setDate(newDate.getDate() + i);
-
-            var visits = Math.round(Math.random() * 40) + 100;
-            var hits = Math.round(Math.random() * 80) + 500;
-            chartData.push({
-                date: newDate,
-                visits: visits,
-                hits: hits
-            });
-        }
-    }
-
-    // this method is called when chart is first inited as we listen for "dataUpdated" event
-    function zoomChart() {
-        // different zoom methods can be used - zoomToIndexes, zoomToDates, zoomToCategoryValues
-        chart.zoomToIndexes(10, 20);
-    }
+        // second graph
+        var graph2 = new AmCharts.AmGraph();
+        graph2.valueAxis = valueAxis1; // we have to indicate which value axis should be used
+        graph2.title = "yellow line";
+        graph2.valueField = "hits";
+        graph2.bullet = "square";
+        graph2.hideBulletsCount = 31;
+        chart.addGraph(graph2);
+        // CURSOR
+        var chartCursor = new AmCharts.ChartCursor();
+        chartCursor.cursorPosition = "mouse";
+        chart.addChartCursor(chartCursor);
+        chart.write("planRzd");
+    });
 </script>
 
 
@@ -285,21 +261,21 @@
         <form id="formCashiers">
             <div style="margin:10px;">
                 <div style="text-align:left;padding:5px">
-                    <span>Уникальный код кассира - </span>
-                    <span style="color:black;"><%=cashiers.getIdCashiers()%></span>
+                    <span style="color:gray;">Уникальный код кассира - </span>
+                    <span style="color:black;font-weight:bold;"><%=cashiers.getIdCashiers()%></span>
                 </div>
                 <div style="text-align:left;padding:5px">
-                    <span>ФИО кассира - </span>
-                    <span style="color:black;"><%=cashiers.getFioCashiers()%></span>
+                    <span style="color:gray;">ФИО кассира - </span>
+                    <span style="color:black;font-weight:bold;"><%=cashiers.getFioCashiers()%></span>
                 </div>
                 <div style="text-align:left;padding:5px">
-                    <span>Станция приписки - </span>
-                    <span style="color:black;"><%=direction.getName()%></span>
+                    <span style="color:gray;">Станция приписки - </span>
+                    <span style="color:black;font-weight:bold;"><%=direction.getName()%></span>
                     <span style="color:gray;">>></span>
-                    <span style="color:black;"><%=sector.getName()%></span>
+                    <span style="color:black;font-weight:bold;"><%=sector.getName()%></span>
                 </div>
                 <div style="text-align:left;padding:5px">
-                    <span>Прочие сведения - </span>
+                    <span style="color:gray;">Прочие сведения - </span>
                     <span style="color:black;"><%=cashiers.getComments()%></span>
                 </div>
             </div>
@@ -347,7 +323,11 @@
                     </table>
                 </div>
                 <div id="graphicData">
-                    <div id="chartdiv" style="width:100%; height:400px;"></div>
+                    <div style="padding:10px;text-align:left;font-size:12pt;color:gray;">Общая выручка</div>
+                    <div id="planBase" style="width:100%; height:400px;"></div>
+                    <div style="padding:10px;text-align:left;font-size:12pt;color:gray;">Выручка по ОАО "РЖД"</div>
+                    <div id="planRzd" style="width:100%; height:400px;"></div>
+                    <%--<div id="chartdiv" style="width:100%; height:400px;"></div>--%>
                 </div>
                 <div id="tableData" style="display:none;">
                     <table class="tableRow" style="width:680px">

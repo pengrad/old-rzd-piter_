@@ -4,6 +4,7 @@
 <%@ page import="objects.SegmentInfo" %>
 <%@ page import="java.util.Collection" %>
 <%@ page import="objects.File" %>
+<%@ page import="utils.Helper" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <%
@@ -11,7 +12,7 @@
     String linkLevel = (request.getAttribute("linkLevel") != null ? (String) request.getAttribute("linkLevel") : null);
     Collection<File> files = (Collection<File>) request.getAttribute("files");
     Object dateReport = request.getAttribute("dateReport");
-    Object idStation = request.getAttribute("idStation");
+    Object idStation = request.getAttribute("station");
 
 %>
 <html>
@@ -24,6 +25,7 @@
     <link href="<%=request.getContextPath()%>/css/upload.css" rel="stylesheet" type="text/css"/>
     <link href="<%=request.getContextPath()%>/css/jquery-ui-1.8.17.custom.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-ui-1.8.17.custom.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/segmentSelect.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $(".viewFile").live("click", function() {
@@ -127,6 +129,7 @@
                     });
                 }
             });
+            selectStation(parseInt(<%=idStation%>));
         });
         function searchFiles(e) {
 
@@ -147,13 +150,27 @@
         <div id="timeCalcReport" style="text-align:left;padding:20px">
             <form action="<%=request.getContextPath()%>/edit/searchForEditFile.htm" method="get">
                 <div style="padding-left:10px;padding-top:10px;vertical-align: middle;">
-                    <span style="font-size:12pt;color:gray;">&nbsp;&nbsp;Дата загрузки&nbsp;&nbsp;</span>
+                    <span style="font-size:12pt;color:gray;">&nbsp;&nbsp;Тип отчетной даты&nbsp;&nbsp;</span>
+                    <input name="typeTimeCalcReport" type="radio" <%=(request.getAttribute("typeTimeCalcReport").equals(Helper.typeTimeCalcReport.DATE_FILE) ? "checked" : "")%> value="<%=Helper.typeTimeCalcReport.DATE_FILE%>"/>
+                    <span>дата в файле</span>
+                    <input name="typeTimeCalcReport" type="radio" <%=(request.getAttribute("typeTimeCalcReport").equals(Helper.typeTimeCalcReport.DATE_UPLOAD) ? "checked" : "")%> value="<%=Helper.typeTimeCalcReport.DATE_UPLOAD%>"/>
+                    <span>дата загрузки</span>
+                    <span style="font-size:12pt;color:gray;">&nbsp;&nbsp;Дата&nbsp;&nbsp;</span>
                     <input style="font-size:12pt;" class="datepicker" name="dateReport" readonly size="8" type="input"
                            value="<%=dateReport!=null?(String)dateReport:new SimpleDateFormat("dd.MM.yyyy").format(new Date())%>"/>
-                    <span style="font-size:12pt;color:gray;">&nbsp;&nbsp;Код станции&nbsp;&nbsp;</span>
-
-                    <input style="font-size:12pt;" type="text" size="8" name="idStation"
-                           value="<%=(idStation!=null?(Integer)idStation:"")%>"/>
+                    <span class="segmentSelect"></span>
+                    <br>
+                    <span style="font-size:12pt;color:gray;">&nbsp;&nbsp;Тип терминала&nbsp;&nbsp;</span>
+                    <input name="typeTerm" type="radio" <%=(request.getAttribute("typeTerm").equals(Helper.typeTerm.ALL) ? "checked" : "")%> value="<%=Helper.typeTerm.ALL%>"/>
+                    <span>все</span>
+                    <input name="typeTerm" type="radio" <%=(request.getAttribute("typeTerm").equals(Helper.typeTerm.MKTK) ? "checked" : "")%> value="<%=Helper.typeTerm.MKTK%>"/>
+                    <span>МКТК</span>
+                    <input name="typeTerm" type="radio" <%=(request.getAttribute("typeTerm").equals(Helper.typeTerm.PKTK) ? "checked" : "")%> value="<%=Helper.typeTerm.PKTK%>"/>
+                    <span>ПКТК</span>
+                    <input name="typeTerm" type="radio" <%=(request.getAttribute("typeTerm").equals(Helper.typeTerm.ABP09) ? "checked" : "")%> value="<%=Helper.typeTerm.ABP09%>"/>
+                    <span>АБП-09</span>
+                    <input name="typeTerm" type="radio" <%=(request.getAttribute("typeTerm").equals(Helper.typeTerm.SPKI102M) ? "checked" : "")%> value="<%=Helper.typeTerm.SPKI102M%>"/>
+                    <span>СПКИ102М</span>
                     <input type="submit" value="Смотреть"/>
                 </div>
             </form>
@@ -167,7 +184,10 @@
             <%for (File file : files) {%>
             <tr>
                 <td>
-                    <%=file.getFileName()%>
+                    <%=file.getFileName()%><br>
+                    Кассир:<span><%=file.getFIO()%></span>
+                    <img src="<%=request.getContextPath()%>/images/edit-icon.png"
+                         title="Редактировать"/>
                 </td>
                 <td>
                     <%=file.getPlaceTerm()%>

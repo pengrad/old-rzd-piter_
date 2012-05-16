@@ -5,6 +5,7 @@ import objects.Ticket;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.transaction.annotation.Transactional;
+import utils.Helper;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -27,7 +28,7 @@ public class FileManager {
         db = new JdbcTemplate(dataSource);
     }
 
-    public Collection<File> getFiles(Date date, int idStation) {
+    public Collection<File> getFiles(Date date, int idStation, Helper.typeTimeCalcReport typeTimeCalcReport, Helper.typeTerm typeTerm) {
         String query = "select\n" +
                 /*0 */"FileID,\n" +
                 /*1 */"FileName,\n" +
@@ -59,7 +60,7 @@ public class FileManager {
                 /*27*/"SumServ,\n" +
                 /*28*/"NDSServ,\n" +
                 /*29*/"TimeCreate\n" +
-                "from file where date(TimeCreate)=? and PlaceTerm=?;";
+                "from file where " + (typeTimeCalcReport == Helper.typeTimeCalcReport.DATE_UPLOAD ? "date(TimeCreate)=?" : "? between date(TimeOpen) and date(TimeClose)") + " and PlaceTerm=?" + (typeTerm == Helper.typeTerm.MKTK ? " and TypeTerm='МКТК'" : "") + (typeTerm == Helper.typeTerm.PKTK ? " and TypeTerm='PKTK'" : "") + ";";
         return db.query(query, new RowMapper<File>() {
             public File mapRow(java.sql.ResultSet rs, int i) throws SQLException {
                 File file = new File();
@@ -99,6 +100,77 @@ public class FileManager {
         }, date, idStation);
     }
 
+//    public Collection<File> getPKTKFilesBySector(Date date,Helper.typeTimeCalcReport typeTimeCalcReport,int idSector) {
+//        String query = "select\n" +
+//                /*0 */"FileID,\n" +
+//                /*1 */"FileName,\n" +
+//                /*2 */"NumTerm,\n" +
+//                /*3 */"SmenaNum,\n" +
+//                /*4 */"PlaceTerm,\n" +
+//                /*5 */"Month,\n" +
+//                /*6 */"TimeOpen,\n" +
+//                /*7 */"FirstTicket,\n" +
+//                /*8 */"Sum,\n" +
+//                /*9 */"TimeClose,\n" +
+//                /*10*/"NumTickets,\n" +
+//                /*11*/"LenTape,\n" +
+//                /*12*/"TypeTerm,\n" +
+//                /*13*/"SoftVersion,\n" +
+//                /*14*/"INN,\n" +
+//                /*15*/"FIO,\n" +
+//                /*16*/"CardOut,\n" +
+//                /*17*/"CardIn,\n" +
+//                /*18*/"Sup,\n" +
+//                /*19*/"Cancel,\n" +
+//                /*20*/"NumProc,\n" +
+//                /*21*/"SumProc,\n" +
+//                /*22*/"SumEKLZ,\n" +
+//                /*23*/"SCol,\n" +
+//                /*24*/"STax,\n" +
+//                /*25*/"Blank,\n" +
+//                /*26*/"SumRet,\n" +
+//                /*27*/"SumServ,\n" +
+//                /*28*/"NDSServ,\n" +
+//                /*29*/"TimeCreate\n" +
+//                "from file where TypeTerm='PKTK' and "+(typeTimeCalcReport==Helper.typeTimeCalcReport.DATE_UPLOAD?"date(TimeCreate)=?":"? between date(TimeOpen) and date(TimeClose)");
+//        return db.query(query, new RowMapper<File>() {
+//            public File mapRow(java.sql.ResultSet rs, int i) throws SQLException {
+//                File file = new File();
+//                file.setFileId(rs.getInt("FileID"));
+//                file.setFileName(rs.getString("FileName"));
+//                file.setNumTerm(rs.getInt("NumTerm"));
+//                file.setSmenaNum(rs.getInt("SmenaNum"));
+//                file.setPlaceTerm(rs.getInt("PlaceTerm"));
+//                file.setMonth(rs.getInt("Month"));
+//                file.setTimeOpen(rs.getTimestamp("TimeOpen"));
+//                file.setFirstTicket(rs.getInt("FirstTicket"));
+//                file.setSum(rs.getDouble("Sum"));
+//                file.setTimeClose(rs.getTimestamp("TimeClose"));
+//                file.setNumTickets(rs.getInt("NumTickets"));
+//                file.setLenTape(rs.getDouble("LenTape"));
+//                file.setTypeTerm(rs.getString("TypeTerm"));
+//                file.setSoftVersion(rs.getString("SoftVersion"));
+//                file.setINN(rs.getString("INN"));
+//                file.setFIO(rs.getString("FIO"));
+//                file.setCardOut(rs.getDouble("CardOut"));
+//                file.setCardIn(rs.getDouble("CardIn"));
+//                file.setSup(rs.getDouble("Sup"));
+//                file.setCancel(rs.getDouble("Cancel"));
+//                file.setNumProc(rs.getInt("NumProc"));
+//                file.setSumProc(rs.getDouble("SumProc"));
+//                file.setSumEKLZ(rs.getDouble("SumEklz"));
+//                file.setSCol(rs.getDouble("SCol"));
+//                file.setSTax(rs.getDouble("STax"));
+//                file.setBlank(rs.getInt("Blank"));
+//                file.setSumRet(rs.getDouble("SumRet"));
+//                file.setSumServ(rs.getDouble("SumServ"));
+//                file.setNDSServ(rs.getDouble("NDSServ"));
+//                file.setTimeCreate(rs.getTimestamp("TimeCreate"));
+////                file.setTickets(getTicketsByFileId(file.getFileId()));
+//                return file;
+//            }
+//        }, date);
+//    }
 //    public Collection<File> getFilesUploadToday() {
 //        String query = "select\n" +
 //                /*0 */"FileID,\n" +

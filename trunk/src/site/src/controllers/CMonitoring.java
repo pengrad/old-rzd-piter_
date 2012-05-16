@@ -127,7 +127,7 @@ public class CMonitoring {
             @RequestParam(value = "idSegment", required = false) Integer idStation,
             @RequestParam(value = "typeTerm", required = false) Helper.typeTerm typeTerm,
             Model model) throws Exception {
-        return fileManager.getFiles(new SimpleDateFormat("dd.MM.yyyy").parse(date), idStation);
+        return fileManager.getFiles(new SimpleDateFormat("dd.MM.yyyy").parse(date), idStation, Helper.typeTimeCalcReport.DATE_UPLOAD, typeTerm);
     }
 
 }

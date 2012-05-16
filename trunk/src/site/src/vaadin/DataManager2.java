@@ -1,4 +1,4 @@
-package managers;
+package vaadin;
 
 import objects.SegmentInfo;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,7 +15,8 @@ import java.util.Collection;
  * Time: 22:14:15
  * To change this template use File | Settings | File Templates.
  */
-public class DataManager {
+@Component
+public class DataManager2 {
     private DataSource dataSource;
     private JdbcTemplate db;
 

@@ -349,9 +349,9 @@
                                 <span><%=new SimpleDateFormat("dd.MM.yyyy").format(pc.getDate())%></span></td>
                             <td style="text-align:center;"><span><%=pc.getRouteNumber()%></span></td>
                             <td style="text-align:center;"><span><%=pc.getPlanBase()%></span></td>
-                            <td style="text-align:center;"><span>-</span></td>
+                            <td style="text-align:center;"><span><%=pc.getFactBase()%></span></td>
                             <td style="text-align:center;"><span><%=pc.getPlanRzd()%></span></td>
-                            <td style="text-align:center;"><span>-</span></td>
+                            <td style="text-align:center;"><span><%=pc.getFactRzd()%></span></td>
                         </tr>
                         <%}%>
                     </table>

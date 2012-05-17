@@ -183,6 +183,30 @@ public class CEditFile {
     }
 
 
+    @RequestMapping(value = "edit/updateCashier.htm", method = RequestMethod.POST)
+    @ResponseBody
+    public ArrayList<ErrorAJAX> updateCashier(
+            @RequestParam(value = "fileId", required = false) Integer fileId,
+            @RequestParam(value = "idCashier", required = true) String idCashier,
+            @RequestParam(value = "fioCashier", required = true) String fioCashier
+    ) {
+        ArrayList<ErrorAJAX> listError = new ArrayList<ErrorAJAX>();
+        int idCash = 0;
+        try {
+            idCash = Integer.parseInt(idCashier);
+        } catch (Exception e) {
+            listError.add(new ErrorAJAX("", "Код задан не корректно"));
+        }
+        if (fioCashier == null) {
+            listError.add(new ErrorAJAX("", "Укажите ФИО кассира"));
+        }
+        if (listError.size() == 0) {
+            fileManager.updateCashierInFile(fileId, idCash, fioCashier);
+        }
+        return listError;
+    }
+
+
 //    @RequestMapping(value = "edit/editFile.htm", method = RequestMethod.GET)
 //
 //    public String openEditKFilePage(HttpServletRequest request, HttpServletResponse response) {

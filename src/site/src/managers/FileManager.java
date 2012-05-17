@@ -46,6 +46,7 @@ public class FileManager {
                 /*13*/"SoftVersion,\n" +
                 /*14*/"INN,\n" +
                 /*15*/"FIO,\n" +
+                /*15*/"CashierId,\n" +
                 /*16*/"CardOut,\n" +
                 /*17*/"CardIn,\n" +
                 /*18*/"Sup,\n" +
@@ -80,6 +81,7 @@ public class FileManager {
                 file.setSoftVersion(rs.getString("SoftVersion"));
                 file.setINN(rs.getString("INN"));
                 file.setFIO(rs.getString("FIO"));
+                file.setCashierId(rs.getInt("CashierId"));
                 file.setCardOut(rs.getDouble("CardOut"));
                 file.setCardIn(rs.getDouble("CardIn"));
                 file.setSup(rs.getDouble("Sup"));
@@ -260,6 +262,7 @@ public class FileManager {
                 /*13*/"SoftVersion,\n" +
                 /*14*/"INN,\n" +
                 /*15*/"FIO,\n" +
+                /*15*/"CashierId,\n" +
                 /*16*/"CardOut,\n" +
                 /*17*/"CardIn,\n" +
                 /*18*/"Sup,\n" +
@@ -294,6 +297,7 @@ public class FileManager {
                 file.setSoftVersion(rs.getString("SoftVersion"));
                 file.setINN(rs.getString("INN"));
                 file.setFIO(rs.getString("FIO"));
+                file.setCashierId(rs.getInt("CashierId"));
                 file.setCardOut(rs.getDouble("CardOut"));
                 file.setCardIn(rs.getDouble("CardIn"));
                 file.setSup(rs.getDouble("Sup"));
@@ -504,6 +508,7 @@ public class FileManager {
                 /*13*/"SoftVersion,\n" +
                 /*14*/"INN,\n" +
                 /*15*/"FIO,\n" +
+                /*15*/"CashierId,\n" +
                 /*16*/"CardOut,\n" +
                 /*17*/"CardIn,\n" +
                 /*18*/"Sup,\n" +
@@ -518,7 +523,7 @@ public class FileManager {
                 /*27*/"SumServ,\n" +
                 /*28*/"NDSServ\n" +
                 ") values (\n" +
-                "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?\n" +
+                "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?\n" +
                 ");";
         db.update(query,
                 /*1 */fileLoad.getFileName(),
@@ -536,6 +541,7 @@ public class FileManager {
                 /*13*/fileLoad.getSoftVersion(),
                 /*14*/fileLoad.getINN(),
                 /*15*/fileLoad.getFIO(),
+                /*15*/fileLoad.getCashierId(),
                 /*16*/fileLoad.getCardOut(),
                 /*17*/fileLoad.getCardIn(),
                 /*18*/fileLoad.getSup(),
@@ -626,5 +632,9 @@ public class FileManager {
         }
     }
 
+    public void updateCashierInFile(int idFile, int idCashier, String fioCashier) {
+        String query = "update file set CashierId=?,FIO=? where FileId=?";
+        db.update(query, idCashier, fioCashier, idFile);
+    }
 
 }

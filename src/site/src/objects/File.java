@@ -3,6 +3,7 @@ package objects;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
+import utils.Helper;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -44,6 +45,7 @@ public class File {
     @Range(min = 10, max = 1000, message = "Должно быть....")
     private String INN;         // 'ИНН',
     private String FIO;         // 'ФИО',
+    private int cashierId;   // 'Код кассира',
     private double cardOut;     // 'Сумма принятого залог',
     private double cardIn;      // 'Сумма возвращенного залог',
     private double sup;         // 'Сумма доплаты льготных билетов',
@@ -315,5 +317,21 @@ public class File {
 
     public void setTickets(Collection<Ticket> tickets) {
         this.tickets = tickets;
+    }
+
+    public int getCashierId() {
+        return cashierId;
+    }
+
+    public void setCashierId(int cashierId) {
+        this.cashierId = cashierId;
+    }
+
+    public Helper.typeTerm getTypeTerminal() {
+        if (typeTerm.equals("МКТК"))
+            return Helper.typeTerm.MKTK;
+        else if (typeTerm.equals("PKTK"))
+            return Helper.typeTerm.PKTK;
+        else return Helper.typeTerm.UNDEFINED;
     }
 }

@@ -86,10 +86,11 @@
         // second graph
         var graph2 = new AmCharts.AmGraph();
         graph2.valueAxis = valueAxis1; // we have to indicate which value axis should be used
-        graph2.title = "yellow line";
+        graph2.title = "red line";
         graph2.valueField = "hits";
         graph2.bullet = "square";
         graph2.hideBulletsCount = 31;
+        graph2.color = "#DAAADA";
         chart.addGraph(graph2);
         // CURSOR
         var chartCursor = new AmCharts.ChartCursor();
@@ -325,8 +326,22 @@
                 <div id="graphicData">
                     <div style="padding:10px;text-align:left;font-size:12pt;color:gray;">Общая выручка</div>
                     <div id="planBase" style="width:100%; height:400px;"></div>
+                    <div style="text-align:center;">
+                        <div style="margin-left:500px;float:left;height:20px;width:20px;background:#FF6600"></div>
+                        <div style="float:left;">-план</div>
+                        <div style="margin-left:20px;float:left;height:20px;width:20px;background:#FCD202"></div>
+                        <div style="float:left;">-факт</div>
+                        <div style="clear:both;"></div>
+                    </div>
                     <div style="padding:10px;text-align:left;font-size:12pt;color:gray;">Выручка по ОАО "РЖД"</div>
                     <div id="planRzd" style="width:100%; height:400px;"></div>
+                    <div style="text-align:center;">
+                        <div style="margin-left:500px;float:left;height:20px;width:20px;background:#FF6600"></div>
+                        <div style="float:left;">-план</div>
+                        <div style="margin-left:20px;float:left;height:20px;width:20px;background:#FCD202"></div>
+                        <div style="float:left;">-факт</div>
+                        <div style="clear:both;"></div>
+                    </div>
                     <%--<div id="chartdiv" style="width:100%; height:400px;"></div>--%>
                 </div>
                 <div id="tableData" style="display:none;">

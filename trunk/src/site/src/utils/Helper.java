@@ -24,7 +24,7 @@ public class Helper {
     }
 
     public static enum typeTerm {
-        ALL, MKTK, PKTK, ABP09, SPKI102M
+        ALL, MKTK, PKTK, ABP09, SPKI102M, UNDEFINED
     }
 
     public static enum typeTimeCalcReport {

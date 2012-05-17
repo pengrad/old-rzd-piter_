@@ -28,6 +28,8 @@
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/segmentSelect.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+
+
             $(".viewFile").live("click", function() {
                 var fileId = $(this).attr("fileId");
                 $("#modalFile").dialog({ buttons: [
@@ -131,6 +133,55 @@
             });
             selectStation(parseInt(<%=idStation%>));
         });
+        function editCashier(e, fileId) {
+            $("#editCashier").dialog({ buttons: [
+                {
+                    text: "Сохранить",
+                    click: function() {
+                        var idCashier = $("#editCashier input[name=idCashier]").val();
+                        var fioCashier = $("#editCashier input[name=fioCashier]").val();
+                        $("#editCashier .errorSection").empty();
+                        $.ajax({
+                            url: '<%=request.getContextPath()%>/edit/updateCashier.htm',
+                            data:{fileId:fileId,idCashier:idCashier,fioCashier:fioCashier},
+                            dataType: 'json',
+                            type: "POST",
+                            success: function(data) {
+                                if (data.length == 0) {
+                                    $(e).parent().find(".idCashier").text(idCashier);
+                                    $(e).parent().find(".fioCashier").text(fioCashier);
+                                     $("#editCashier").dialog("close");
+                                } else {
+                                    for (var i = 0; i < data.length; i++) {
+                                        $("#editCashier .errorSection").append(data[i].errorMessage + "<br>")
+                                    }
+                                }
+                            },
+                            error:function() {
+                                alert("Во время удаления, возникла ошибка, попробуте еще раз");
+                            }
+                        });
+                    }
+                },
+                {
+                    text: "Закрыть",
+                    click: function() {
+                        $(this).dialog("close");
+                    }
+                }
+
+            ],
+                height:250,
+                width:350,
+                modal:true,
+                open:function(event, ui) {
+                    $("#editCashier .errorSection").empty();
+                    $("#editCashier input[name=idCashier]").val($(e).parent().find(".idCashier").text());
+                    $("#editCashier input[name=fioCashier]").val($(e).parent().find(".fioCashier").text());
+                }
+            });
+        }
+
         function searchFiles(e) {
 
 
@@ -185,9 +236,12 @@
             <tr>
                 <td>
                     <%=file.getFileName()%><br>
-                    Кассир:<span><%=file.getFIO()%></span>
-                    <img src="<%=request.getContextPath()%>/images/edit-icon.png"
+                    Код:<span class="idCashier"><%=file.getCashierId()%></span>&nbsp;
+                    ФИО:<span class="fioCashier"><%=file.getFIO()%></span>
+                    <%if (file.getTypeTerminal().equals(Helper.typeTerm.PKTK)) {%>
+                    <img style="cursor:pointer" onclick="editCashier(this,<%=file.getFileId()%>)" src="<%=request.getContextPath()%>/images/edit-icon.png"
                          title="Редактировать"/>
+                    <%}%>
                 </td>
                 <td>
                     <%=file.getPlaceTerm()%>
@@ -224,6 +278,17 @@
 <jsp:include page="/pages/share/footer.jsp"/>
 </body>
 </html>
-<div id="modalFile">
-
+<div id="modalFile"></div>
+<div id="editCashier">
+    <div style="padding:5px">
+        <div class="errorSection" style="color:red;text-align:left;"></div>
+        <div style="text-align:left;">Введите код кассира</div>
+        <div>
+            <input name="idCashier" type="text" style="width:300px;"/>
+        </div>
+        <div style="text-align:left;">Введите ФИО кассира</div>
+        <div>
+            <input name="fioCashier" type="text" style="width:300px;"/>
+        </div>
+    </div>
 </div>

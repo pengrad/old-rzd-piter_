@@ -241,7 +241,6 @@ public class CCashiers {
     }
 
     //---------------------
-
     @RequestMapping(value = "cashiers/rep1.htm", method = RequestMethod.GET)
     public ModelAndView loadXML(HttpServletRequest request, HttpServletResponse response,
                                 Model model) throws Exception {

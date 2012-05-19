@@ -8,13 +8,6 @@ import org.springframework.stereotype.Component;
 import javax.sql.DataSource;
 import java.util.Collection;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Evgeniy
- * Date: 12.04.2012
- * Time: 22:14:15
- * To change this template use File | Settings | File Templates.
- */
 public class DataManager {
     private DataSource dataSource;
     private JdbcTemplate db;
@@ -49,7 +42,8 @@ public class DataManager {
     }
 
     public SegmentInfo getDirectionByIdStation(int idStation) {
-        return db.queryForObject("select d.dir_id,d.dir_name from direction d join sector s on d.dir_id=s.sect_dir_id join station_sector_cross ssc on s.sect_id=ssc.sect_id where ssc.stat_id=? limit 1", new RowMapper<SegmentInfo>() {
+        return db.queryForObject("select d.dir_id,d.dir_name from direction d join sector s on d.dir_id=s.sect_dir_id\n" +
+                "join station_sector_cross ssc on s.sect_id=ssc.sect_id where ssc.stat_id=? limit 1", new RowMapper<SegmentInfo>() {
             public SegmentInfo mapRow(java.sql.ResultSet rs, int i) throws java.sql.SQLException {
                 return new SegmentInfo(rs.getInt(1), rs.getString(2));
             }
@@ -73,7 +67,8 @@ public class DataManager {
     }
 
     public SegmentInfo getSectorByIdStation(int idStation) {
-        return db.queryForObject("select s.sect_id,s.sect_name from sector s join station_sector_cross ssc on s.sect_id=ssc.sect_id where ssc.stat_id=? limit 1", new RowMapper<SegmentInfo>() {
+        return db.queryForObject("select s.sect_id,s.sect_name from sector s\n" +
+                "join station_sector_cross ssc on s.sect_id=ssc.sect_id where ssc.stat_id=? limit 1", new RowMapper<SegmentInfo>() {
             public SegmentInfo mapRow(java.sql.ResultSet rs, int i) throws java.sql.SQLException {
                 return new SegmentInfo(rs.getInt(1), rs.getString(2));
             }

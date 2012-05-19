@@ -1,6 +1,8 @@
+<%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page import="objects.SegmentInfo" %>
-<%@ page import="java.util.*" %>
+<%@ page import="java.util.Collection" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <%
@@ -26,50 +28,55 @@
 </head>
 <body>
 <jsp:include page="/pages/share/head.jsp"/>
-<jsp:include page="/pages/share/menuReport.jsp"/>
-<div id="data">
+<div id="data" style="width:900px!important;">
     <div class="infoPath">
-        <a href="<%=request.getContextPath()%>/report/listReport.htm">Отчетность</a>&nbsp;
-        <img src="<%=request.getContextPath()%>/images/h3-bg.gif" alt="">
-        <span>Отчетность по разъездным кассирам</span>
+            <span>Отчетность&nbsp;
+        </span>
     </div>
     <div style="color:gray;font-size:14pt;text-align:center;">
         <table width="100%" border="0" style="border-spacing:20px!important;">
             <tr>
                 <td>
-                    <span style="font-size:12pt!important;" href="<%=request.getContextPath()%>/report/listReportCashiers.htm">
-                        План-график на месяц по ВЫРУЧКЕ и РЖД
-                    </span>
+                    <a style="font-size:14pt!important;" href="<%=request.getContextPath()%>/pages/report/graphics/gr1.jsp">
+                        Доход по группам пассажиров
+                    </a>
                 </td>
+            </tr>
+            <tr>
                 <td>
-                    <span>Год</span>
-                    <select name="year">
-                        <%
-                            GregorianCalendar gc = new GregorianCalendar();
-                            for (int i = gc.get(Calendar.YEAR) - 5; i <= gc.get(Calendar.YEAR); i++) {
-                        %>
-                        <option <%=((i==gc.get(Calendar.YEAR))?"selected":"")%>>
-                            <%=i%>
-                        </option>
-                        <%}%>
-                    </select>
-                    <span>Месяц</span>
-                    <select name="month">
-                        <%for (int i = 1; i <= 12; i++) {%>
-                        <option <%=((i==(gc.get(Calendar.MONTH)+1))?"selected":"")%>>
-                            <%=i%>
-                        </option>
-                        <%}%>
-                    </select>
-                    <button type="button" onclick="view()" onblur="">Смотреть</button>
+                    <a style="font-size:14pt!important;" href="<%=request.getContextPath()%>/pages/report/graphics/gr2.jsp">
+                        Пассажиропоток по направлениям
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a style="font-size:14pt!important;" href="<%=request.getContextPath()%>/pages/report/graphics/gr3.jsp">
+                        Доходах от перевозок
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a style="font-size:14pt!important;" href="<%=request.getContextPath()%>/pages/report/graphics/gr4.jsp">
+                        Соотнесение пассажиропотока и дохода
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a style="font-size:14pt!important;" href="<%=request.getContextPath()%>/report/listReportCashiers.htm">
+                        Отчетность по разъездным кассирам
+                    </a>
                 </td>
             </tr>
         </table>
     </div>
-    <div>
-        <div id="chartdiv" style="width: 700px; height: 600px;"></div>
-        <div style="clear:both;"></div>
-    </div>
+</div>
+<div>
+    <div id="chartdiv" style="width: 700px; height: 600px;"></div>
+    <div style="clear:both;"></div>
+</div>
 </div>
 <jsp:include page="/pages/share/footer.jsp"/>
 </body>

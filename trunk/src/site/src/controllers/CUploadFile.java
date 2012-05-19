@@ -5,10 +5,9 @@ import objects.FileUploadMessage;
 import objects.File;
 import objects.Ticket;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import parser.ParserKFileXML;
+import parsers.ParserKFileXML;
 import utils.Helper;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,10 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 
 /**
  * Created by IntelliJ IDEA.

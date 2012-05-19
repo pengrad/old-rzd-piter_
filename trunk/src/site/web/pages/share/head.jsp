@@ -33,7 +33,7 @@
                                     <li class="first"><a href="<%=request.getContextPath()%>/3932/direction.htm">Администрирование</a>
                                     </li>
                                     <li>
-                                        <a href="<%=request.getContextPath()%>/pages/report/graphics/gr1.jsp">Отчетность</a>
+                                        <a href="<%=request.getContextPath()%>/report/listReport.htm">Отчетность</a>
                                     </li>
                                     <li><a href="#">Рабочая область</a></li>
                                 </ul>

@@ -20,16 +20,16 @@ import java.util.HashMap;
  */
 @Controller
 public class CReport {
-     @RequestMapping(value = "report/listReportCashiers.htm", method = RequestMethod.GET)
-    public ModelAndView listReportCashiers(HttpServletRequest request, HttpServletResponse response,
-                                Model model) throws Exception {
-        HashMap map = new HashMap();
-        map.put("year", 2012);
-        map.put("month", 5);
-        map.put("idSector", 1);
-//        map.put("reportCashiers1Builder", reportCashiers1Builder);
-        ModelAndView mav = new ModelAndView(new XLSView1(), map);
-        return mav;
+    @RequestMapping(value = "report/listReport.htm", method = RequestMethod.GET)
+    public String listReport(HttpServletRequest request, HttpServletResponse response,
+                             Model model) throws Exception {
+        return "/pages/report/cashier/listReport.jsp";
+    }
+
+    @RequestMapping(value = "report/listReportCashiers.htm", method = RequestMethod.GET)
+    public String listReportCashiers(HttpServletRequest request, HttpServletResponse response,
+                                     Model model) throws Exception {
+        return "/pages/report/cashier/listReportCashier.jsp";
     }
 
 }

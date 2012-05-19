@@ -23,15 +23,9 @@
               <tr>
                 <td><a href="<%=request.getContextPath()%>/pages/report/graphics/gr4.jsp">Соотнесение пассажиропотока и дохода</a></td>
             </tr>
-            <%--<tr>--%>
-                <%--<td><a href="<%=request.getContextPath()%>/addFile/uploadFile.htm">Загрузка</a></td>--%>
-            <%--</tr>--%>
-            <%--<tr>--%>
-                <%--<td><a href="<%=request.getContextPath()%>/edit/editFile.htm">Корректировка</a></td>--%>
-            <%--</tr>--%>
-            <%--<tr>--%>
-                <%--<td><a href="<%=request.getContextPath()%>/3932/direction.htm">Формирование 3932</a></td>--%>
-            <%--</tr>--%>
+            <tr>
+                <td><a href="<%=request.getContextPath()%>/report/listReportCashiers.htm">Отчетность по разъездным кассирам</a></td>
+            </tr>
         </table>
     </div>
     <div class="bottom"></div>

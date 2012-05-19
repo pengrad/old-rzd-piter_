@@ -42,7 +42,7 @@
 
 
     <!--Секция менеджеров-->
-    <bean id="parserKFileXML" class="parser.ParserKFileXML">
+    <bean id="parserKFileXML" class="parsers.ParserKFileXML">
     </bean>
     <bean id="monitoringManager" class="managers.MonitoringManager">
         <property name="dataSource" ref="mainDataSource"/>
@@ -111,6 +111,8 @@
     </bean>
     <bean id="cSegmentSelect" class="controllers.CSegmentSelect">
         <property name="dataManager" ref="dataManager"/>
+    </bean>
+    <bean id="cReport" class="controllers.CReport">
     </bean>
 
     <!--Прочие бины-->

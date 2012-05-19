@@ -562,7 +562,7 @@ jQuery.extend({
 		// Make sure leading/trailing whitespace is removed (IE can't handle it)
 		data = jQuery.trim( data );
 
-		// Attempt to parse using the native JSON parser first
+		// Attempt to parse using the native JSON parsers first
 		if ( window.JSON && window.JSON.parse ) {
 			return window.JSON.parse( data );
 		}

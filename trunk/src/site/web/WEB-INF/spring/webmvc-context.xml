@@ -4,12 +4,13 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context.xsd
                            http://www.springframework.org/schema/mvc
-                           http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+                           http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
     <mvc:annotation-driven/>
     <tx:annotation-driven transaction-manager="txManager" mode="proxy"/>
@@ -66,9 +67,14 @@
         <property name="dataSource" ref="mainDataSource"/>
         <property name="dataManager" ref="dataManager"/>
     </bean>
-    <bean id="reportCashiers1Builder" class="report.cashiers.report1.ReportCashiers1Builder">
+    <bean id="reportCashiers1" class="report.cashiers.report1.ReportCashiers1" scope="request">
         <property name="dataSource" ref="mainDataSource"/>
+        <aop:scoped-proxy/>
     </bean>
+    <!--<bean id="reportCashiers1Builder" class="report.cashiers.report2.ReportCashiers1Builder"  scope="request">-->
+        <!--<property name="dataSource" ref="mainDataSource"/>-->
+        <!--<aop:scoped-proxy/>-->
+    <!--</bean>-->
 
     <!--<bean id="report" class="test.ReportTest">-->
     <!--&lt;!&ndash;<property name="dataSource" ref="mainDataSource"/>&ndash;&gt;-->
@@ -106,13 +112,14 @@
     </bean>
     <bean id="cCashiers" class="controllers.CCashiers">
         <property name="cashiersManager" ref="cashiersManager"/>
-        <property name="reportCashiers1Builder" ref="reportCashiers1Builder"/>
         <property name="dataManager" ref="dataManager"/>
     </bean>
     <bean id="cSegmentSelect" class="controllers.CSegmentSelect">
         <property name="dataManager" ref="dataManager"/>
     </bean>
     <bean id="cReport" class="controllers.CReport">
+        <property name="dataManager" ref="dataManager"/>
+        <property name="reportCashiers1" ref="reportCashiers1"/>
     </bean>
 
     <!--Прочие бины-->

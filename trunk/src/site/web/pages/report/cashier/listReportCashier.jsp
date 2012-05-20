@@ -4,8 +4,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <%
-    Collection<SegmentInfo> monSegment = (Collection<SegmentInfo>) request.getAttribute("monSegment");
-    String linkLevel = (request.getAttribute("linkLevel") != null ? (String) request.getAttribute("linkLevel") : null);
+    Collection<SegmentInfo> directions = (Collection<SegmentInfo>) request.getAttribute("directions");
 %>
 <html>
 <head>
@@ -20,9 +19,31 @@
     <script src="<%=request.getContextPath()%>/js/amcharts/amcharts.js" type="text/javascript"></script>
     <script src="<%=request.getContextPath()%>/js/amcharts/raphael.js" type="text/javascript"></script>
     <script type="text/javascript">
-
+        function updateSector(dirId) {
+            var sector = $("select[name=sector]");
+            $(sector).empty();
+            $.ajax({
+                url:'/rp/segmentSelect/getSectorByIdDirection.htm',
+                dataType:'json',
+                data:{dirId:dirId},
+                async:false,
+                success:function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var ssOption = $("<option>").attr("value", data[i].id).text(data[i].name);
+                        $(sector).append(ssOption);
+                    }
+                }
+            });
+        }
+        $(document).ready(function () {
+            $("select[name=direction]").live("change", function () {
+                var dirId = $(this).find(":selected").val();
+//                alert(dirId);
+                updateSector(dirId);
+            });
+            $("select[name=direction]").change();
+        });
     </script>
-
 </head>
 <body>
 <jsp:include page="/pages/share/head.jsp"/>
@@ -36,33 +57,44 @@
     <div style="color:gray;font-size:14pt;text-align:center;">
         <table width="100%" border="0" style="border-spacing:20px!important;">
             <tr>
-                <td>
-                    <span style="font-size:12pt!important;" href="<%=request.getContextPath()%>/report/listReportCashiers.htm">
+                <form action="<%=request.getContextPath()%>/report/reportCashiers1.htm" method="get">
+                    <td>
+                    <span style="font-size:12pt!important;"
+                          href="<%=request.getContextPath()%>/report/listReportCashiers.htm">
                         План-график на месяц по ВЫРУЧКЕ и РЖД
                     </span>
-                </td>
-                <td>
-                    <span>Год</span>
-                    <select name="year">
-                        <%
-                            GregorianCalendar gc = new GregorianCalendar();
-                            for (int i = gc.get(Calendar.YEAR) - 5; i <= gc.get(Calendar.YEAR); i++) {
-                        %>
-                        <option <%=((i==gc.get(Calendar.YEAR))?"selected":"")%>>
-                            <%=i%>
-                        </option>
-                        <%}%>
-                    </select>
-                    <span>Месяц</span>
-                    <select name="month">
-                        <%for (int i = 1; i <= 12; i++) {%>
-                        <option <%=((i==(gc.get(Calendar.MONTH)+1))?"selected":"")%>>
-                            <%=i%>
-                        </option>
-                        <%}%>
-                    </select>
-                    <button type="button" onclick="view()" onblur="">Смотреть</button>
-                </td>
+                    </td>
+                    <td>
+                        <span>Год</span>
+                        <select name="year">
+                            <%
+                                GregorianCalendar gc = new GregorianCalendar();
+                                for (int i = gc.get(Calendar.YEAR) - 5; i <= gc.get(Calendar.YEAR); i++) {
+                            %>
+                            <option <%=((i == gc.get(Calendar.YEAR)) ? "selected" : "")%>>
+                                <%=i%>
+                            </option>
+                            <%}%>
+                        </select>
+                        <span>Месяц</span>
+                        <select name="month">
+                            <%for (int i = 1; i <= 12; i++) {%>
+                            <option <%=((i == (gc.get(Calendar.MONTH) + 1)) ? "selected" : "")%>>
+                                <%=i%>
+                            </option>
+                            <%}%>
+                        </select>
+                        <select name="direction">
+                            <%for (SegmentInfo si : directions) {%>
+                            <option value="<%=si.getId()%>">
+                                <%=si.getName()%>
+                            </option>
+                            <%}%>
+                        </select>
+                        <select name="sector"></select>
+                        <button type="submit" onblur="">Смотреть</button>
+                    </td>
+                </form>
             </tr>
         </table>
     </div>

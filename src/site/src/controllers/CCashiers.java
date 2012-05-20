@@ -5,21 +5,17 @@ import managers.DataManager;
 import objects.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import report.cashiers.report1.ReportCashiers1Builder;
+import report.cashiers.report2.ReportCashiers1Builder;
 import utils.Helper;
-import view.XLSView1;
-import view.XMLView;
+import view.XLSViewReport;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -33,16 +29,13 @@ import java.util.*;
 @Controller
 public class CCashiers {
     private CashiersManager cashiersManager;
-    private ReportCashiers1Builder reportCashiers1Builder;
     private DataManager dataManager;
 
     public void setCashiersManager(CashiersManager cashiersManager) {
         this.cashiersManager = cashiersManager;
     }
 
-    public void setReportCashiers1Builder(ReportCashiers1Builder reportCashiers1Builder) {
-        this.reportCashiers1Builder = reportCashiers1Builder;
-    }
+
 
     public void setDataManager(DataManager dataManager) {
         this.dataManager = dataManager;
@@ -240,17 +233,5 @@ public class CCashiers {
         return errors;
     }
 
-    //---------------------
-    @RequestMapping(value = "cashiers/rep1.htm", method = RequestMethod.GET)
-    public ModelAndView loadXML(HttpServletRequest request, HttpServletResponse response,
-                                Model model) throws Exception {
-        HashMap map = new HashMap();
-        map.put("year", 2012);
-        map.put("month", 5);
-        map.put("idSector", 1);
-        map.put("reportCashiers1Builder", reportCashiers1Builder);
-        ModelAndView mav = new ModelAndView(new XLSView1(), map);
-        return mav;
-    }
 
 }

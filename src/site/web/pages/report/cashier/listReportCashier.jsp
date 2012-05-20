@@ -57,44 +57,86 @@
     <div style="color:gray;font-size:14pt;text-align:center;">
         <table width="100%" border="0" style="border-spacing:20px!important;">
             <tr>
-                <form action="<%=request.getContextPath()%>/report/reportCashiers1.htm" method="get">
-                    <td>
+                <td>
+                    <form action="<%=request.getContextPath()%>/report/reportCashiers1.htm" method="get">
                     <span style="font-size:12pt!important;"
                           href="<%=request.getContextPath()%>/report/listReportCashiers.htm">
                         План-график на месяц по ВЫРУЧКЕ и РЖД
                     </span>
-                    </td>
-                    <td>
-                        <span>Год</span>
-                        <select name="year">
-                            <%
-                                GregorianCalendar gc = new GregorianCalendar();
-                                for (int i = gc.get(Calendar.YEAR) - 5; i <= gc.get(Calendar.YEAR); i++) {
-                            %>
-                            <option <%=((i == gc.get(Calendar.YEAR)) ? "selected" : "")%>>
-                                <%=i%>
-                            </option>
-                            <%}%>
-                        </select>
-                        <span>Месяц</span>
-                        <select name="month">
-                            <%for (int i = 1; i <= 12; i++) {%>
-                            <option <%=((i == (gc.get(Calendar.MONTH) + 1)) ? "selected" : "")%>>
-                                <%=i%>
-                            </option>
-                            <%}%>
-                        </select>
-                        <select name="direction">
-                            <%for (SegmentInfo si : directions) {%>
-                            <option value="<%=si.getId()%>">
-                                <%=si.getName()%>
-                            </option>
-                            <%}%>
-                        </select>
-                        <select name="sector"></select>
-                        <button type="submit" onblur="">Смотреть</button>
-                    </td>
-                </form>
+
+                        <div>
+                            <span>Год</span>
+                            <select name="year">
+                                <%
+                                    GregorianCalendar gc = new GregorianCalendar();
+                                    for (int i = gc.get(Calendar.YEAR) - 5; i <= gc.get(Calendar.YEAR); i++) {
+                                %>
+                                <option <%=((i == gc.get(Calendar.YEAR)) ? "selected" : "")%>>
+                                    <%=i%>
+                                </option>
+                                <%}%>
+                            </select>
+                            <span>Месяц</span>
+                            <select name="month">
+                                <%for (int i = 1; i <= 12; i++) {%>
+                                <option <%=((i == (gc.get(Calendar.MONTH) + 1)) ? "selected" : "")%>>
+                                    <%=i%>
+                                </option>
+                                <%}%>
+                            </select>
+                            <select style="width: 180px" name="direction">
+                                <%for (SegmentInfo si : directions) {%>
+                                <option value="<%=si.getId()%>">
+                                    <%=si.getName()%>
+                                </option>
+                                <%}%>
+                            </select>
+                            <select style="width: 180px" name="sector"></select>
+                            <button type="submit" onblur="">Смотреть</button>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form action="<%=request.getContextPath()%>/report/reportCashiers1.htm" method="get">
+                    <span style="font-size:12pt!important;"
+                          href="<%=request.getContextPath()%>/report/listReportCashiers.htm">
+                          Приложение №3 (5-тидневки по-фам.отчет ККБР и пл-графики)
+                    </span>
+
+                        <div>
+                            <span>Год</span>
+                            <select name="year">
+                                <%
+                                     gc = new GregorianCalendar();
+                                    for (int i = gc.get(Calendar.YEAR) - 5; i <= gc.get(Calendar.YEAR); i++) {
+                                %>
+                                <option <%=((i == gc.get(Calendar.YEAR)) ? "selected" : "")%>>
+                                    <%=i%>
+                                </option>
+                                <%}%>
+                            </select>
+                            <span>Месяц</span>
+                            <select name="month">
+                                <%for (int i = 1; i <= 12; i++) {%>
+                                <option <%=((i == (gc.get(Calendar.MONTH) + 1)) ? "selected" : "")%>>
+                                    <%=i%>
+                                </option>
+                                <%}%>
+                            </select>
+                            <select style="width: 180px" name="direction">
+                                <%for (SegmentInfo si : directions) {%>
+                                <option value="<%=si.getId()%>">
+                                    <%=si.getName()%>
+                                </option>
+                                <%}%>
+                            </select>
+                            <select style="width: 180px" name="sector"></select>
+                            <button type="submit" onblur="">Смотреть</button>
+                        </div>
+                    </form>
+                </td>
             </tr>
         </table>
     </div>

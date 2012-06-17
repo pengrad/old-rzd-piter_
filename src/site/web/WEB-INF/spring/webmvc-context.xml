@@ -23,7 +23,7 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <!--<property name="url" value="jdbc:mysql://10.20.100.22:1433/uniform?useUnicode=true&amp;characterEncoding=UTF-8&amp;dumpQueriesOnException=true" />-->
         <property name="url"
-                  value="jdbc:mysql://localhost:3306/rzd?useUnicode=true&amp;characterEncoding=UTF-8&amp;dumpQueriesOnException=true"/>
+                  value="jdbc:mysql://gid1-2:3307/rzd?useUnicode=true&amp;characterEncoding=UTF-8&amp;dumpQueriesOnException=true"/>
         <!--<property name="url"-->
         <!--value="jdbc:mysql://62.76.41.48:3306/rzd?useUnicode=true&amp;characterEncoding=UTF-8&amp;dumpQueriesOnException=true"/>-->
 

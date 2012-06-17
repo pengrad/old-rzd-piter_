@@ -55,7 +55,7 @@
     AmCharts.ready(function () {
         // SERIAL CHART
         var chart = new AmCharts.AmSerialChart();
-        chart.pathToImages = "/lib/samples/javascript/images/";
+//        chart.pathToImages = "/lib/samples/javascript/images/";
         chart.panEventsEnabled = true;
         chart.dataProvider = chartData;
         chart.categoryField = "date";

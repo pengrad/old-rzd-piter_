@@ -17,29 +17,29 @@ http://www.springframework.org/schema/security ">
 
 
 
-    <http use-expressions="true" auto-config="true" access-denied-page="/403.html">
-        <form-login login-page="/login.jsp"
-                    default-target-url="/upload/uploadFile.htm"
-                    authentication-failure-url="/login.jsp?login_error=1"/>
-        <logout logout-url="/logout.htm"
-                invalidate-session="true"
-                delete-cookies="JSESSIONID"
-                logout-success-url="/login.jsp"/>
-        <remember-me token-validity-seconds="1200000"/>
-        <intercept-url pattern="/**" access="isAuthenticated()"/>
-        <remember-me/>
-        <session-management invalid-session-url="/login.jsp">
-            <concurrency-control max-sessions="2000" error-if-maximum-exceeded="true"/>
-        </session-management>
-    </http>
-    <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="szppk"
-                      password="12345"
-                      authorities="supervisor, user, teller"/>
-            </user-service>
-        </authentication-provider>
-    </authentication-manager>
+    <!--<http use-expressions="true" auto-config="true" access-denied-page="/403.html">-->
+        <!--<form-login login-page="/login.jsp"-->
+                    <!--default-target-url="/upload/uploadFile.htm"-->
+                    <!--authentication-failure-url="/login.jsp?login_error=1"/>-->
+        <!--<logout logout-url="/logout.htm"-->
+                <!--invalidate-session="true"-->
+                <!--delete-cookies="JSESSIONID"-->
+                <!--logout-success-url="/login.jsp"/>-->
+        <!--<remember-me token-validity-seconds="1200000"/>-->
+        <!--<intercept-url pattern="/**" access="isAuthenticated()"/>-->
+        <!--<remember-me/>-->
+        <!--<session-management invalid-session-url="/login.jsp">-->
+            <!--<concurrency-control max-sessions="2000" error-if-maximum-exceeded="true"/>-->
+        <!--</session-management>-->
+    <!--</http>-->
+    <!--<authentication-manager>-->
+        <!--<authentication-provider>-->
+            <!--<user-service>-->
+                <!--<user name="szppk"-->
+                      <!--password="12345"-->
+                      <!--authorities="supervisor, user, teller"/>-->
+            <!--</user-service>-->
+        <!--</authentication-provider>-->
+    <!--</authentication-manager>-->
 
 </beans:beans>

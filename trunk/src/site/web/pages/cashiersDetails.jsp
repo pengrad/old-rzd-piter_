@@ -34,116 +34,286 @@
 <script src="<%=request.getContextPath()%>/js/amcharts/amcharts.js" type="text/javascript"></script>
 <script src="<%=request.getContextPath()%>/js/amcharts/raphael.js" type="text/javascript"></script>
 
+<%--<script type="text/javascript">--%>
+    <%--var chartData = [];--%>
+    <%--&lt;%&ndash;alert(new Date('<%=new SimpleDateFormat("yyyy.MM.dd").format(new Date())%>'));&ndash;%&gt;--%>
+    <%--&lt;%&ndash;<%for(PlanCashiers pc:cashiers.getPlanCashiers()){%>&ndash;%&gt;--%>
+    <%--&lt;%&ndash;chartData.push({&ndash;%&gt;--%>
+        <%--&lt;%&ndash;date: new Date('<%=new SimpleDateFormat("yyyy.MM.dd").format(pc.getDate())%>'),&ndash;%&gt;--%>
+        <%--&lt;%&ndash;visits: <%=pc.getPlanBase()%>,&ndash;%&gt;--%>
+        <%--&lt;%&ndash;hits: <%=pc.getFactBase()%>&ndash;%&gt;--%>
+    <%--&lt;%&ndash;});&ndash;%&gt;--%>
+    <%--&lt;%&ndash;<%}%>&ndash;%&gt;--%>
+
+    <%--chartData.push({--%>
+        <%--date:new Date('2012.11.10'),--%>
+        <%--visits: 10,--%>
+        <%--hits: 50--%>
+    <%--});--%>
+    <%--var chartData2 = [];--%>
+    <%--&lt;%&ndash;<%for(PlanCashiers pc:cashiers.getPlanCashiers()){%>&ndash;%&gt;--%>
+    <%--&lt;%&ndash;chartData2.push({&ndash;%&gt;--%>
+        <%--&lt;%&ndash;date: new Date('<%=new SimpleDateFormat("yyyy.MM.dd").format(pc.getDate())%>'),&ndash;%&gt;--%>
+        <%--&lt;%&ndash;visits: <%=pc.getPlanRzd()%>,&ndash;%&gt;--%>
+        <%--&lt;%&ndash;hits: <%=pc.getFactRzd()%>&ndash;%&gt;--%>
+    <%--&lt;%&ndash;});&ndash;%&gt;--%>
+    <%--&lt;%&ndash;<%}%>&ndash;%&gt;--%>
+    <%--AmCharts.ready(function () {--%>
+        <%--// SERIAL CHART--%>
+        <%--var chart = new AmCharts.AmSerialChart();--%>
+        <%--&lt;%&ndash;chart.pathToImages = "<%=request.getContextPath()%>/js/amcharts/images/";&ndash;%&gt;--%>
+        <%--chart.panEventsEnabled = true;--%>
+        <%--chart.dataProvider = chartData;--%>
+        <%--chart.categoryField = "date";--%>
+        <%--// AXES--%>
+        <%--// category--%>
+        <%--var categoryAxis = chart.categoryAxis;--%>
+        <%--categoryAxis.parseDates = true; // as our data is date-based, we set parseDates to true--%>
+        <%--categoryAxis.minPeriod = "DD"; // our data is daily, so we set minPeriod to DD--%>
+        <%--categoryAxis.dashLength = 1;--%>
+        <%--categoryAxis.gridAlpha = 0.15;--%>
+        <%--categoryAxis.axisColor = "#DADADA";--%>
+        <%--// first value axis (on the left)--%>
+        <%--var valueAxis1 = new AmCharts.ValueAxis();--%>
+        <%--valueAxis1.axisColor = "#FF6600";--%>
+        <%--valueAxis1.axisThickness = 2;--%>
+        <%--valueAxis1.gridAlpha = 0;--%>
+        <%--chart.addValueAxis(valueAxis1);--%>
+        <%--// GRAPHS--%>
+        <%--// first graph--%>
+        <%--var graph1 = new AmCharts.AmGraph();--%>
+        <%--graph1.valueAxis = valueAxis1; // we have to indicate which value axis should be used--%>
+        <%--graph1.title = "red line";--%>
+        <%--graph1.valueField = "visits";--%>
+        <%--graph1.bullet = "round";--%>
+        <%--graph1.hideBulletsCount = 31;--%>
+        <%--chart.addGraph(graph1);--%>
+
+        <%--// second graph--%>
+        <%--var graph2 = new AmCharts.AmGraph();--%>
+        <%--graph2.valueAxis = valueAxis1; // we have to indicate which value axis should be used--%>
+        <%--graph2.title = "red line";--%>
+        <%--graph2.valueField = "hits";--%>
+        <%--graph2.bullet = "square";--%>
+        <%--graph2.hideBulletsCount = 31;--%>
+        <%--graph2.color = "#DAAADA";--%>
+        <%--chart.addGraph(graph2);--%>
+        <%--// CURSOR--%>
+        <%--var chartCursor = new AmCharts.ChartCursor();--%>
+        <%--chartCursor.cursorPosition = "mouse";--%>
+        <%--chart.addChartCursor(chartCursor);--%>
+        <%--chart.write("planBase");--%>
+    <%--});--%>
+    <%--AmCharts.ready(function () {--%>
+        <%--// SERIAL CHART--%>
+        <%--var chart = new AmCharts.AmSerialChart();--%>
+<%--//        chart.pathToImages = "/lib/samples/javascript/images/";--%>
+        <%--chart.dataProvider = chartData2;--%>
+        <%--chart.categoryField = "date";--%>
+        <%--// AXES--%>
+        <%--// category--%>
+        <%--var categoryAxis = chart.categoryAxis;--%>
+        <%--categoryAxis.parseDates = true; // as our data is date-based, we set parseDates to true--%>
+        <%--categoryAxis.minPeriod = "DD"; // our data is daily, so we set minPeriod to DD--%>
+        <%--categoryAxis.dashLength = 1;--%>
+        <%--categoryAxis.gridAlpha = 0.15;--%>
+        <%--categoryAxis.axisColor = "#DADADA";--%>
+        <%--// first value axis (on the left)--%>
+        <%--var valueAxis1 = new AmCharts.ValueAxis();--%>
+        <%--valueAxis1.axisColor = "#FF6600";--%>
+        <%--valueAxis1.axisThickness = 2;--%>
+        <%--valueAxis1.gridAlpha = 0;--%>
+        <%--chart.addValueAxis(valueAxis1);--%>
+        <%--// GRAPHS--%>
+        <%--// first graph--%>
+        <%--var graph1 = new AmCharts.AmGraph();--%>
+        <%--graph1.valueAxis = valueAxis1; // we have to indicate which value axis should be used--%>
+        <%--graph1.title = "red line";--%>
+        <%--graph1.valueField = "visits";--%>
+        <%--graph1.bullet = "round";--%>
+        <%--graph1.hideBulletsCount = 31;--%>
+        <%--chart.addGraph(graph1);--%>
+
+        <%--// second graph--%>
+        <%--var graph2 = new AmCharts.AmGraph();--%>
+        <%--graph2.valueAxis = valueAxis1; // we have to indicate which value axis should be used--%>
+        <%--graph2.title = "yellow line";--%>
+        <%--graph2.valueField = "hits";--%>
+        <%--graph2.bullet = "square";--%>
+        <%--graph2.hideBulletsCount = 31;--%>
+        <%--chart.addGraph(graph2);--%>
+        <%--// CURSOR--%>
+        <%--var chartCursor = new AmCharts.ChartCursor();--%>
+        <%--chartCursor.cursorPosition = "mouse";--%>
+        <%--chart.addChartCursor(chartCursor);--%>
+        <%--chart.write("planRzd");--%>
+    <%--});--%>
+<%--</script>--%>
+
+
 <script type="text/javascript">
+    var chart1;
+    var chart2;
     var chartData = [];
-    <%--alert(new Date('<%=new SimpleDateFormat("yyyy.MM.dd").format(new Date())%>'));--%>
     <%for(PlanCashiers pc:cashiers.getPlanCashiers()){%>
     chartData.push({
-        date: new Date('<%=new SimpleDateFormat("yyyy.MM.dd").format(pc.getDate())%>'),
+        date: new Date(<%=new SimpleDateFormat("yyyy,MM,dd").format(pc.getDate())%>),
         visits: <%=pc.getPlanBase()%>,
         hits: <%=pc.getFactBase()%>
     });
     <%}%>
+
     var chartData2 = [];
     <%for(PlanCashiers pc:cashiers.getPlanCashiers()){%>
     chartData2.push({
-        date: new Date('<%=new SimpleDateFormat("yyyy.MM.dd").format(pc.getDate())%>'),
-        visits: <%=pc.getPlanRzd()%>,
-        hits: <%=pc.getFactRzd()%>
+    date: new Date(<%=new SimpleDateFormat("yyyy,MM,dd").format(pc.getDate())%>),
+    visits: <%=pc.getPlanRzd()%>,
+    hits: <%=pc.getFactRzd()%>
     });
     <%}%>
     AmCharts.ready(function () {
+        // generate some random data first
         // SERIAL CHART
-        var chart = new AmCharts.AmSerialChart();
-//        chart.pathToImages = "/lib/samples/javascript/images/";
-        chart.panEventsEnabled = true;
-        chart.dataProvider = chartData;
-        chart.categoryField = "date";
+        chart1 = new AmCharts.AmSerialChart();
+        chart1.pathToImages = "<%=request.getContextPath()%>/js/amcharts/images/";
+        chart1.zoomOutButton = {
+            backgroundColor: '#000000',
+            backgroundAlpha: 0.15
+        };
+        chart1.dataProvider = chartData;
+        chart1.categoryField = "date";
+
+        // listen for "dataUpdated" event (fired when chart is inited) and call zoomChart method when it happens
+        chart1.addListener("dataUpdated", zoomChart1);
+
         // AXES
         // category
-        var categoryAxis = chart.categoryAxis;
+        var categoryAxis = chart1.categoryAxis;
         categoryAxis.parseDates = true; // as our data is date-based, we set parseDates to true
         categoryAxis.minPeriod = "DD"; // our data is daily, so we set minPeriod to DD
-        categoryAxis.dashLength = 1;
+        categoryAxis.dashLength = 2;
         categoryAxis.gridAlpha = 0.15;
         categoryAxis.axisColor = "#DADADA";
+
         // first value axis (on the left)
         var valueAxis1 = new AmCharts.ValueAxis();
         valueAxis1.axisColor = "#FF6600";
         valueAxis1.axisThickness = 2;
         valueAxis1.gridAlpha = 0;
-        chart.addValueAxis(valueAxis1);
+        chart1.addValueAxis(valueAxis1);
         // GRAPHS
         // first graph
         var graph1 = new AmCharts.AmGraph();
         graph1.valueAxis = valueAxis1; // we have to indicate which value axis should be used
-        graph1.title = "red line";
+        graph1.title = "план";
         graph1.valueField = "visits";
         graph1.bullet = "round";
         graph1.hideBulletsCount = 31;
-        chart.addGraph(graph1);
-
+        chart1.addGraph(graph1);
         // second graph
         var graph2 = new AmCharts.AmGraph();
         graph2.valueAxis = valueAxis1; // we have to indicate which value axis should be used
-        graph2.title = "red line";
+        graph2.title = "факт";
         graph2.valueField = "hits";
         graph2.bullet = "square";
         graph2.hideBulletsCount = 31;
-        graph2.color = "#DAAADA";
-        chart.addGraph(graph2);
+        chart1.addGraph(graph2);
+
         // CURSOR
         var chartCursor = new AmCharts.ChartCursor();
         chartCursor.cursorPosition = "mouse";
-        chart.addChartCursor(chartCursor);
-        chart.write("planBase");
+        chart1.addChartCursor(chartCursor);
+
+        // SCROLLBAR
+        var chartScrollbar = new AmCharts.ChartScrollbar();
+        chart1.addChartScrollbar(chartScrollbar);
+
+        // LEGEND
+        var legend = new AmCharts.AmLegend();
+        legend.marginLeft = 110;
+        chart1.addLegend(legend);
+
+        // WRITE
+        chart1.write("planBase");
     });
     AmCharts.ready(function () {
+        // generate some random data first
         // SERIAL CHART
-        var chart = new AmCharts.AmSerialChart();
-        chart.pathToImages = "/lib/samples/javascript/images/";
-        chart.dataProvider = chartData2;
-        chart.categoryField = "date";
+        chart2 = new AmCharts.AmSerialChart();
+        chart2.pathToImages = "<%=request.getContextPath()%>/js/amcharts/images/";
+        chart2.zoomOutButton = {
+            backgroundColor: '#000000',
+            backgroundAlpha: 0.15
+        };
+        chart2.dataProvider = chartData2;
+        chart2.categoryField = "date";
+
+        // listen for "dataUpdated" event (fired when chart is inited) and call zoomChart method when it happens
+        chart2.addListener("dataUpdated", zoomChart2);
+
         // AXES
         // category
-        var categoryAxis = chart.categoryAxis;
+        var categoryAxis = chart2.categoryAxis;
         categoryAxis.parseDates = true; // as our data is date-based, we set parseDates to true
         categoryAxis.minPeriod = "DD"; // our data is daily, so we set minPeriod to DD
-        categoryAxis.dashLength = 1;
+        categoryAxis.dashLength = 2;
         categoryAxis.gridAlpha = 0.15;
         categoryAxis.axisColor = "#DADADA";
+
         // first value axis (on the left)
         var valueAxis1 = new AmCharts.ValueAxis();
         valueAxis1.axisColor = "#FF6600";
         valueAxis1.axisThickness = 2;
         valueAxis1.gridAlpha = 0;
-        chart.addValueAxis(valueAxis1);
+        chart2.addValueAxis(valueAxis1);
         // GRAPHS
         // first graph
         var graph1 = new AmCharts.AmGraph();
         graph1.valueAxis = valueAxis1; // we have to indicate which value axis should be used
-        graph1.title = "red line";
+        graph1.title = "план";
         graph1.valueField = "visits";
         graph1.bullet = "round";
         graph1.hideBulletsCount = 31;
-        chart.addGraph(graph1);
-
+        chart2.addGraph(graph1);
         // second graph
         var graph2 = new AmCharts.AmGraph();
         graph2.valueAxis = valueAxis1; // we have to indicate which value axis should be used
-        graph2.title = "yellow line";
+        graph2.title = "факт";
         graph2.valueField = "hits";
         graph2.bullet = "square";
         graph2.hideBulletsCount = 31;
-        chart.addGraph(graph2);
+        chart2.addGraph(graph2);
+
         // CURSOR
         var chartCursor = new AmCharts.ChartCursor();
         chartCursor.cursorPosition = "mouse";
-        chart.addChartCursor(chartCursor);
-        chart.write("planRzd");
-    });
-</script>
+        chart2.addChartCursor(chartCursor);
 
+        // SCROLLBAR
+        var chartScrollbar = new AmCharts.ChartScrollbar();
+        chart2.addChartScrollbar(chartScrollbar);
+
+        // LEGEND
+        var legend = new AmCharts.AmLegend();
+        legend.marginLeft = 110;
+        chart2.addLegend(legend);
+
+        // WRITE
+        chart2.write("planRzd");
+    });
+
+
+
+    // this method is called when chart is first inited as we listen for "dataUpdated" event
+    function zoomChart1() {
+        // different zoom methods can be used - zoomToIndexes, zoomToDates, zoomToCategoryValues
+        chart1.zoomToIndexes(0, 31);
+    }
+    function zoomChart2() {
+        // different zoom methods can be used - zoomToIndexes, zoomToDates, zoomToCategoryValues
+        chart2.zoomToIndexes(0, 31);
+    }
+</script>
 
 <script type="text/javascript">
     function view() {
@@ -326,22 +496,22 @@
                 <div id="graphicData">
                     <div style="padding:10px;text-align:left;font-size:12pt;color:gray;">Общая выручка</div>
                     <div id="planBase" style="width:100%; height:400px;"></div>
-                    <div style="text-align:center;">
-                        <div style="margin-left:500px;float:left;height:20px;width:20px;background:#FF6600"></div>
-                        <div style="float:left;">-план</div>
-                        <div style="margin-left:20px;float:left;height:20px;width:20px;background:#FCD202"></div>
-                        <div style="float:left;">-факт</div>
-                        <div style="clear:both;"></div>
-                    </div>
+                    <%--<div style="text-align:center;">--%>
+                        <%--<div style="margin-left:500px;float:left;height:20px;width:20px;background:#FF6600"></div>--%>
+                        <%--<div style="float:left;">-план</div>--%>
+                        <%--<div style="margin-left:20px;float:left;height:20px;width:20px;background:#FCD202"></div>--%>
+                        <%--<div style="float:left;">-факт</div>--%>
+                        <%--<div style="clear:both;"></div>--%>
+                    <%--</div>--%>
                     <div style="padding:10px;text-align:left;font-size:12pt;color:gray;">Выручка по ОАО "РЖД"</div>
                     <div id="planRzd" style="width:100%; height:400px;"></div>
-                    <div style="text-align:center;">
-                        <div style="margin-left:500px;float:left;height:20px;width:20px;background:#FF6600"></div>
-                        <div style="float:left;">-план</div>
-                        <div style="margin-left:20px;float:left;height:20px;width:20px;background:#FCD202"></div>
-                        <div style="float:left;">-факт</div>
-                        <div style="clear:both;"></div>
-                    </div>
+                    <%--<div style="text-align:center;">--%>
+                        <%--<div style="margin-left:500px;float:left;height:20px;width:20px;background:#FF6600"></div>--%>
+                        <%--<div style="float:left;">-план</div>--%>
+                        <%--<div style="margin-left:20px;float:left;height:20px;width:20px;background:#FCD202"></div>--%>
+                        <%--<div style="float:left;">-факт</div>--%>
+                        <%--<div style="clear:both;"></div>--%>
+                    <%--</div>--%>
                     <%--<div id="chartdiv" style="width:100%; height:400px;"></div>--%>
                 </div>
                 <div id="tableData" style="display:none;">

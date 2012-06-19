@@ -25,6 +25,6 @@ public class ExcelView extends AbstractExcelView {
         GenerateReportExcel rr =(GenerateReportExcel)model.get("generateReportExcel");
         rr.createHSSFWorkBook(hssfWorkbook);
         rr.generateStandartStyles();
-        rr.make(report);
+//        rr.make(report);
     }
 }

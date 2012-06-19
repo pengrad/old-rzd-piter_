@@ -23,7 +23,7 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <!--<property name="url" value="jdbc:mysql://10.20.100.22:1433/uniform?useUnicode=true&amp;characterEncoding=UTF-8&amp;dumpQueriesOnException=true" />-->
         <property name="url"
-                  value="jdbc:mysql://gid1-2:3307/rzd?useUnicode=true&amp;characterEncoding=UTF-8&amp;dumpQueriesOnException=true"/>
+                  value="jdbc:mysql://localhost:3307/rzd?useUnicode=true&amp;characterEncoding=UTF-8&amp;dumpQueriesOnException=true"/>
         <!--<property name="url"-->
         <!--value="jdbc:mysql://62.76.41.48:3306/rzd?useUnicode=true&amp;characterEncoding=UTF-8&amp;dumpQueriesOnException=true"/>-->
 
@@ -67,13 +67,17 @@
         <property name="dataSource" ref="mainDataSource"/>
         <property name="dataManager" ref="dataManager"/>
     </bean>
-    <bean id="reportCashiers1" class="report.cashiers.report1.ReportCashiers1" scope="request">
+    <bean id="reportCashiers1" class="report.cashiers.report1.ReportCashiers1">
         <property name="dataSource" ref="mainDataSource"/>
-        <aop:scoped-proxy/>
+        <property name="dataManager" ref="dataManager"/>
+    </bean>
+    <bean id="reportCashiers3" class="report.cashiers.report1.ReportCashiers3">
+        <property name="dataSource" ref="mainDataSource"/>
+        <property name="dataManager" ref="dataManager"/>
     </bean>
     <!--<bean id="reportCashiers1Builder" class="report.cashiers.report2.ReportCashiers1Builder"  scope="request">-->
-        <!--<property name="dataSource" ref="mainDataSource"/>-->
-        <!--<aop:scoped-proxy/>-->
+    <!--<property name="dataSource" ref="mainDataSource"/>-->
+    <!--<aop:scoped-proxy/>-->
     <!--</bean>-->
 
     <!--<bean id="report" class="test.ReportTest">-->
@@ -120,6 +124,8 @@
     <bean id="cReport" class="controllers.CReport">
         <property name="dataManager" ref="dataManager"/>
         <property name="reportCashiers1" ref="reportCashiers1"/>
+        <property name="reportCashiers3" ref="reportCashiers3"/>
+
     </bean>
 
     <!--Прочие бины-->

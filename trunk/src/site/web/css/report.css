@@ -1,0 +1,149 @@
+.header2 {
+    width: 100%;
+    text-align: center;
+}
+
+.header2 .repCaption {
+    font-size: 20pt;
+}
+
+.header2 .repCaptionH1 {
+    font-size: 15pt;
+}
+
+.header2 .repCaptionH2 {
+    font-size: 12pt;
+}
+
+.header2 .repCaptionH3 {
+    font-size: 10pt;
+}
+
+.header2 .repDate {
+    color: gray;
+    font-size: 14pt;
+    padding: 5px;
+}
+
+.header2 .queryParm {
+    text-align: left;
+    padding: 10px;
+    margin-left: 1%; /*border-top: 1px solid gray;*/
+    /*border-left: 1px solid gray;*/
+    /*border-right: 1px solid gray;*/
+    /*background: aliceblue;*/
+}
+
+#export {
+    font-size: 8pt;
+    text-align: right;
+    padding: 10px;
+}
+
+.tTable {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 20px;
+}
+
+.tTable table {
+    /*width: 98%;*/
+    border-collapse: collapse;
+}
+
+.tTable table .head {
+    /*font: 10pt  Arial, Tahoma;*/
+    font-size: 11px;
+    font-family: Verdana;
+    padding: 3px;
+    text-align: center;
+    background: #fefecc;
+    font-weight: bold;
+}
+
+.tTable table .defaultCell {
+    /*font: 10pt  Arial, Tahoma;*/
+    /*padding: 1px;*/
+    font-size: 11px;
+    font-family: Verdana;
+    padding: 3px;
+    text-align: center;
+}
+
+.tTable table .selectColumnCell {
+    /*font: 10pt  Arial, Tahoma;*/
+    /*padding: 1px;*/
+    font-size: 11px;
+    font-family: Verdana;
+    padding: 3px;
+    text-align: center;
+    background: #eef5ff;
+}
+
+.tTable table .firsLevel {
+    /*font: 10pt  Arial, Tahoma;*/
+    background: #ffffe7;
+    font-weight: bold; /*padding: 1px;*/
+    text-align: center;
+    font-size: 11px;
+    font-family: Verdana;
+    padding: 3px;
+
+}
+
+.tTable table .secondLevel {
+    /*font: 10pt  Arial, Tahoma;*/
+    background: #d7f3fb;
+    font-weight: bold; /*padding: 1px;*/
+    text-align: center;
+    font-size: 11px;
+    font-family: Verdana;
+    padding: 3px;
+
+}
+
+.tTable table .subLevel {
+    /*font: 8pt  Arial, Tahoma;*/
+    background: #ebeded; /*padding: 1px;*/
+    text-align: center;
+    font-size: 10px;
+    font-family: Verdana;
+    padding: 3px;
+}
+
+.tTable table th {
+    border: 1px solid gray;
+}
+
+.tTable table td {
+    border: 1px solid gray;
+}
+
+h1 {
+    padding: 15px;
+    font: normal 30px "Trebuchet MS"
+}
+
+.listtable tr.over td {
+    background: #eceeff;
+}
+
+/*Ховер для таблицы*/
+.tTableSV td.hover, #tableone tr:hover {
+    background-color: LightCyan;
+}
+
+.betterhover, #tabletwo tr:hover {
+    background: #eceeff;
+}
+
+.queryParm{
+    text-align:left;padding:10px;
+}
+
+
+
+
+
+
+

@@ -43,6 +43,18 @@
             });
             $("select[name=direction]").change();
         });
+        function openReport(e) {
+            var form = $(e).parent().parent();
+            $.ajax({
+                url:$(form).attr("action"),
+                dataType:'json',
+                data:$(form).serialize(),
+                async:true,
+                success:function (repKey) {
+                    window.open('<%=request.getContextPath()%>/report/reportHtml.htm?repKey=' + repKey, '', 'height=600,width=850,left=50,top=150,directories=no,scrollbars=yes,resizable=yes');
+                }
+            });
+        }
     </script>
 </head>
 <body>
@@ -92,14 +104,14 @@
                                 <%}%>
                             </select>
                             <select style="width: 180px" name="sector"></select>
-                            <button type="submit" onblur="">Смотреть</button>
+                            <button onclick="openReport(this)" type="button">Смотреть</button>
                         </div>
                     </form>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <form action="<%=request.getContextPath()%>/report/reportCashiers1.htm" method="get">
+                    <form action="<%=request.getContextPath()%>/report/reportCashiers3.htm" method="get">
                     <span style="font-size:12pt!important;"
                           href="<%=request.getContextPath()%>/report/listReportCashiers.htm">
                           Приложение №3 (5-тидневки по-фам.отчет ККБР и пл-графики)
@@ -109,7 +121,7 @@
                             <span>Год</span>
                             <select name="year">
                                 <%
-                                     gc = new GregorianCalendar();
+                                    gc = new GregorianCalendar();
                                     for (int i = gc.get(Calendar.YEAR) - 5; i <= gc.get(Calendar.YEAR); i++) {
                                 %>
                                 <option <%=((i == gc.get(Calendar.YEAR)) ? "selected" : "")%>>
@@ -133,7 +145,7 @@
                                 <%}%>
                             </select>
                             <select style="width: 180px" name="sector"></select>
-                            <button type="submit" onblur="">Смотреть</button>
+                            <button type="button" onclick="openReport(this)">Смотреть</button>
                         </div>
                     </form>
                 </td>
